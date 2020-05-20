@@ -1,0 +1,189 @@
+@font-face {
+	font-family: 'DIN Pro';
+	src: url('DINPro.eot');
+	src: local('DIN Pro'), local('DINPro'),
+	url('DINPro.eot?#iefix') format('embedded-opentype'),
+	url('DINPro.woff2') format('woff2'),
+	url('DINPro.woff') format('woff'),
+	url('DINPro.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	padding: 0px;
+	margin: 0px;
+	font-family: 'DIN Pro' !important;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 16pt;
+	text-decoration: line-through;
+	font-color: darkgray;
+	outline: white none 0px !important;
+	background-color: lightgray;
+}
+
+#logo {
+	position: fixed;
+	right: 10pt;
+	top: 10pt;
+	z-index: 1000;
+	max-width:50vw;
+}
+
+#logo img {
+	width: 100%
+}
+
+#lateral {
+	display: block;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100vh;
+	width: 40px;
+	outline: green dashed 1px;
+	z-index: 5;
+}
+
+main {
+	display: block;
+	position: fixed;
+	top: 0px;
+	left: 40px;
+	right: 0px;
+	height: 100vh;
+	width: 100%;
+}
+
+#menu {
+	display: none !important;
+}
+
+#lateral > div {
+	display: block;
+	outline: blue dotted 1px;
+	width: 100%;
+}
+
+#languages p {
+	margin: 0px;
+	padding: 0px;
+}
+
+#button {
+	outline: orange dashed 1px;
+	width: 100%;
+	height: 40px;
+	display: block;
+}
+
+#title {
+	height: 35%;
+}
+
+#description {
+	height: 45%;
+}
+
+#title p {
+	transform: rotate(270deg);
+	transform-origin: left;
+	position: relative;
+	margin-left: 5px !important;
+	height: 0px;
+	width: 35vh;
+	bottom: -30vh;
+	outline: blueviolet solid 1px;
+}
+
+#description p {
+	transform: rotate(270deg);
+	transform-origin: left;
+	position: relative;
+	height: 0px;
+	width: 45vh;
+	bottom: -40vh;
+	font-size: 10pt;
+	outline: yellowgreen solid 1px;
+}
+
+#description p:first-child {
+	letter-spacing: 3px;
+	text-align: justify;
+	font-weight: bold;
+}
+
+#description p+p {
+	margin-top: 0vh;
+	margin-left: 20px !important;
+	font-size: 8pt;
+	text-align: center;
+}
+
+#foto {
+	display: block;
+	position: relative;
+	outline: red dashed 1px;
+	width: 100%;
+	height: 97%;
+}
+
+footer {
+	outline: cyan dashed 1px;
+	display: block;
+	height: 3%;
+	width: 100%;
+	font-size: 6pt;
+}
+
+footer > p {
+	position: fixed;
+	right: 0px;
+	margin: 2px;
+	margin-right: 5px;
+	padding: 0px;
+	text-align: right;
+}
+
+.active {
+	background-color: darkgray;
+	font-color: lightgray;
+}
+
+* {
+	outline: black solid 0px !important;
+}
+
+/*
+ * Puntos
+ */
+	#lcct-N32-point {
+	}
+	.lcct-point {
+		font-size: 40pt;
+		color: green;
+		background-color: unset;
+		width: 54px;
+		cursor: pointer;
+	}
+	/*
+	 * Notas
+	 */
+	.lcct-note {
+		width: 250px;
+		background-color: white;
+		position: absolute;
+		display: none;
+		font-size: 12px;
+		outline: 7px solid #14ff64;
+		padding: 20px;
+	}
+	#N16 {
+		width: 500px;
+	}
+	#N16 object {
+		width: inherit;
+	}

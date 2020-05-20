@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es" class="h-100 lcct">
+	<head>
+		<title>L-C---C-T</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="js/openseadragon.min.js"></script>
+		<script src="js/openseadragon-svg-overlay.js"></script>
+      <script src="//d3js.org/d3.v5.min.js"></script>
+	</head>
+	<body>
+		<div id="logo">
+				<span class="lcct">L.C.C.T.</span>
+		</div>
+			<ul id="bar" class="nav flex-column">
+				<li>
+  			<a class="btn bg-light" data-toggle="collapse" href="#menu" role="button" aria-expanded="false" aria-controls="menu">
+				<span class="navbar-toggler-icon"></span>
+			</a>
+			<div class="collapse" id="menu">
+			    <ul class="nav">
+			      <li class="nav-item active">
+			        <a class="nav-link"><span class="lcct">L.C.C.T.<span class="sr-only">(actual)</span></span></a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="proyecto.html">EL PROYECTO </a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="notas.html">NOTAS AL PIE</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="libro.html">LIBRO DIGITAL</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="libro.html">COMENTA</a>
+			      </li>
+			    </ul>
+		  </div>
+				</li>
+			      <li class="nav-item" id="title">
+					<span>la ciudad como texto</span>
+				</li>
+			      <li class="nav-item">
+					<span>SP</span>
+				</li>
+			      <li class="nav-item">
+					<span>EN</span>
+				</li>
+			      <li class="nav-item">
+					<div id="description">
+						<p>Estallido social chile 2019</p>
+						<p>Día 36 | Av. Alameda Bernardo O'Higgins</p>
+					</div>
+				</li>
+			</ul>
+		<main role="main" class="flex-shrink-0">
+			<div id="main" class="container">
+				<div id="foto">
+				</div>
+			</div>
+		</main>
+		<footer class="footer mt-auto py-3">
+			<div class="container">
+				<span class="text-muted">COPYRIGHT &copy;La Ciudad como Texto | 2020</span>
+			</div>
+		</footer>
+		<script>
+            // ----------
+            App = {
+                // ----------
+                init: function() {
+                    var self = this;
+
+                    var tileSource = {
+                        Image: {
+                            xmlns: "http://schemas.microsoft.com/deepzoom/2008",
+                            Url: "http://openseadragon.github.io/example-images/highsmith/highsmith_files/",
+                            Format: "jpg",
+                            Overlap: "2",
+                            TileSize: "256",
+                            Size: {
+                                Height: "9221",
+                                Width:  "7026"
+                            }
+                        }
+                    };
+
+                    this.viewer = OpenSeadragon({
+                        id: "foto",
+                        prefixUrl: "/js/images/",
+								defaultZoomLevel: 72,
+								viewportMargins: {
+									left: 0,
+									 /*
+									top: 0,
+									right: 0,
+									bottom: 0
+								*/
+								},
+				overlays: [{
+					id: 'lcct-N32-point',
+					className: 'lcct-point',
+					placement: 'CENTER',
+					checkResize: false,
+//					width: 30/241159,
+//					height: 30/241159,
+//					x: OpenSeadragon.Viewport.pointFromPixel(128861.865),
+//					y: OpenSeadragon.Viewport.pointFromPixel(898.799)
+					x: 128861.865/241159,
+					y: 898.799/241159
+				},
+						  {
+									             id: 'example-overlay',
+									             x: 0.5/241195,
+									             y: 0.5/241195,
+									             width: 0.2/241159,
+									             height: 0.25/241159,
+									             className: 'highlight'
+				}],
+								tileSources: "/iipsrv/iipsrv.fcgi?DeepZoom=lcct.tif.dzi"
+							});
+                }
+            };
+
+            // ----------
+            $(document).ready(function() {
+               App.init();
+
+                var overlay = App.viewer.svgOverlay();
+
+					 var point = new OpenSeadragon.Point(128861.865,898.799);
+						  console.log('point=',point);
+					// ir a la posición de partida
+						  App.viewer.viewport.fitBounds(new OpenSeadragon.Rect(0,0,1000,1000));
+//						  App.viewer.viewport.zoomTo(82).update();
+					 var vp_point = App.viewer.viewport.imageToViewportCoordinates(point);
+						  console.log('vp_point=',vp_point);
+					 var view_point = App.viewer.viewport.viewportToViewerElementCoordinates(vp_point);
+						  console.log('view_point=',view_point);
+					 var view_point = App.viewer.viewport.imageToViewerElementCoordinates(point);
+						  console.log('view_point=',view_point);
+					  var zoom = App.viewer.viewport.getZoom(true);
+						  console.log('zoom=',zoom);
+						  var imageZoom = App.viewer.viewport.viewportToImageZoom(zoom);
+						  console.log('imageZoom=',imageZoom);
+						  var drawPoint = function(z){
+                var d3Rect = d3.select(overlay.node()).append("rect")
+							.attr("id","lcct-r1")
+                    .style('fill', '#f00')
+                  .attr("x", point.x/241195)
+                  .attr("y", point.y/241195)
+                    .attr("width", "10px")
+                    .attr("height", "10px");
+//						  .attr("transform","scale("+1/z+")");
+						var d3Text = d3.select(overlay.node())
+						.append("text")
+							.attr("id","lcct-p1")
+                  .attr("x", point.x/241195)
+                  .attr("y", point.y/241195)
+						.attr("text-anchor","middle")
+//						.attr("transform","scale("+1/z+")")
+//						.attr("dy", ".35em")
+                  .attr("font-size", "20px")
+						.style("fill","green")
+                  .text("*");
+                overlay.onClick(d3Text.node(), function() {
+                    console.log('click', arguments);
+                });
+						  }
+						  var delPoint = function(){
+								d3.select("#lcct-r1").remove();
+								d3.select("#lcct-p1").remove();
+						  }
+						  var reDrawPoint = function(z){
+									 console.log('redraw ',z);
+								d3.select("#lcct-r1")
+                    		.attr("width", "10px")
+                    		.attr("height", "10px")
+                  		.attr("x", point.x)
+		                  .attr("y", point.y);
+//								.attr("transform","scale("+1/z+")");
+								d3.select("#lcct-p1")
+                  		.attr("font-size", "20px")
+                  		.attr("x", point.x)
+		                  .attr("y", point.y);
+//								.attr("transform","scale("+1/z+")");
+						  }
+						  drawPoint(imageZoom);
+
+					App.viewer.addHandler('canvas-scroll', function(event) {
+				      // The canvas-click event gives us a position in web coordinates.
+				      var webPoint = event.position;
+
+				      // Convert that to viewport coordinates, the lingua franca of OpenSeadragon coordinates.
+				      var viewportPoint = App.viewer.viewport.pointFromPixel(webPoint);
+
+				      // Convert from viewport coordinates to image coordinates.
+				      var imagePoint = App.viewer.viewport.viewportToImageCoordinates(viewportPoint);
+
+				      // Show the results.
+				      console.log('web=',webPoint.toString(),'viewport=', viewportPoint.toString(), 'image=',imagePoint.toString());
+					  var zoom2 = App.viewer.viewport.getZoom(true);
+						  console.log('zoom=',zoom2);
+						  var imageZoom2 = App.viewer.viewport.viewportToImageZoom(zoom2);
+						  console.log('imageZoom=',imageZoom2);
+						  var page = App.viewer.currentPage();
+						  console.log('page=',page);
+						reDrawPoint(imageZoom2);
+					});
+                $(window).resize(function() {
+                  App.viewer.svgOverlay().resize();
+               });
+         });
+		</script>
+	</body>
+</html>
