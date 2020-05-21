@@ -20,9 +20,9 @@ body {
 	font-style: normal;
 	font-size: 16pt;
 	text-decoration: line-through;
-	font-color: darkgray;
+	color: #666666;
 	outline: white none 0px !important;
-	background-color: lightgray;
+	background-color: #CCCCCC;
 }
 
 #logo {
@@ -58,11 +58,50 @@ main {
 	width: 100%;
 }
 
-#menu {
-	display: none !important;
+#button {
+	background-image: url("/images/Hamburger_icon.svg");
+	background-size: 90%;
+	background-repeat: no-repeat;
 }
 
-#lateral > div {
+#menu {
+	margin: 0px;
+	padding: 0px;
+	z-index: 1100;
+	position: fixed;
+	top: 0px;
+	left: 40px;
+	font-size: 26pt;
+	outline: red solid 1px;
+}
+
+#menu div {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+a.nav-link, a.nav-link:visited {
+	color: #666666;
+	text-decoration: none;
+}
+
+#menu div:first-child a {
+	color: #CCCCCC;
+	background-image: url("/images/logo_negro.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+#menu div a {
+	display: block;
+	margin: 0px;
+	padding: 3pt;
+	background-color: #CCCCCC;
+}
+
+#lateral > div+div {
 	display: block;
 	outline: blue dotted 1px;
 	width: 100%;
@@ -126,9 +165,127 @@ main {
 #foto {
 	display: block;
 	position: relative;
-	outline: red dashed 1px;
+	outline: red dashed 0px;
 	width: 100%;
 	height: 97%;
+}
+
+.collapse {
+	display: none;
+}
+
+.lightbox {
+	margin-left: 40px;
+	position: fixed;
+	background-color: #CCCCCC;
+	z-index: 2000;
+	border: 1px solid cyan;
+	border-radius: 3px;
+}
+
+.lightbox nav {
+/*	display: block;
+	width: 100%;
+	height: 20pt;*/
+/*	background-color: #999999;*/
+	border-radius: 3px;
+}
+
+.lightbox button {
+	display: inline-block;
+	background-color: transparent;
+	border: 1px solid #CCCCCC;
+	border-radius: 3px;
+	text-transform: uppercase;
+	height: 100%;
+	vertical-align: middle;
+	float: right;
+	font-size: 20pt;
+	margin-bottom: -8pt;
+}
+
+#comenta {
+	top: 20vh;
+	left: 10vw;
+	width: 80vw;
+	height: 60vh;
+	padding: 0px;
+}
+
+#comenta section {
+	display: inline-block;
+	background-color: white;
+	margin: 20pt;
+	border-radius: 3px;
+}
+
+#comenta div {
+	display: inline-block;
+	position: relative;
+	top: 0px;
+	width: 45%;
+	height: 100%;
+	padding: 2%;
+/*	outline: green solid 1px !important;*/
+}
+
+#comenta h1 {
+	font-size: 20pt;
+	color: #CCCCCC;
+}
+
+#comenta a {
+	color: #666666;
+}
+
+a.nav-contact {
+	font-size: 12pt;
+}
+
+a.social-ig img {
+	width: 20pt;
+}
+
+#comenta fieldset {
+	border: 0px solid #CCCCCC;
+	padding: 0px;
+	margin: 0px;
+}
+
+#comenta legend {
+	font-size: 0px;
+}
+
+#comenta input, #comenta textarea {
+	border: 0px;
+	background-color: #BBD6CD;
+	padding: 0px;
+	margin: 0px;
+}
+
+#comenta input.medium {
+	width: 49%;
+}
+
+#comenta input.wide {
+	width: 100%;
+}
+
+#comenta textarea {
+	width: 100%;
+	margin-top: 8pt;
+}
+
+#mask {
+	display: none;
+	z-index: 1500;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height: 100vh;
+	width: 100vw;
+	background-color: black;
+	opacity: 0.25;
 }
 
 footer {
@@ -150,8 +307,9 @@ footer > p {
 
 .active {
 	background-color: darkgray;
-	font-color: lightgray;
+	font-color: #CCCCCC;
 }
+
 
 * {
 	outline: black solid 0px !important;

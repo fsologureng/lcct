@@ -99,3 +99,22 @@ viewer.addHandler('open', function(event) {
 	}
 });
 
+$(document).ready(function(){
+	// bind menú button
+	$('#button').on('click',function(e){
+		$('#menu').fadeToggle("fast",function(){console.log("menu click")});
+		return false;
+	});
+	$('#menu a[href="#comenta"]').on('click',function(e){
+		console.log('click comenta');
+		$('#menu').fadeToggle("fast",function(){console.log("esconde menu")});
+		$('#comenta').fadeIn("fast",function(){console.log("activa comenta")});
+		$('#mask').fadeIn("fast",function(){console.log("activa máscara")});
+	});
+	$('#comenta nav button').on('click',function(e){
+		console.log('click cierra comenta');
+		$('#mask').fadeOut("fast",function(){console.log("desactiva máscara")});
+		$('#comenta').fadeOut("fast",function(){console.log("desactiva comenta")});
+		document.location.hash='';
+	});
+});
