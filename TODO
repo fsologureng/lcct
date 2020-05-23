@@ -1,9 +1,12 @@
- * Corregir posición de partida (zoom)
- * Agregar slider
  * Agregar rayos.
+ * Agregar scroll foto (navigator)
  * Corregir bloqueo de máscara
  * Agregar enlace a libro
  * Crear página en inglés
- * Incluir foto final con rostros removidos
- * Revisar posición N03 y N35
  * Corregir despliegue de barra lateral en móviles apaisados
+ * Agregar botón envío formulario.
+ * Incorporar observaciones de la planilla en notas.
+ * Corregir overlay de la barra lateral que queda encima de las notas en móviles.
+ * Eliminar botón derecho sobre la imagen?
+ * Mejorar despliegue de notas para no interferir con la posición en móviles.
+ * Corregir nota que se queda abierta en móviles si no se cierra manualmente: capturar evento de movimiento para cerrarla.
