@@ -13,8 +13,18 @@ var viewer = OpenSeadragon({
 	overlays: Object.values(overlays),
 	visibilityRatio: 1.0,
 	constrainDuringPan: true,
-	showNavigator: false,
-	navigatorPosition: 'BOTTOM_RIGHT',
+	showNavigator: true,
+	navigatorId: 'navigator',
+/*	navigatorPosition: 'ABSOLUTE',
+	navigatorTop: '94%',
+	navigatorLeft: '0px',
+	navigatorHeight: '3%',
+	navigatorWidth: '100%',*/
+/*	navigatorSizeRatio: 5.8,*/
+	navigatorMaintainSizeRatio: true,
+	navigatorAutoResize: true,
+	navigatorAutoFade: false,
+	navigatorDisplayRegionColor: '#14FF64',
 	showNavigationControl: false
 });
 
@@ -95,6 +105,14 @@ function bindtooltip(el){
 		});
 	}
 };
+
+// send email
+function sendMail(){
+	var subject = encodeURIComponent('Mensaje desde LCCT');
+	var body = encodeURIComponent(document.forms.feedback.message.value);
+	window.open("mailto:laciudadcomotexto2019@gmail.com?subject="+subject+"&body="+body,"_blank");
+	return false;
+}
 
 viewer.addHandler('animate', function(event) {
 	// The canvas-click event gives us a position in web coordinates.

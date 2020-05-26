@@ -32,7 +32,7 @@
 					<a class="nav-link" href="#notas" role="button" aria-expanded="false" aria-controls="notas">N&#x2731;TAS AL PIE</a>
 				</div>
 				<div class="nav-item">
-					<a class="nav-link" href="#libro" role="button" aria-expanded="false" aria-controls="libro">LIBRO DIGITAL</a>
+					<a class="nav-link" href="https://www.example.org/libro" role="button" target="_blank">LIBRO DIGITAL</a>
 				</div>
 				<div class="nav-item">
 					<a class="nav-link" href="#comenta" role="button" aria-expanded="false" aria-controls="comenta">COMENTA</a>
@@ -52,6 +52,8 @@
 		</div>
 		<main id="main" role="main">
 			<div id="foto">
+			</div>
+			<div id="navigator">
 			</div>
 			<div id="proyecto" class="collapse lightbox">
 				<nav><button>&times;</button></nav>
@@ -200,11 +202,6 @@
 					</div>
 				</section>
 			</div>
-			<div id="libro" class="collapse lightbox">
-				<nav><button>&times;</button></nav>
-				<section>
-				</section>
-			</div>
 			<div id="comenta" class="collapse lightbox">
 				<nav><button>&times;</button></nav>
 				<section>
@@ -215,13 +212,16 @@
 						<p><a class="social social-ig" href="https://www.instagram.com/laciudadcomotexto" target="_blank"><img src="/images/Instagram_simple_icon.svg" alt="laciudadcomotexto"></a></p>
 					</div>
 					<div>
-						<form>
+						<form id="feedback" name="feedback" action="" method="get" onsubmit="javascript:sendMail()">
 							<fieldset>
 								<legend>Contacto</legend>
 								<input class="medium" name="email" type="email" placeholder="Correo electrónico*" required>
 								<input class="medium" name="name" type="text" placeholder="Nombre*" required>
 								<input class="wide" name="subject" type="text" placeholder="Asunto">
 								<textarea name="message" placeholder="Mensaje" rows="8"></textarea>
+							</fieldset>
+							<fieldset>
+								<input class="send" name="Enviar" type="submit">
 							</fieldset>
 						</form>
 					</div>
