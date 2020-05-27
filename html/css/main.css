@@ -21,7 +21,6 @@ body {
 	font-size: 16pt;
 	text-decoration: line-through;
 	color: #666666;
-	outline: white none 0px !important;
 	background-color: #CCCCCC;
 }
 
@@ -135,6 +134,7 @@ a.nav-link:hover {
 #languages p {
 	margin: 0px;
 	padding: 0px;
+	text-align: center;
 }
 
 #title {
@@ -151,24 +151,25 @@ a.nav-link:hover {
 	transform: rotate(270deg);
 	transform-origin: left;
 	position: relative;
-	margin-left: 5px !important;
+	margin-left: 9px !important;
 	height: 0px;
 	width: 35vh;
-	bottom: -30vh;
-	font-size: 12pt;
-	text-transform: uppercase;
+	bottom: -34vh;
+	font-size: 11pt;
+	text-align: center;
 }
 
 #description p {
 	transform: rotate(270deg);
 	transform-origin: left;
 	position: relative;
+	margin-left: 2px !important;
 	height: 0px;
 	width: 45vh;
-	bottom: -40vh;
-	font-size: 11pt;
+	bottom: -43vh;
+	font-size: 10pt;
 	letter-spacing: 2px;
-	text-align: justify;
+	text-align: center;
 	font-weight: bold;
 /*	outline: yellowgreen solid 1px;*/
 }
@@ -325,6 +326,17 @@ a.social-ig img {
 
 #notas {
 	font-size: 12pt;
+	padding-right: 10px;
+}
+
+#notas ul {
+	list-style: "\2731";
+	column-count: 2;
+	column-gap: 15px;
+}
+
+#notas ul li {
+	padding-left: 5px;
 }
 
 a.note-link, a.note-link:visited {
@@ -338,8 +350,13 @@ a.note-link, a.note-link:visited {
 	text-decoration: none;
 }
 
+a:hover.note-link {
+	text-decoration: line-through;
+}
+
 #notas .nav-note {
 	padding: 12pt;
+	margin-right: 20px;
 	color: #666666;
 	background-color: #14FF64;
 }
@@ -393,11 +410,12 @@ footer > p {
  * Notas
  */
 .lcct-note {
-	background-color: white;
+	color: white;
+	background-color: #666666;
 	position: absolute;
 	display: none;
 	font-size: 12px;
-	outline: 7px solid #14FF64;
+	outline: 2px solid #14FF64;
 	padding: 20px;
 }
 .lcct-note pre {

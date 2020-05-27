@@ -71,11 +71,11 @@ function bindtooltip(el){
 		var mousex = e.pageX, //Get X coodrinates
 			mousey = e.pageY; //Get Y coordinates
 
-		var lasersX = mousex - ( viewerBottomRight.x - viewerTopLeft.x ) + laser1_delta_x;
+		var lasersX = mousex - 2500/2 + laser1_delta_x;
 		console.log('lasersX=',lasersX);
-		var lasersY = mousey - ( viewerBottomRight.y - viewerTopLeft.y ) + laser1_delta_y;
+		var lasersY = mousey - 2130/2 + laser1_delta_y;
 		console.log('lasersY=',lasersY);
-		laser.css({left: lasersX, top: lasersY, width: ( viewerBottomRight.x - viewerTopLeft.x )*2, height: ( viewerBottomRight.y - viewerTopLeft.y )*2, position: 'absolute' });
+		laser.css({left: lasersX, top: lasersY, width: 2500, height: 2130, position: 'absolute' });
 		laser.show();
 	};
 	console.log('is touch: '+window.matchMedia("(pointer: coarse)").matches);
