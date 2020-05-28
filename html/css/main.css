@@ -249,6 +249,18 @@ a.nav-link:hover {
 	font-size: 12pt;
 }
 
+#proyecto > section {
+	border-radius: 3px;
+}
+
+#proyecto > section > p {
+	margin: 20pt;
+}
+
+p.signature {
+	text-align:right;
+}
+
 #comenta {
 	top: 20vh;
 	left: 10vw;
@@ -275,12 +287,10 @@ a.nav-link:hover {
 	font-size: 20pt;
 }
 
-#comenta a {
-	color: #14FF64;
-}
-
 a.nav-contact {
+	color: #14FF64;
 	font-size: 12pt;
+	text-decoration: none;
 }
 
 a.social-ig img {
