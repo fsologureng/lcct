@@ -15,17 +15,12 @@ var viewer = OpenSeadragon({
 	constrainDuringPan: true,
 	showNavigator: true,
 	navigatorId: 'navigator',
-/*	navigatorPosition: 'ABSOLUTE',
-	navigatorTop: '94%',
-	navigatorLeft: '0px',
-	navigatorHeight: '3%',
-	navigatorWidth: '100%',*/
-/*	navigatorSizeRatio: 5.8,*/
 	navigatorMaintainSizeRatio: true,
 	navigatorAutoResize: true,
 	navigatorAutoFade: false,
 	navigatorDisplayRegionColor: '#14FF64',
-	showNavigationControl: false
+	showNavigationControl: true,
+	navigationControlAnchor: 'BOTTOM_RIGHT'
 });
 
 // Bind a note
@@ -49,15 +44,53 @@ function bindtooltip(el){
 			tipWidth = tip.width(), //Find width of tooltip
 			tipHeight = tip.height(); //Find height of tooltip
 
-		if ( mousex < (viewerTopLeft.x + viewerBottomRight.x)/2 ) { // left
-			// console.log('left');
-			var tipVisX = mousex + 20;
+		var tipVisX,
+			tipVisY,
+			x_pan = ( viewerBottomRight.x - mousex )/( mousex - viewerTopLeft.x),
+			y_pan = ( viewerBottomRight.y - mousey )/( mousey - viewerTopLeft.y);
+		console.log('x_pan=',x_pan,' y_pan=',y_pan);
+		if ( x_pan > 1.5 ) { // left
+			console.log('mouse on left');
+			tipVisX = mousex + (viewerBottomRight.x - mousex - tipWidth)*0.5;
+			tipVisY = (viewerBottomRight.y - tipHeight)/2;
 		}
-		else { // right
-			// console.log('right');
-			var tipVisX = mousex - tipWidth - 60 > 40 ? mousex - tipWidth - 60 : 40;
+		else if ( x_pan < 0.66666666 ) { // right
+			console.log('mouse on right');
+			tipVisX = (mousex - tipWidth)/2;
+			tipVisY = (viewerBottomRight.y - tipHeight)/2;
 		}
-		var tipVisY = viewerTopLeft.y + (viewerBottomRight.y - viewerTopLeft.y - tipHeight)/2;
+		else { // horizontal center
+			console.log('on horizontal center');
+			if ( y_pan > 1.5 ) { // top 
+				console.log('mouse on top');
+				tipVisX = (viewerBottomRight.x - tipWidth)/2;
+				tipVisY = mousey + (viewerBottomRight.y - mousey - tipHeight)/2;
+			}
+			else if ( y_pan < 0.66666666 ) { // bottom
+				console.log('mouse on bottom');
+				tipVisX = (viewerBottomRight.x - tipWidth)/2;
+				tipVisY = (mousey - tipHeight)/2;
+			}
+			else { // vertical center
+				console.log('on vertical center');
+				if ( x_pan > 1 ) { // center left
+					console.log('mouse on left');
+					tipVisX = viewerTopLeft.x + (viewerBottomRight.x - viewerTopLeft.x)*0.55;
+				}
+				else { // center right
+					console.log('mouse on right');
+					tipVisX = (viewerBottomRight.x - viewerTopLeft.x)/9;
+				}
+				if ( y_pan > 1 ) { // center top
+					console.log('mouse on top');
+					tipVisY = mousey + (viewerTopLeft.y - mousey - tipHeight)/2;
+				}
+				else { // center bottom
+					console.log('mouse on bottom');
+					tipVisY = (mousey - tipHeight)/2;
+				}
+			}
+		}
 		tip.css({ left: tipVisX, top: tipVisY, position: 'absolute' });
 		tip.show(); //Show tooltip
 	};
@@ -114,6 +147,10 @@ function sendMail(){
 	return false;
 }
 
+viewer.addHandler('canvas-drag-end', function(event) {
+	$('div.reduced').addClass('phantom').removeClass('reduced');
+});
+
 viewer.addHandler('animate', function(event) {
 	// The canvas-click event gives us a position in web coordinates.
 	var webPoint = event.position;
@@ -129,20 +166,64 @@ viewer.addHandler('animate', function(event) {
 });
 
 // focus on a note
-function goToNote(note){
+function goToNote(note){ // invariant: always fitted vertically
 	// Starting point
-	var oldBounds = viewer.viewport.getBounds();  //FIXME: posición no depende
+	var oldBounds = viewer.viewport.getBounds();
 	console.log('oldBounds=',oldBounds);
-	var X = overlays[note].x < oldBounds.width ? 0 : overlays[note].x > lcct_width - oldBounds.width ?lcct_width - oldBounds.width : overlays[note].x-oldBounds.width/2;
+	// fit always with displacement
+	var X = overlays[note].x < oldBounds.width*0.3 ? 0 : overlays[note].x > lcct_width - oldBounds.width*0.3 ? lcct_width - oldBounds.width : overlays[note].x-oldBounds.width*0.3;
 	var newBounds = new OpenSeadragon.Rect(X, oldBounds.y, oldBounds.width, oldBounds.height,0); 
 	console.log('newBounds=',newBounds);
 	viewer.viewport.fitBoundsWithConstraints(newBounds, true);
+}
+
+function isPointCentered(leftPos, rightPos){
+//	console.log('leftPos=',leftPos);
+//	console.log('rightPos=',rightPos);
+//	console.log('leftSquarePos=',$('#foto').width()*0.3);
+//	console.log('rightSquarePos=',$('#foto').width()*0.7);
+	if (leftPos > $('#foto').width()*0.1 && rightPos < $('#foto').width()*0.9){ // center
+		console.log('point centered');
+		return true;
+	}
+	else {
+		console.log('point not centered');
+		return false;
+	}
 }
 
 // inicio del viewer
 viewer.addHandler('open', function(event) {
 	// fit vertically
 	viewer.viewport.fitVertically();
+	// bind center square
+	$('.lcct-point div+div').each(function(i,el){
+		$(el).hover(function(e){
+			console.log('enter square');
+			var leftPos = e.target.getBoundingClientRect().left + $(window)['scrollLeft']();
+			var rightPos = e.target.getBoundingClientRect().right + $(window)['scrollLeft']();
+			if (isPointCentered(leftPos, rightPos)){ // center
+				if ( leftPos > ($('#foto').width() - rightPos ) ) {
+					// mover a la izquierda 
+					console.log('move to left');
+					viewer.viewport.panBy(new OpenSeadragon.Point(-5/lcct_width,0), false);
+				}
+				else {
+					// mover a la derecha 
+					console.log('move to right');
+					viewer.viewport.panBy(new OpenSeadragon.Point(5/lcct_width,0), false);
+				}
+			}
+			else {
+				$(e.target).addClass('reduced');
+			}
+			e.stopImmediatePropagation();
+			$(e.target).removeClass('phantom');
+		},function(e){
+			console.log('leave square');
+			$(e.target).not('.reduced').addClass('phantom');
+		});
+	});
 	// Bind notes
 	$('.lcct-note').each(function(i,el){
 		bindtooltip(el);
@@ -156,7 +237,7 @@ viewer.addHandler('open', function(event) {
 	}
 	else {
 		// Starting point
-		var oldBounds = viewer.viewport.getBounds(); // FIXME: arreglar el zoom para diferentes dispositivos 
+		var oldBounds = viewer.viewport.getBounds();
 		console.log('oldBounds=',oldBounds);
 		var newBounds = new OpenSeadragon.Rect(0, oldBounds.y, oldBounds.width, oldBounds.height,0); 
 		console.log('newBounds=',newBounds);

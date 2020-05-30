@@ -66,6 +66,7 @@ main {
 	background-image: url("/images/Hamburger_icon.svg");
 	background-size: 90%;
 	background-repeat: no-repeat;
+	background-position: center;
 	outline: #666666 solid 1px;
 }
 
@@ -132,6 +133,7 @@ a.nav-link:hover {
 }
 
 #languages p {
+	background-color: #CCCCCC;
 	margin: 0px;
 	padding: 0px;
 	text-align: center;
@@ -196,6 +198,8 @@ a.nav-link:hover {
 	width: 100%;
 /*	height: 6%;*/
 	bottom: 7%;
+	border: white solid 2px;
+	outline: #666666 solid 1px;
 }
 
 .collapse {
@@ -207,7 +211,7 @@ a.nav-link:hover {
 	position: fixed;
 	background-color: #666666;
 	z-index: 2000;
-/*	border: 1px solid cyan;*/
+	border: 2px solid #14FF64;
 	border-radius: 3px;
 	top: 20vh;
 	left: 10vw;
@@ -226,6 +230,7 @@ a.nav-link:hover {
 }
 
 .lightbox button {
+	color: #14FF64;
 	display: inline-block;
 	background-color: transparent;
 	border: 1px none #CCCCCC;
@@ -389,8 +394,8 @@ footer > p {
 }
 
 .active {
-	background-color: darkgray;
-	font-color: #CCCCCC;
+	background-color: #14FF64 !important;
+	outline: #666666 solid 1px;
 }
 
 /*
@@ -405,15 +410,41 @@ footer > p {
 	overflow: visible;
 }
 .lcct-point div {
-	position: relative;
+	position: absolute;
 	top: -22px;
 	left: -22px;
 	width: 58px;
 	height: 58px;
+}
+.lcct-point div:first-child {
 	z-index: 1600;
 	background: url('/images/Asterisco.svg');
 	background-repeat: no-repeat;
 	background-position: center;
+	pointer-events: none;
+}
+.lcct-point div.phantom {
+	margin-top: -15vh;
+	margin-bottom: -15vh;
+	margin-left: -15vw;
+	margin-right: -15vw;
+	padding-top: 15vh;
+	padding-bottom: 15vh;
+	padding-left: 15vw;
+	padding-right: 15vw;
+}
+.lcct-point div+div {
+	top: 0px;
+	left: 0px;
+	width: 1px;
+	height: 1px;
+	z-index: 1500;
+/*	outline: blue solid 1px;*/
+}
+.lcct-point div+div:hover {
+	background-color: blue;
+}
+.lcct-point div.reduced {
 	pointer-events: none;
 }
 /*
@@ -426,13 +457,13 @@ footer > p {
 	display: none;
 	font-size: 12px;
 	outline: 2px solid #14FF64;
-	padding: 20px;
+	padding: 3.3vw;
 }
 .lcct-note pre {
 	font-family: 'DIN Pro';
 }
 .lcct-note p {
-	max-width: 45vw;
+	max-width: 30vw;
 }
 #N34 {
 	text-align: center;	
