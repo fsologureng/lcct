@@ -77,7 +77,7 @@ main {
 	position: fixed;
 	top: 0px;
 	left: 40px;
-	font-size: 26pt;
+	font-size: 25pt;
 }
 
 #menu div {
@@ -98,8 +98,8 @@ a.nav-link, a.nav-link:visited {
 /*	padding: 3pt;*/
 	width: 100%;
 	height: 100%;
-	color: #666666;
-	background-color: #CCCCCC;
+	color: #14FF64;
+	background-color: #666666;
 	text-decoration: none;
 }
 
@@ -114,6 +114,7 @@ a.nav-link:hover {
 #menu div:first-child a {
 	color: #CCCCCC;
 	background-image: url("/images/logo_negro.png");
+	background-color: #CCCCCC;
 	background-size: 100%;
 	background-repeat: no-repeat;
 	pointer-events: none;
@@ -260,6 +261,20 @@ a.nav-link:hover {
 
 #proyecto > section > p {
 	margin: 20pt;
+}
+
+#ficha {
+	border: #CCCCCC solid 2px;
+	margin: 40pt;
+	padding: 30pt;
+}
+
+#ficha h4 {
+	margin-top: 0px;
+}
+
+#ficha dt {
+	color: #CCCCCC;
 }
 
 p.signature {
@@ -423,6 +438,7 @@ footer > p {
 	background-position: center;
 	pointer-events: none;
 }
+/*
 .lcct-point div.phantom {
 	margin-top: -15vh;
 	margin-bottom: -15vh;
@@ -439,7 +455,7 @@ footer > p {
 	width: 1px;
 	height: 1px;
 	z-index: 1500;
-/*	outline: blue solid 1px;*/
+	outline: blue solid 1px;
 }
 .lcct-point div+div:hover {
 	background-color: blue;
@@ -447,6 +463,7 @@ footer > p {
 .lcct-point div.reduced {
 	pointer-events: none;
 }
+*/
 /*
  * Notas
  */

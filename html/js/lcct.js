@@ -20,103 +20,155 @@ var viewer = OpenSeadragon({
 	navigatorAutoFade: false,
 	navigatorDisplayRegionColor: '#14FF64',
 	showNavigationControl: true,
-	navigationControlAnchor: 'BOTTOM_RIGHT'
+	navigationControlAnchor: 'BOTTOM_RIGHT',
+	animationTime: 1.4
+});
+
+// show a note
+function show_note(){
+}
+function hide_note(){
+}
+
+function showTip(point){
+	var tip = $('#'+$(point).attr('aria-controls'));
+	var bounds = viewer.viewport.getBounds(); 
+	var viewerTopLeft = viewer.viewport.viewportToWindowCoordinates(bounds.getTopLeft());
+	console.log('[showTip] viewerTopLeft=',viewerTopLeft);
+	var viewerBottomRight = viewer.viewport.viewportToWindowCoordinates(bounds.getBottomRight());
+	console.log('[showTip] viewerBottomRight=',viewerBottomRight);
+	var asterisk = $(point).children('div:first-child').get(0);
+	console.log('[showTip] point=',point);
+	var leftPos = asterisk.getBoundingClientRect().left + $(window)['scrollLeft']();
+	console.log('[showTip] leftPos=',leftPos);
+	var rightPos = asterisk.getBoundingClientRect().right + $(window)['scrollLeft']();
+	console.log('[showTip] rightPos=',rightPos);
+	var tipWidth = tip.outerWidth(); //Find width of tooltip
+	console.log('[panningTip] tipWidth=',tipWidth);
+	var tipHeight = tip.outerHeight(); //Find height of tooltip
+	var tipVisX;
+	var tipVisY = (viewerBottomRight.y - tipHeight)/2;
+	if ( leftPos - viewerTopLeft.x < viewerBottomRight.x - rightPos ) {
+		tipVisX = rightPos + (viewerBottomRight.x - rightPos - tipWidth)/2;
+	}
+	else {
+		tipVisX = viewerTopLeft.x + (leftPos - tipWidth - viewerTopLeft.x)/2;
+	}
+	tip.css({
+		left: tipVisX,
+		top: tipVisY,
+		position: 'absolute'
+	});
+	tip.show(); //Show tooltip
+}
+function panningTip(point){
+	console.log('[panningTip] point=',point);
+	var bounds = viewer.viewport.getBounds(); 
+	// console.log('bindtooltip] bounds=',bounds);
+	var viewerTopLeft = viewer.viewport.viewportToWindowCoordinates(bounds.getTopLeft());
+	console.log('[panningTip] viewerTopLeft=',viewerTopLeft);
+	var viewerBottomRight = viewer.viewport.viewportToWindowCoordinates(bounds.getBottomRight());
+	console.log('[panningTip] viewerBottomRight=',viewerBottomRight);
+	var asterisk = $(point).children('div:first-child').get(0);
+	console.log('[panningTip] asterisk=',asterisk);
+	var leftPos = asterisk.getBoundingClientRect().left + $(window)['scrollLeft']();
+	console.log('[panningTip] leftPos=',leftPos);
+	var rightPos = asterisk.getBoundingClientRect().right + $(window)['scrollLeft']();
+	console.log('[panningTip] rightPos=',rightPos);
+	var tip = $('#'+$(point).attr('aria-controls'));
+	var tipWidth = tip.outerWidth(); //Find width of tooltip
+	console.log('[panningTip] tipWidth=',tipWidth);
+	var marginFactor = 1.2;
+	var tipHeight = tip.outerHeight(); //Find height of tooltip
+	var tipVisX;
+	var tipVisY = (viewerBottomRight.y - tipHeight)/2;
+	// panning to give space
+	if ( ( viewerBottomRight.x - rightPos < tipWidth*marginFactor ) && ( leftPos - viewerTopLeft.x < tipWidth*marginFactor ) ){ // center
+		if ( leftPos - viewerTopLeft.x < viewerBottomRight.x - rightPos ) {
+			// mover punto de vista hacia la derecha 
+			console.log('[panningTip] move asterisk to left');
+			var delta = new OpenSeadragon.Point(tipWidth*marginFactor - (viewerBottomRight.x - rightPos),0);
+			console.log('[panningTip] delta=',delta);
+			viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(delta), false);
+		}
+		else {
+			// mover punto de vista hacia la izquierda 
+			console.log('[panningTip] move point to right');
+			var delta = new OpenSeadragon.Point(tipWidth*marginFactor - (leftPos - viewerTopLeft.x),0);
+			console.log('[panningTip] delta=',delta);
+			viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(delta.rotate(180)), false);
+		}
+		$(point).addClass('pending');
+		return true;
+	}
+	else {
+		console.log('[panningTip] no panning');
+		return false;
+	}
+}
+
+function showLasers(asterisk){
+	var bounds = viewer.viewport.getBounds(); 
+	// console.log('[showLasers] bounds=',bounds);
+	var viewerTopLeft = viewer.viewport.viewportToWindowCoordinates(bounds.getTopLeft());
+	// console.log('[showLasers] viewerTopLeft=',viewerTopLeft);
+	var viewerBottomRight = viewer.viewport.viewportToWindowCoordinates(bounds.getBottomRight());
+	// console.log('[showLasers] viewerBottomRight=',viewerBottomRight);
+	var leftPos = asterisk.getBoundingClientRect().left + $(window)['scrollLeft']();
+	console.log('[showLasers] leftPos=',leftPos);
+	var rightPos = asterisk.getBoundingClientRect().right + $(window)['scrollLeft']();
+	console.log('[showLasers] rightPos=',rightPos);
+	var topPos = asterisk.getBoundingClientRect().top + $(window)['scrollTop']();
+	console.log('[showLasers] topPos=',topPos);
+	var bottomPos = asterisk.getBoundingClientRect().bottom + $(window)['scrollTop']();
+	console.log('[showLasers] bottomPos=',bottomPos);
+
+	var lasersX = (leftPos + rightPos)/2 - 2500/2 + laser1_delta_x;
+	// console.log('[showLasers] lasersX=',lasersX);
+	var lasersY = (topPos + bottomPos)/2 - 2130/2 + laser1_delta_y;
+	// console.log('[showLasers] lasersY=',lasersY);
+	$('#lasers').css({
+		left: lasersX,
+		top: lasersY,
+		width: 2500,
+		height: 2130,
+		position: 'absolute'
+	});
+	$('#lasers').show();
+};
+
+viewer.addHandler('animation-finish', function(event) {
+	console.log('[animation-finish handler]');
+	var point = $('div.pending');
+	console.log('[animation-finish handler] point=',point);
+	if ( point.length > 0 ){
+		// mostrar nota asociada
+		$('#mask').show();
+		showLasers(point.get(0));
+		showTip(point.get(0));
+		point.removeClass('pending');
+		var tip = $('#'+$(point).attr('aria-controls'));
+		window.setTimeout(function(){
+			tip.hide(); //Hide tooltip
+			$('#lasers').hide();
+			$('#mask').hide();
+		},6000);
+	}
 });
 
 // Bind a note
-function bindtooltip(el){
-	var tip = $(el);
-	// console.log('tip=',tip);
-	var laser = $('#lasers');
-	console.log('laser=',laser);
+function bindtooltip(note){
+	var tip = $(note);
+	// console.log('[bindtooltip] tip=',tip);
 	var mask = $('#mask');
 	var id = tip.prop('id').replace(/^N(\d+)$/,'P$1','ig');
-	// console.log('id='+id);
-	var showTip = function(e){
-		var bounds = viewer.viewport.getBounds(); 
-		// console.log('bounds=',bounds);
-		var viewerTopLeft = viewer.viewport.viewportToWindowCoordinates(bounds.getTopLeft());
-		// console.log('viewerTopLeft=',viewerTopLeft);
-		var viewerBottomRight = viewer.viewport.viewportToWindowCoordinates(bounds.getBottomRight());
-		// console.log('viewerBottomRight=',viewerBottomRight);
-		var mousex = e.pageX, //Get X coodrinates
-			mousey = e.pageY, //Get Y coordinates
-			tipWidth = tip.width(), //Find width of tooltip
-			tipHeight = tip.height(); //Find height of tooltip
-
-		var tipVisX,
-			tipVisY,
-			x_pan = ( viewerBottomRight.x - mousex )/( mousex - viewerTopLeft.x),
-			y_pan = ( viewerBottomRight.y - mousey )/( mousey - viewerTopLeft.y);
-		console.log('x_pan=',x_pan,' y_pan=',y_pan);
-		if ( x_pan > 1.5 ) { // left
-			console.log('mouse on left');
-			tipVisX = mousex + (viewerBottomRight.x - mousex - tipWidth)*0.5;
-			tipVisY = (viewerBottomRight.y - tipHeight)/2;
-		}
-		else if ( x_pan < 0.66666666 ) { // right
-			console.log('mouse on right');
-			tipVisX = (mousex - tipWidth)/2;
-			tipVisY = (viewerBottomRight.y - tipHeight)/2;
-		}
-		else { // horizontal center
-			console.log('on horizontal center');
-			if ( y_pan > 1.5 ) { // top 
-				console.log('mouse on top');
-				tipVisX = (viewerBottomRight.x - tipWidth)/2;
-				tipVisY = mousey + (viewerBottomRight.y - mousey - tipHeight)/2;
-			}
-			else if ( y_pan < 0.66666666 ) { // bottom
-				console.log('mouse on bottom');
-				tipVisX = (viewerBottomRight.x - tipWidth)/2;
-				tipVisY = (mousey - tipHeight)/2;
-			}
-			else { // vertical center
-				console.log('on vertical center');
-				if ( x_pan > 1 ) { // center left
-					console.log('mouse on left');
-					tipVisX = viewerTopLeft.x + (viewerBottomRight.x - viewerTopLeft.x)*0.55;
-				}
-				else { // center right
-					console.log('mouse on right');
-					tipVisX = (viewerBottomRight.x - viewerTopLeft.x)/9;
-				}
-				if ( y_pan > 1 ) { // center top
-					console.log('mouse on top');
-					tipVisY = mousey + (viewerTopLeft.y - mousey - tipHeight)/2;
-				}
-				else { // center bottom
-					console.log('mouse on bottom');
-					tipVisY = (mousey - tipHeight)/2;
-				}
-			}
-		}
-		tip.css({ left: tipVisX, top: tipVisY, position: 'absolute' });
-		tip.show(); //Show tooltip
-	};
-	var showLasers = function(e){
-		var bounds = viewer.viewport.getBounds(); 
-		// console.log('bounds=',bounds);
-		var viewerTopLeft = viewer.viewport.viewportToWindowCoordinates(bounds.getTopLeft());
-		// console.log('viewerTopLeft=',viewerTopLeft);
-		var viewerBottomRight = viewer.viewport.viewportToWindowCoordinates(bounds.getBottomRight());
-		// console.log('viewerBottomRight=',viewerBottomRight);
-		var mousex = e.pageX, //Get X coodrinates
-			mousey = e.pageY; //Get Y coordinates
-
-		var lasersX = mousex - 2500/2 + laser1_delta_x;
-		console.log('lasersX=',lasersX);
-		var lasersY = mousey - 2130/2 + laser1_delta_y;
-		console.log('lasersY=',lasersY);
-		laser.css({left: lasersX, top: lasersY, width: 2500, height: 2130, position: 'absolute' });
-		laser.show();
-	};
-	console.log('is touch: '+window.matchMedia("(pointer: coarse)").matches);
-	if (window.matchMedia("(pointer: coarse)").matches){
+	// console.log('bindtooltip] id='+id);
+	// console.log('[bindtooltip] is touch: '+window.matchMedia("(pointer: coarse)").matches);
+	if (window.matchMedia("(pointer: coarse)").matches){ //FIXME: add same behaviour as mouse
 		$("#"+id).on('click', function(e) {
 			if( tip.filter(':visible').length > 0 ){
 				tip.hide(); //Hide tooltip
-				laser.hide();
+				$('#lasers').hide();
 				mask.hide();
 			}
 			else {
@@ -129,15 +181,17 @@ function bindtooltip(el){
 	else {
 		$("#"+id).hover(function(e){
 			mask.show();
-			showLasers(e);
-			showTip(e);
+			showLasers(e.target);
+			if(!panningTip(e.target)){
+				showTip(e.target);
+			}
 		}, function() {
 			tip.hide(); //Hide tooltip
-			laser.hide();
-			mask.hide();
+			$('#lasers').hide();
+			$('#mask').hide();
 		});
 	}
-};
+}
 
 // send email
 function sendMail(){
@@ -146,10 +200,6 @@ function sendMail(){
 	window.open("mailto:laciudadcomotexto2019@gmail.com?subject="+subject+"&body="+body,"_blank");
 	return false;
 }
-
-viewer.addHandler('canvas-drag-end', function(event) {
-	$('div.reduced').addClass('phantom').removeClass('reduced');
-});
 
 viewer.addHandler('animate', function(event) {
 	// The canvas-click event gives us a position in web coordinates.
@@ -192,10 +242,28 @@ function isPointCentered(leftPos, rightPos){
 	}
 }
 
+function panPoint(point){
+	var leftPos = point.getBoundingClientRect().left + $(window)['scrollLeft']();
+	var rightPos = point.getBoundingClientRect().right + $(window)['scrollLeft']();
+	var note_width = $('#'+point.prop('aria-controls')).width();
+	if ( ( $('#foto').width() - rightPos ) < note_width || ( $('#foto').width() - leftPos ) < note_width ){ // center
+		if ( leftPos > ($('#foto').width() - rightPos ) ) {
+			// mover a la izquierda 
+			console.log('[panPoint] move to left');
+			viewer.viewport.panBy(new OpenSeadragon.Point(-(note_width - ($('#foto').width() - leftPos))/lcct_width,0), false);
+		}
+		else {
+			// mover a la derecha 
+			console.log('[panPoint] move to right');
+			viewer.viewport.panBy(new OpenSeadragon.Point((note_width - ($('#foto').width() - rightPos))/lcct_width,0), false);
+		}
+	}
+}
 // inicio del viewer
 viewer.addHandler('open', function(event) {
 	// fit vertically
 	viewer.viewport.fitVertically();
+/*
 	// bind center square
 	$('.lcct-point div+div').each(function(i,el){
 		$(el).hover(function(e){
@@ -224,9 +292,10 @@ viewer.addHandler('open', function(event) {
 			$(e.target).not('.reduced').addClass('phantom');
 		});
 	});
+*/
 	// Bind notes
-	$('.lcct-note').each(function(i,el){
-		bindtooltip(el);
+	$('.lcct-note').each(function(idx,note){
+		bindtooltip(note);
 	});
 	// Posicionamiento en nota
 	var fragment = document.location.hash;
