@@ -21,7 +21,7 @@ var viewer = OpenSeadragon({
 	navigatorDisplayRegionColor: '#14FF64',
 	showNavigationControl: true,
 	navigationControlAnchor: 'BOTTOM_RIGHT',
-	animationTime: 1.4
+	animationTime: 1.0
 });
 
 // show a note
@@ -37,14 +37,14 @@ function showTip(point){
 	console.log('[showTip] viewerTopLeft=',viewerTopLeft);
 	var viewerBottomRight = viewer.viewport.viewportToWindowCoordinates(bounds.getBottomRight());
 	console.log('[showTip] viewerBottomRight=',viewerBottomRight);
-	var asterisk = $(point).children('div:first-child').get(0);
+	var asterisk = $(point).children('div.asterisk').get(0);
 	console.log('[showTip] point=',point);
 	var leftPos = asterisk.getBoundingClientRect().left + $(window)['scrollLeft']();
 	console.log('[showTip] leftPos=',leftPos);
 	var rightPos = asterisk.getBoundingClientRect().right + $(window)['scrollLeft']();
 	console.log('[showTip] rightPos=',rightPos);
 	var tipWidth = tip.outerWidth(); //Find width of tooltip
-	console.log('[panningTip] tipWidth=',tipWidth);
+	console.log('[needPanTip] tipWidth=',tipWidth);
 	var tipHeight = tip.outerHeight(); //Find height of tooltip
 	var tipVisX;
 	var tipVisY = (viewerBottomRight.y - tipHeight)/2;
@@ -61,48 +61,63 @@ function showTip(point){
 	});
 	tip.show(); //Show tooltip
 }
-function panningTip(point){
-	console.log('[panningTip] point=',point);
+function needPanTip(e){
+	var point = e.target
+	console.log('[needPanTip] point=',point);
 	var bounds = viewer.viewport.getBounds(); 
 	// console.log('bindtooltip] bounds=',bounds);
 	var viewerTopLeft = viewer.viewport.viewportToWindowCoordinates(bounds.getTopLeft());
-	console.log('[panningTip] viewerTopLeft=',viewerTopLeft);
+	console.log('[needPanTip] viewerTopLeft=',viewerTopLeft);
 	var viewerBottomRight = viewer.viewport.viewportToWindowCoordinates(bounds.getBottomRight());
-	console.log('[panningTip] viewerBottomRight=',viewerBottomRight);
-	var asterisk = $(point).children('div:first-child').get(0);
-	console.log('[panningTip] asterisk=',asterisk);
+	console.log('[needPanTip] viewerBottomRight=',viewerBottomRight);
+	var asterisk = $(point).children('div.asterisk').get(0);
+	console.log('[needPanTip] asterisk=',asterisk);
 	var leftPos = asterisk.getBoundingClientRect().left + $(window)['scrollLeft']();
-	console.log('[panningTip] leftPos=',leftPos);
+	console.log('[needPanTip] leftPos=',leftPos);
 	var rightPos = asterisk.getBoundingClientRect().right + $(window)['scrollLeft']();
-	console.log('[panningTip] rightPos=',rightPos);
+	console.log('[needPanTip] rightPos=',rightPos);
 	var tip = $('#'+$(point).attr('aria-controls'));
 	var tipWidth = tip.outerWidth(); //Find width of tooltip
-	console.log('[panningTip] tipWidth=',tipWidth);
-	var marginFactor = 1.2;
+	console.log('[needPanTip] tipWidth=',tipWidth);
+	var marginFactor = 1.05;
 	var tipHeight = tip.outerHeight(); //Find height of tooltip
 	var tipVisX;
 	var tipVisY = (viewerBottomRight.y - tipHeight)/2;
+	// debug
+	/*
+	var debug1 = document.createElement('div');
+	point.appendChild(debug1);
+	$(debug1).css({
+		position: 'fixed',
+		left: leftPos,
+		top: 0,
+		width: rightPos - leftPos,
+		height: viewerBottomRight.y-1,
+		border: 'red solid 1px',
+		'pointer-events': 'none'
+	});*/
+
 	// panning to give space
 	if ( ( viewerBottomRight.x - rightPos < tipWidth*marginFactor ) && ( leftPos - viewerTopLeft.x < tipWidth*marginFactor ) ){ // center
 		if ( leftPos - viewerTopLeft.x < viewerBottomRight.x - rightPos ) {
 			// mover punto de vista hacia la derecha 
-			console.log('[panningTip] move asterisk to left');
-			var delta = new OpenSeadragon.Point(tipWidth*marginFactor - (viewerBottomRight.x - rightPos),0);
-			console.log('[panningTip] delta=',delta);
+			console.log('[needPanTip] move asterisk to left');
+			var delta = new OpenSeadragon.Point(Math.min(tipWidth*marginFactor - (viewerBottomRight.x - rightPos),Math.ceil(e.pageX+(rightPos-leftPos))),0);
+			console.log('[needPanTip] delta=',delta);
 			viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(delta), false);
 		}
 		else {
 			// mover punto de vista hacia la izquierda 
-			console.log('[panningTip] move point to right');
+			console.log('[needPanTip] move point to right');
 			var delta = new OpenSeadragon.Point(tipWidth*marginFactor - (leftPos - viewerTopLeft.x),0);
-			console.log('[panningTip] delta=',delta);
+			console.log('[needPanTip] delta=',delta);
 			viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(delta.rotate(180)), false);
 		}
 		$(point).addClass('pending');
 		return true;
 	}
 	else {
-		console.log('[panningTip] no panning');
+		console.log('[needPanTip] no panning');
 		return false;
 	}
 }
@@ -127,14 +142,14 @@ function showLasers(asterisk){
 	// console.log('[showLasers] lasersX=',lasersX);
 	var lasersY = (topPos + bottomPos)/2 - 2130/2 + laser1_delta_y;
 	// console.log('[showLasers] lasersY=',lasersY);
-	$('#lasers').css({
+	$(asterisk).children('.mask').show();
+	$(asterisk).children('.laser').css({
 		left: lasersX,
 		top: lasersY,
 		width: 2500,
 		height: 2130,
-		position: 'absolute'
-	});
-	$('#lasers').show();
+		position: 'fixed'
+	}).show();
 };
 
 viewer.addHandler('animation-finish', function(event) {
@@ -150,8 +165,8 @@ viewer.addHandler('animation-finish', function(event) {
 		var tip = $('#'+$(point).attr('aria-controls'));
 		window.setTimeout(function(){
 			tip.hide(); //Hide tooltip
-			$('#lasers').hide();
-			$('#mask').hide();
+			point.children('.laser').hide();
+			point.children('.mask').hide();
 		},6000);
 	}
 });
@@ -164,31 +179,33 @@ function bindtooltip(note){
 	var id = tip.prop('id').replace(/^N(\d+)$/,'P$1','ig');
 	// console.log('bindtooltip] id='+id);
 	// console.log('[bindtooltip] is touch: '+window.matchMedia("(pointer: coarse)").matches);
-	if (window.matchMedia("(pointer: coarse)").matches){ //FIXME: add same behaviour as mouse
+	if (window.matchMedia("(pointer: coarse)").matches){ //FIXME: close lightboxes on click 
 		$("#"+id).on('click', function(e) {
 			if( tip.filter(':visible').length > 0 ){
 				tip.hide(); //Hide tooltip
-				$('#lasers').hide();
-				mask.hide();
+				$(e.target).children('.laser').hide();
+				$(e.target).children('.mask').hide();
 			}
 			else {
-				mask.show();
-				showLasers(e); //Show lasers
-				showTip(e); //Show tooltip
+				if(!needPanTip(e)){
+					mask.show();
+					showLasers(e.target);
+					showTip(e.target);
+				}
 			}
 		});
 	}
 	else {
 		$("#"+id).hover(function(e){
-			mask.show();
-			showLasers(e.target);
-			if(!panningTip(e.target)){
+			if(!needPanTip(e)){
+				mask.show();
+				showLasers(e.target);
 				showTip(e.target);
 			}
-		}, function() {
+		}, function(e) {
 			tip.hide(); //Hide tooltip
-			$('#lasers').hide();
-			$('#mask').hide();
+			$(e.target).children('.laser').hide();
+			$(e.target).children('.mask').hide();
 		});
 	}
 }
@@ -263,36 +280,6 @@ function panPoint(point){
 viewer.addHandler('open', function(event) {
 	// fit vertically
 	viewer.viewport.fitVertically();
-/*
-	// bind center square
-	$('.lcct-point div+div').each(function(i,el){
-		$(el).hover(function(e){
-			console.log('enter square');
-			var leftPos = e.target.getBoundingClientRect().left + $(window)['scrollLeft']();
-			var rightPos = e.target.getBoundingClientRect().right + $(window)['scrollLeft']();
-			if (isPointCentered(leftPos, rightPos)){ // center
-				if ( leftPos > ($('#foto').width() - rightPos ) ) {
-					// mover a la izquierda 
-					console.log('move to left');
-					viewer.viewport.panBy(new OpenSeadragon.Point(-5/lcct_width,0), false);
-				}
-				else {
-					// mover a la derecha 
-					console.log('move to right');
-					viewer.viewport.panBy(new OpenSeadragon.Point(5/lcct_width,0), false);
-				}
-			}
-			else {
-				$(e.target).addClass('reduced');
-			}
-			e.stopImmediatePropagation();
-			$(e.target).removeClass('phantom');
-		},function(e){
-			console.log('leave square');
-			$(e.target).not('.reduced').addClass('phantom');
-		});
-	});
-*/
 	// Bind notes
 	$('.lcct-note').each(function(idx,note){
 		bindtooltip(note);

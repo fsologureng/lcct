@@ -1,8 +1,4 @@
- * Calcular necesidad de paneo en función del tamaño de la nota.
- * Corregir posición de rayo en el hover del asterisco usando la posición del parent del target. 
- * Agregar rayos.
  * Corregir bloqueo de máscara
- * Corregir despliegue de barra lateral en móviles apaisados
  * Incorporar observaciones de la planilla en notas.
  * Corregir overlay de la barra lateral que queda encima de las notas en móviles.
  * Reevaluar mobile en el change window size?

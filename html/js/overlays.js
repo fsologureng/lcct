@@ -1,7 +1,7 @@
 var lcct_width = 241159;
 var lcct_height = 1420;
-var laser1_delta_x = -5;
-var laser1_delta_y = -141;
+var laser1_delta_x = 33;
+var laser1_delta_y = -144;
 var overlays = {
 	'N01': {
 		id: 'P01',
