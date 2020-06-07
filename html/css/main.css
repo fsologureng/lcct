@@ -31,6 +31,33 @@ body {
 #logo img {
 	width: 100%
 }
+.panner {
+	display: block;
+	position: relative;
+	color: #666666;
+	background-color: #14FF64;
+	top: 49vh;
+	width: 5vh;
+	height: 5vh;
+	clear: none;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 2.7em;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.panner span {
+	position: relative;
+	top: -2.6vh;
+}
+#left {
+	float: left;
+	left: 2vw;
+}
+#right {
+	float: right;
+	right: 2vw;
+}
 #lateral {
 	display: block;
 	position: fixed;
@@ -45,10 +72,10 @@ main {
 	display: block;
 	position: fixed;
 	top: 0px;
-	left: 40px;
+	left: 3vw;
 	right: 0px;
 	height: 100vh;
-	width: 100%;
+	width: 97vw;
 	overflow: hidden;
 }
 #button {
@@ -67,7 +94,7 @@ main {
 	padding: 0px;
 	position: fixed;
 	top: 0px;
-	left: 40px;
+	left: 3vw;
 	font-size: 2em;
 }
 #menu div {
@@ -180,7 +207,7 @@ a.nav-link:hover {
 	display: none;
 }
 .lightbox {
-	margin-left: 40px;
+	margin-left: 3vw;
 	position: fixed;
 	background-color: #666666;
 	border: 2px solid #14FF64;
@@ -369,7 +396,6 @@ footer > p {
 	width: 100vw;
 	background-color: black;
 	opacity: 0.66;
-	pointer-events: none;
 }
 .lcct-point img.laser {
 	display: none;
@@ -438,6 +464,5 @@ p.author {
 	width: 100vw;
 	background-color: black;
 	opacity: 0.66;
-	pointer-events: none;
 }
 

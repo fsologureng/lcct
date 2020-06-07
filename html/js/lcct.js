@@ -21,7 +21,35 @@ var viewer = OpenSeadragon({
 	navigatorDisplayRegionColor: '#14FF64',
 	showNavigationControl: true,
 	navigationControlAnchor: 'BOTTOM_RIGHT',
-	animationTime: 1.0
+	animationTime: 0.8,
+	gestureSettingsMouse: {
+		scrollToZoom: true,
+		clickToZoom: false,
+		dblClickToZoom: false,
+		pinchToZoom: true,
+		flickEnabled: true
+	},
+	gestureSettingsTouch: {
+		scrollToZoom: true,
+		clickToZoom: false,
+		dblClickToZoom: false,
+		pinchToZoom: true,
+		flickEnabled: true
+	},
+	gestureSettingsPen: {
+		scrollToZoom: true,
+		clickToZoom: false,
+		dblClickToZoom: false,
+		pinchToZoom: true,
+		flickEnabled: true
+	},
+	gestureSettingsUnknown: {
+		scrollToZoom: true,
+		clickToZoom: false,
+		dblClickToZoom: false,
+		pinchToZoom: true,
+		flickEnabled: true
+	}
 });
 
 // show a note
@@ -158,16 +186,16 @@ viewer.addHandler('animation-finish', function(event) {
 	console.log('[animation-finish handler] point=',point);
 	if ( point.length > 0 ){
 		// mostrar nota asociada
-		$('#mask').show();
+		point.children('.mask').show();
 		showLasers(point.get(0));
 		showTip(point.get(0));
 		point.removeClass('pending');
 		var tip = $('#'+$(point).attr('aria-controls'));
-		window.setTimeout(function(){
+/*		window.setTimeout(function(){
 			tip.hide(); //Hide tooltip
 			point.children('.laser').hide();
 			point.children('.mask').hide();
-		},6000);
+		},6000);*/
 	}
 });
 
@@ -175,11 +203,31 @@ viewer.addHandler('animation-finish', function(event) {
 function bindtooltip(note){
 	var tip = $(note);
 	// console.log('[bindtooltip] tip=',tip);
-	var mask = $('#mask');
+//	var mask = $('#mask');
 	var id = tip.prop('id').replace(/^N(\d+)$/,'P$1','ig');
 	// console.log('bindtooltip] id='+id);
 	// console.log('[bindtooltip] is touch: '+window.matchMedia("(pointer: coarse)").matches);
 	if (window.matchMedia("(pointer: coarse)").matches){ //FIXME: close lightboxes on click 
+		screen.orientation.lock('landscape');
+	}
+	$("#"+id).on('click', function(e) {
+		e.stopImmediatePropagation();
+		if( tip.filter(':visible').length > 0 ){
+			tip.hide(); //Hide tooltip
+			$(e.target).children('.laser').hide();
+			$(e.target).children('.mask').hide();
+		}
+		else {
+			if(!needPanTip(e)){
+				$(e.target).children('.mask').show();
+				showLasers(e.target);
+				showTip(e.target);
+			}
+		}
+	});
+/*
+	if (window.matchMedia("(pointer: coarse)").matches){ //FIXME: close lightboxes on click 
+		screen.orientation.lock('landscape');
 		$("#"+id).on('click', function(e) {
 			if( tip.filter(':visible').length > 0 ){
 				tip.hide(); //Hide tooltip
@@ -188,7 +236,7 @@ function bindtooltip(note){
 			}
 			else {
 				if(!needPanTip(e)){
-					mask.show();
+					$(e.target).children('.mask').show();
 					showLasers(e.target);
 					showTip(e.target);
 				}
@@ -198,7 +246,8 @@ function bindtooltip(note){
 	else {
 		$("#"+id).hover(function(e){
 			if(!needPanTip(e)){
-				mask.show();
+				//mask.show();
+				$(e.target).children('.mask').show();
 				showLasers(e.target);
 				showTip(e.target);
 			}
@@ -208,6 +257,7 @@ function bindtooltip(note){
 			$(e.target).children('.mask').hide();
 		});
 	}
+	*/
 }
 
 // send email
@@ -237,28 +287,14 @@ function goToNote(note){ // invariant: always fitted vertically
 	// Starting point
 	var oldBounds = viewer.viewport.getBounds();
 	console.log('oldBounds=',oldBounds);
-	// fit always with displacement
+	// always fit with displacement
 	var X = overlays[note].x < oldBounds.width*0.3 ? 0 : overlays[note].x > lcct_width - oldBounds.width*0.3 ? lcct_width - oldBounds.width : overlays[note].x-oldBounds.width*0.3;
 	var newBounds = new OpenSeadragon.Rect(X, oldBounds.y, oldBounds.width, oldBounds.height,0); 
 	console.log('newBounds=',newBounds);
 	viewer.viewport.fitBoundsWithConstraints(newBounds, true);
 }
 
-function isPointCentered(leftPos, rightPos){
-//	console.log('leftPos=',leftPos);
-//	console.log('rightPos=',rightPos);
-//	console.log('leftSquarePos=',$('#foto').width()*0.3);
-//	console.log('rightSquarePos=',$('#foto').width()*0.7);
-	if (leftPos > $('#foto').width()*0.1 && rightPos < $('#foto').width()*0.9){ // center
-		console.log('point centered');
-		return true;
-	}
-	else {
-		console.log('point not centered');
-		return false;
-	}
-}
-
+// move point to left or right depending on focus
 function panPoint(point){
 	var leftPos = point.getBoundingClientRect().left + $(window)['scrollLeft']();
 	var rightPos = point.getBoundingClientRect().right + $(window)['scrollLeft']();
@@ -314,15 +350,30 @@ $(document).ready(function(){
 		$('#menu a[href="#'+id+'"]').on('click',function(e){
 			console.log('click ',id);
 			$('#menu').hide("fast",function(){console.log("esconde menu")});
-			$('#'+id).show("fast",function(){console.log("activa ",id)});
+			$('#'+id).show("fast",function(){console.log("activa ",id)}).addClass('show');
 			$('#mask').show("fast",function(){console.log("activa máscara")});
 		});
 		$('#'+id+' nav button').on('click',function(e){
 			console.log('click cierra ',id);
 			$('#mask').hide("fast",function(){console.log("desactiva máscara")});
-			$('#'+id).hide("fast",function(){console.log("desactiva ",id)});
+			$('#'+id).hide("fast",function(){console.log("desactiva ",id)}).removeClass('show');
 			document.location.hash='';
 		});
+	});
+	// out with click on mask
+	$('#mask').on('click',function(e){
+		console.log('click mascara');
+		$('.lightbox.show').hide("fast",function(){console.log("desactiva lightbox desde la máscara")}).removeClass('show');
+		$('#mask').hide("fast",function(){console.log("desactiva máscara")});
+		document.location.hash='';
+	});
+	$('.mask').on('click',function(e){
+		e.stopImmediatePropagation();
+		mask = e.target;
+		var tip = $('#'+$(mask).parent().attr('aria-controls'));
+		tip.hide(); //Hide tooltip
+		$(mask).siblings('img.laser').hide();
+		$(mask).hide();
 	});
 	// bind notes access
 	$('a.lcct-link').on('click',function(e){
@@ -341,4 +392,25 @@ $(document).ready(function(){
 	if ( $(''+fragment+'.lightbox').length > 0 ){
 		$('#menu a[href="'+fragment+'"]').trigger('click');
 	}
+	// click on logo
+	$('#logo').on('click',function(){
+		// fit vertically
+		viewer.viewport.fitVertically();
+		// Starting point
+		var oldBounds = viewer.viewport.getBounds();
+		console.log('oldBounds=',oldBounds);
+		var newBounds = new OpenSeadragon.Rect(0, oldBounds.y, oldBounds.width, oldBounds.height,0); 
+		console.log('newBounds=',newBounds);
+		viewer.viewport.fitBoundsWithConstraints(newBounds, true);
+	});
+	// click on left
+	$('#left').on('click',function(){
+		console.log('[left]');
+		viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(-250,0)), false);
+	});
+	// click on right
+	$('#right').on('click',function(){
+		console.log('[right]');
+		viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(250,0)), false);
+	});
 });
