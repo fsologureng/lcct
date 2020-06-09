@@ -20,8 +20,9 @@ var viewer = OpenSeadragon({
 	navigatorAutoFade: false,
 	navigatorDisplayRegionColor: '#14FF64',
 	showNavigationControl: true,
-	navigationControlAnchor: 'BOTTOM_RIGHT',
-	animationTime: 0.8,
+	zoomInButton : "zoom-in",
+	zoomOutButton : "zoom-out",
+	fullPageButton : "full-page",
 	gestureSettingsMouse: {
 		scrollToZoom: true,
 		clickToZoom: false,

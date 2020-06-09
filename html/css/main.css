@@ -95,12 +95,13 @@ main {
 	position: fixed;
 	top: 0px;
 	left: 3vw;
-	font-size: 2em;
+	font-size: 2.8vw;
 }
 #menu div {
 	display: block;
 	margin: 0px;
 	padding: 0px;
+	height: 3vw;
 	list-style: none;
 	outline: #666666 solid 1px;
 }
@@ -203,6 +204,40 @@ a.nav-link:hover {
 	outline: #666666 solid 1px;
 	margin-left:
 }
+#btn-bar {
+	display: block;
+	position: fixed;
+	bottom: 5vh;
+	right: 2vw;
+}
+#btn-bar > ul > li {
+	list-style: none;
+	margin-top: 0.5em;
+	text-align: right;
+}
+#btn-bar a, #btn-bar a:visited {
+	color: #666666;
+	background-color: #14FF64;
+	font-size: 1.5em;
+	width: 1.2em;
+	text-align: center;
+	border-radius: 0.6em;
+	text-decoration: none;
+	border: #14FF64 solid 1px;
+}
+#btn-bar a:hover {
+	border: #666666 solid 1px;
+}
+#btn-bar a#ig-lnk {
+	background-color: transparent !important;
+	border: none !important;
+}
+#btn-bar a#ig-lnk img {
+	width: inherit;
+}
+#btn-bar .social-ht {
+	color:white;
+}
 .collapse {
 	display: none;
 }
@@ -266,9 +301,9 @@ p.signature {
 }
 #comenta {
 	top: 20vh;
-	left: 10vw;
-	width: 80vw;
-	height: 60vh;
+	left: 35vw;
+	width: 30vw;
+	height: 50vh;
 	padding: 0px;
 }
 #comenta > section {
@@ -279,7 +314,6 @@ p.signature {
 	display: inline-block;
 	position: relative;
 	top: 0px;
-	width: 45%;
 	padding: 2%;
 /*	outline: green solid 1px !important;*/
 }
@@ -292,7 +326,7 @@ a.nav-contact {
 	text-decoration: none;
 }
 a.social-ig img {
-	width: 1.5em;
+	width: 2.5em;
 }
 #comenta fieldset {
 	border: 0px solid #CCCCCC;
@@ -395,7 +429,7 @@ footer > p {
 	height: 100vh;
 	width: 100vw;
 	background-color: black;
-	opacity: 0.66;
+	opacity: 0.80;
 }
 .lcct-point img.laser {
 	display: none;
@@ -463,6 +497,6 @@ p.author {
 	height: 100vh;
 	width: 100vw;
 	background-color: black;
-	opacity: 0.66;
+	opacity: 0.80;
 }
 
