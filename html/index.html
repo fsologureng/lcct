@@ -12,6 +12,17 @@
 		<script src="js/overlays.js"></script>
 		<!--script src="js/openseadragon-svg-overlay.js"></script>
       <script src="https://d3js.org/d3.v5.min.js"></script-->
+		<link rel="preload" href="images/menu_icon.svg" as="image">
+		<link rel="preload" href="images/laser.svg" as="image">
+		<link rel="preload" href="images/ig_icon.svg" as="image">
+		<link rel="preload" href="images/zoom-in.svg" as="image">
+		<link rel="preload" href="images/zoom-out.svg" as="image">
+		<link rel="preload" href="images/fullscreen.svg" as="image">
+		<link rel="preload" href="images/left.svg" as="image">
+		<link rel="preload" href="images/right.svg" as="image">
+		<link rel="preload" href="images/asterisk.svg" as="image">
+		<link rel="preload" href="images/creditos.svg" as="image">
+		<link rel="preload" href="images/ficha_tecnica.svg" as="image">
 	</head>
 	<body>
 		<main id="main">
@@ -20,16 +31,16 @@
 			<div id="btn-bar">
 				<ul>
 					<li>
-						<a id="zoom-in" class="zoomin" href="#zoom-in">+</a>
+						<a id="zoom-in" class="zoomin" href="#zoom-in"><img src="images/zoom-in.svg" alt="Acercar"></a>
 					</li>
 					<li>
-						<a id="zoom-out" class="zoomout" href="#zoom-out">-</a>
+						<a id="zoom-out" class="zoomout" href="#zoom-out"><img src="images/zoom-out.svg" alt="Alejar"></a>
 					</li>
 					<li>
-						<a id="full-page" class="fullscreen" href="#full-page">F</a>
+						<a id="full-page" class="fullscreen" href="#full-page"><img src="images/fullscreen.svg" alt="L.C.C.T."></a>
 					</li>
 					<li>
-						<a id="ig-lnk" href="https://www.instagram.com/laciudadcomotexto" target="_blank"><img src="/images/Instagram_simple_icon.svg" alt="laciudadcomotexto"></a>
+						<a id="ig-lnk" href="https://www.instagram.com/laciudadcomotexto" target="_blank"><img src="images/ig_icon.svg" alt="ig:laciudadcomotexto"></a>
 					</li>
 					<li class="social-ht">
 						#noseborra
@@ -39,13 +50,13 @@
 			<div id="navigator">
 			</div>
 			<div id="logo">
-				<img src="/images/logo.png" alt="L.C.C.T.">
+				<img src="images/logo.png" alt="L.C.C.T.">
 			</div>
 			<a id="left" class="panner">
-				<span>&lt;</span>
+				<img src="images/left.svg" alt="Ir a la izquierda">
 			</a>
 			<a id="right" class="panner">
-				<span>&gt;</span>
+				<img src="images/right.svg" alt="Ir a la derecha">
 			</a>
 			<footer>
 				<p>COPYRIGHT &copy;La Ciudad como Texto | 2020</p>
@@ -92,7 +103,7 @@
 				<section>
 					<p>Este proyecto captura la memoria grabada en los muros de la calle que fue protagonista de las manifestaciones durante <em>El Estallido Social</em> en Santiago –Av. Libertador Bernardo O’Higgins, popularmente conocida como La Alameda– exponiendo los casi 2.4 km de extensión como obra en sí misma. El registro del día número 36 del Estallido, compuesto por 136 fotografías contiguas que capturan la vereda sur de La Alameda, desde la calle Seminario hasta la calle Nataniel Cox, ubicada frente al Palacio de La Moneda. En esta plataforma la invitación es a recorrer este trayecto, leer este pergamino de fachadas compuestas por textos sueltos rayados en la ciudad y que cada uno puede seleccionar para hilvanar su propio tejido discursivo. Del mismo modo, se presenta como una posibilidad para que personas que no estuvieron en Santiago o en Chile en ese momento, puedan experimentar este tránsito continuo por donde muchos ciudadanos gritaron, rayaron, saltaron y marcharon durante las protestas. El recorrido y material fotográfico permite fijar e inmortalizar la historia de nuestro país, siendo un material a disposición de quienes estén interesados en descubrir este material. El valor del registro de archivo de esta crisis social posibilita generar estudios, investigaciones y múltiples análisis desde variadas disciplinas y campos del saber, sobre todo porque se presenta como un material de libre acceso y expuesto globalmente.</p> 
 					<div id="ficha">
-						<h4>FICHA TÉCNICA DEL REGISTRO</h4>
+						<!--h4>FICHA TÉCNICA DEL REGISTRO</h4>
 						<dl>
 							<dt>RUTA:</dt>
 							<dd>
@@ -113,7 +124,8 @@
 							<dd>7:10 am - 10:18 am</dd>
 							<dt>NÚMERO DE IMÁGENES:</dt>
 							<dd>136 fotografías (montaje digital y material)</dd>
-						</dl>
+						</dl-->
+						<img src="images/ficha_tecnica.svg" alt="Ficha técnica">
 					</div>
 					<p>La apropiación de la calle y del espacio público ha sido el escenario de las protestas y la mejor expresión de la sociedad en su conjunto. La calle como espacio compartido se ha ido construyendo en un lugar de encuentro, de conversación, de bailes, de barricadas, de trincheras, de comercio, de <em>“multi-todo”</em> al cubo... y también de libro abierto. La fachada callejera como soporte ha conformado las páginas de este libro donde las demandas, hitos, dichos, personajes, noticias, códigos, entre otros, se han dibujado en los muros, fijando mensajes casi como memorándum o bitácora de la contingencia que acompaña el tránsito de los ciudadanos día a día. Sin embargo, este pliego contiguo de murallas no da abasto, ampliándose orgánicamente hacia paraderos, veredas, rejas, asientos e incluso el mismo suelo, el cual hoy forma parte de este único material gráfico que refleja el imaginario local del periodo histórico que Chile está experimentado. La creatividad, elocuencia, humor y violencia ha despertado en las personas y es reflejo de todo el malestar cargado por tantos años de constantes vulneraciones a los ciudadanos.</p>
 
@@ -123,7 +135,7 @@
 
 					<p class="signature">CAROLA URETA MARÍN</p>
 					<p class="signature"><a class="nav-contact" href="mailto:carola.umarin@gmail.com">carola.umarin@gmail.com</a></p>
-					<p class="signature"><a class="nav-contact" href="http://www.carolaumarin.com" target="_blank">www.carolaumarin.com</a></p>
+					<p class="signature"><a class="nav-contact" href="https://www.carolaumarin.com" target="_blank">https://www.carolaumarin.com</a></p>
 					</p>
 
 					<img id="credits" src="images/creditos.svg">
@@ -265,50 +277,56 @@
 				<section>
 					<div>
 						<h1>Contacto</h1>
-						<p><a class="nav-contact" href="mailto:laciudadcomotexto2019@gmail.com">laciudadcomotexto2019@gmail.com</a> </p>
-						<p>Santiago, Chile</p>
-						<p><a class="social social-ig" href="https://www.instagram.com/laciudadcomotexto" target="_blank"><img src="/images/Instagram_simple_icon.svg" alt="laciudadcomotexto"></a></p>
+						<div>
+						<p><a class="nav-contact" href="mailto:laciudadcomotexto2019@gmail.com">laciudadcomotexto2019@gmail.com</a></p>
+						<p>Día 36 del Estallido Social | Santiago| Chile</p>
+						</div>
+						<div>
 						<p><strong>#noseborra</strong></p>
+						<p><strong>#laciudadcomotexto</strong></p>
+						<p><strong>#chiledesperto</strong></p>
+						</div>
+						<p><a class="social social-ig" href="https://www.instagram.com/laciudadcomotexto" target="_blank"><img src="images/ig_icon.svg" alt="laciudadcomotexto"></a><img class="social-logo" src="images/logo.svg" alt="LCCT"></p>
 					</div>
 				</section>
 			</div>
-		<div id="P01" class="lcct-point" role="button" aria-expanded="false" aria-controls="N01"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P02" class="lcct-point" role="button" aria-expanded="false" aria-controls="N02"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P03" class="lcct-point" role="button" aria-expanded="false" aria-controls="N03"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P04" class="lcct-point" role="button" aria-expanded="false" aria-controls="N04"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P05" class="lcct-point" role="button" aria-expanded="false" aria-controls="N05"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P06" class="lcct-point" role="button" aria-expanded="false" aria-controls="N06"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P07" class="lcct-point" role="button" aria-expanded="false" aria-controls="N07"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P08" class="lcct-point" role="button" aria-expanded="false" aria-controls="N08"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P09" class="lcct-point" role="button" aria-expanded="false" aria-controls="N09"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P10" class="lcct-point" role="button" aria-expanded="false" aria-controls="N10"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P11" class="lcct-point" role="button" aria-expanded="false" aria-controls="N11"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P12" class="lcct-point" role="button" aria-expanded="false" aria-controls="N12"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P13" class="lcct-point" role="button" aria-expanded="false" aria-controls="N13"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P14" class="lcct-point" role="button" aria-expanded="false" aria-controls="N14"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P15" class="lcct-point" role="button" aria-expanded="false" aria-controls="N15"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P16" class="lcct-point" role="button" aria-expanded="false" aria-controls="N16"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P17" class="lcct-point" role="button" aria-expanded="false" aria-controls="N17"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P18" class="lcct-point" role="button" aria-expanded="false" aria-controls="N18"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P19" class="lcct-point" role="button" aria-expanded="false" aria-controls="N19"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P20" class="lcct-point" role="button" aria-expanded="false" aria-controls="N20"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P21" class="lcct-point" role="button" aria-expanded="false" aria-controls="N21"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P22" class="lcct-point" role="button" aria-expanded="false" aria-controls="N22"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P23" class="lcct-point" role="button" aria-expanded="false" aria-controls="N23"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P24" class="lcct-point" role="button" aria-expanded="false" aria-controls="N24"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P25" class="lcct-point" role="button" aria-expanded="false" aria-controls="N25"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P26" class="lcct-point" role="button" aria-expanded="false" aria-controls="N26"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P27" class="lcct-point" role="button" aria-expanded="false" aria-controls="N27"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P28" class="lcct-point" role="button" aria-expanded="false" aria-controls="N28"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P29" class="lcct-point" role="button" aria-expanded="false" aria-controls="N29"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P30" class="lcct-point" role="button" aria-expanded="false" aria-controls="N30"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P31" class="lcct-point" role="button" aria-expanded="false" aria-controls="N31"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P32" class="lcct-point" role="button" aria-expanded="false" aria-controls="N32"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P33" class="lcct-point" role="button" aria-expanded="false" aria-controls="N33"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P34" class="lcct-point" role="button" aria-expanded="false" aria-controls="N34"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P35" class="lcct-point" role="button" aria-expanded="false" aria-controls="N35"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P36" class="lcct-point" role="button" aria-expanded="false" aria-controls="N36"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
-		<div id="P37" class="lcct-point" role="button" aria-expanded="false" aria-controls="N37"><div class="mask"></div><img src="images/Laser_04.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P01" class="lcct-point" role="button" aria-expanded="false" aria-controls="N01"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P02" class="lcct-point" role="button" aria-expanded="false" aria-controls="N02"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P03" class="lcct-point" role="button" aria-expanded="false" aria-controls="N03"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P04" class="lcct-point" role="button" aria-expanded="false" aria-controls="N04"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P05" class="lcct-point" role="button" aria-expanded="false" aria-controls="N05"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P06" class="lcct-point" role="button" aria-expanded="false" aria-controls="N06"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P07" class="lcct-point" role="button" aria-expanded="false" aria-controls="N07"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P08" class="lcct-point" role="button" aria-expanded="false" aria-controls="N08"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P09" class="lcct-point" role="button" aria-expanded="false" aria-controls="N09"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P10" class="lcct-point" role="button" aria-expanded="false" aria-controls="N10"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P11" class="lcct-point" role="button" aria-expanded="false" aria-controls="N11"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P12" class="lcct-point" role="button" aria-expanded="false" aria-controls="N12"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P13" class="lcct-point" role="button" aria-expanded="false" aria-controls="N13"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P14" class="lcct-point" role="button" aria-expanded="false" aria-controls="N14"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P15" class="lcct-point" role="button" aria-expanded="false" aria-controls="N15"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P16" class="lcct-point" role="button" aria-expanded="false" aria-controls="N16"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P17" class="lcct-point" role="button" aria-expanded="false" aria-controls="N17"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P18" class="lcct-point" role="button" aria-expanded="false" aria-controls="N18"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P19" class="lcct-point" role="button" aria-expanded="false" aria-controls="N19"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P20" class="lcct-point" role="button" aria-expanded="false" aria-controls="N20"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P21" class="lcct-point" role="button" aria-expanded="false" aria-controls="N21"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P22" class="lcct-point" role="button" aria-expanded="false" aria-controls="N22"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P23" class="lcct-point" role="button" aria-expanded="false" aria-controls="N23"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P24" class="lcct-point" role="button" aria-expanded="false" aria-controls="N24"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P25" class="lcct-point" role="button" aria-expanded="false" aria-controls="N25"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P26" class="lcct-point" role="button" aria-expanded="false" aria-controls="N26"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P27" class="lcct-point" role="button" aria-expanded="false" aria-controls="N27"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P28" class="lcct-point" role="button" aria-expanded="false" aria-controls="N28"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P29" class="lcct-point" role="button" aria-expanded="false" aria-controls="N29"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P30" class="lcct-point" role="button" aria-expanded="false" aria-controls="N30"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P31" class="lcct-point" role="button" aria-expanded="false" aria-controls="N31"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P32" class="lcct-point" role="button" aria-expanded="false" aria-controls="N32"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P33" class="lcct-point" role="button" aria-expanded="false" aria-controls="N33"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P34" class="lcct-point" role="button" aria-expanded="false" aria-controls="N34"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P35" class="lcct-point" role="button" aria-expanded="false" aria-controls="N35"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P36" class="lcct-point" role="button" aria-expanded="false" aria-controls="N36"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
+		<div id="P37" class="lcct-point" role="button" aria-expanded="false" aria-controls="N37"><div class="mask"></div><img src="images/laser.svg" class="laser"><div class="asterisk"></div></div>
 		<div id="N01" class="lcct-note">
 			<p>“Chile despertó, dime algo más lindo k eso”, es la frase que se encumbra en la estructura del paradero de micros. Desde aquí veo esta ciudad nueva, caótica, alborotada…, pero viva, más viva que nunca. Por aquí pasó el hastío desbocado del orden neoliberal, cuando nos cansamos de ser gente de vida hipotecada y nos desordenamos, nos desbordamos con ira creativa y destituyente para volver a ser pueblo palpitante y constituyente. Los muros de Chile, cual palimpsesto, dan cuenta del dolor y la esperanza. Sigo en el paradero. ¿Hasta dónde irá el recorrido?… “Hasta que la dignidad se haga costumbre”.</p>
 			<p class="author">Silvia Aguilera Morales (1963)</p>
