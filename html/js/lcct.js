@@ -400,18 +400,29 @@ $(document).ready(function(){
 		// Starting point
 		var oldBounds = viewer.viewport.getBounds();
 		console.log('oldBounds=',oldBounds);
-		var newBounds = new OpenSeadragon.Rect(0, oldBounds.y, oldBounds.width, oldBounds.height,0); 
-		console.log('newBounds=',newBounds);
-		viewer.viewport.fitBoundsWithConstraints(newBounds, true);
+		viewer.viewport.panBy(new OpenSeadragon.Point(-oldBounds.x,0), false);
+		document.location.hash='';
 	});
 	// click on left
 	$('#left').on('click',function(){
 		console.log('[left]');
-		viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(-250,0)), false);
+		var oldBounds = viewer.viewport.getBounds();
+		if ( oldBounds.x > viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(250,0)).x ) {
+			viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(-250,0)), false);
+		}
+		else if ( oldBounds.x > 0 ) {
+			viewer.viewport.panBy(new OpenSeadragon.Point(-oldBounds.x,0), false);
+		}
 	});
 	// click on right
 	$('#right').on('click',function(){
 		console.log('[right]');
-		viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(250,0)), false);
+		var oldBounds = viewer.viewport.getBounds();
+		if ( oldBounds.x + oldBounds.width < viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width - 250,0)).x ) {
+			viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(250,0)), false);
+		}
+		else if ( oldBounds.x + oldBounds.width < viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width,0)).x ) {
+			viewer.viewport.panBy(new OpenSeadragon.Point(viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width,0)).x - oldBounds.x - oldBounds.width,0), false);
+		}
 	});
 });
