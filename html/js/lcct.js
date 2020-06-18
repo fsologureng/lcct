@@ -23,41 +23,36 @@ var viewer = OpenSeadragon({
 	zoomInButton : "zoom-in",
 	zoomOutButton : "zoom-out",
 	fullPageButton : "full-page",
+	animationTime: 0.1,
 	gestureSettingsMouse: {
 		scrollToZoom: true,
 		clickToZoom: false,
 		dblClickToZoom: false,
 		pinchToZoom: true,
-		flickEnabled: true
+		flickEnabled: false
 	},
 	gestureSettingsTouch: {
 		scrollToZoom: true,
 		clickToZoom: false,
 		dblClickToZoom: false,
 		pinchToZoom: true,
-		flickEnabled: true
+		flickEnabled: false
 	},
 	gestureSettingsPen: {
 		scrollToZoom: true,
 		clickToZoom: false,
 		dblClickToZoom: false,
 		pinchToZoom: true,
-		flickEnabled: true
+		flickEnabled: false
 	},
 	gestureSettingsUnknown: {
 		scrollToZoom: true,
 		clickToZoom: false,
 		dblClickToZoom: false,
 		pinchToZoom: true,
-		flickEnabled: true
+		flickEnabled: false
 	}
 });
-
-// show a note
-function show_note(){
-}
-function hide_note(){
-}
 
 function showTip(point){
 	var tip = $('#'+$(point).attr('aria-controls'));
@@ -152,35 +147,31 @@ function needPanTip(e){
 }
 
 function showLasers(asterisk){
-	var bounds = viewer.viewport.getBounds(); 
-	// console.log('[showLasers] bounds=',bounds);
-	var viewerTopLeft = viewer.viewport.viewportToWindowCoordinates(bounds.getTopLeft());
-	// console.log('[showLasers] viewerTopLeft=',viewerTopLeft);
-	var viewerBottomRight = viewer.viewport.viewportToWindowCoordinates(bounds.getBottomRight());
-	// console.log('[showLasers] viewerBottomRight=',viewerBottomRight);
-	var leftPos = asterisk.getBoundingClientRect().left + $(window)['scrollLeft']();
-	console.log('[showLasers] leftPos=',leftPos);
-	var rightPos = asterisk.getBoundingClientRect().right + $(window)['scrollLeft']();
-	console.log('[showLasers] rightPos=',rightPos);
-	var topPos = asterisk.getBoundingClientRect().top + $(window)['scrollTop']();
-	console.log('[showLasers] topPos=',topPos);
-	var bottomPos = asterisk.getBoundingClientRect().bottom + $(window)['scrollTop']();
-	console.log('[showLasers] bottomPos=',bottomPos);
-
-	var lasersX = (leftPos + rightPos)/2 - 2500/2 + laser1_delta_x;
-	// console.log('[showLasers] lasersX=',lasersX);
-	var lasersY = (topPos + bottomPos)/2 - 2130/2 + laser1_delta_y;
-	// console.log('[showLasers] lasersY=',lasersY);
 	$(asterisk).children('.mask').show();
-	$(asterisk).children('.laser').css({
-		left: lasersX,
-		top: lasersY,
-		width: 2500,
-		height: 2130,
-		position: 'fixed'
-	}).show();
+	$(asterisk).children('.laser').show();
 };
 
+var panningStep = 50;
+var isMousePanning = false;
+var panningFunction = function(){};
+var leftPanning = function(){
+	var oldBounds = viewer.viewport.getBounds();
+	if ( oldBounds.x > viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(panningStep,0)).x ) {
+		viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(-panningStep,0)), false);
+	}
+	else if ( oldBounds.x > 0 ) {
+		viewer.viewport.panBy(new OpenSeadragon.Point(-oldBounds.x,0), false);
+	}
+}
+var rightPanning = function(){
+	var oldBounds = viewer.viewport.getBounds();
+	if ( oldBounds.x + oldBounds.width < viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width - panningStep,0)).x ) {
+		viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(panningStep,0)), false);
+	}
+	else if ( oldBounds.x + oldBounds.width < viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width,0)).x ) {
+		viewer.viewport.panBy(new OpenSeadragon.Point(viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width,0)).x - oldBounds.x - oldBounds.width,0), false);
+	}
+}
 viewer.addHandler('animation-finish', function(event) {
 	console.log('[animation-finish handler]');
 	var point = $('div.pending');
@@ -192,11 +183,10 @@ viewer.addHandler('animation-finish', function(event) {
 		showTip(point.get(0));
 		point.removeClass('pending');
 		var tip = $('#'+$(point).attr('aria-controls'));
-/*		window.setTimeout(function(){
-			tip.hide(); //Hide tooltip
-			point.children('.laser').hide();
-			point.children('.mask').hide();
-		},6000);*/
+	}
+	else if ( isMousePanning ) {
+		console.log('continue panning');
+		panningFunction();
 	}
 });
 
@@ -204,13 +194,8 @@ viewer.addHandler('animation-finish', function(event) {
 function bindtooltip(note){
 	var tip = $(note);
 	// console.log('[bindtooltip] tip=',tip);
-//	var mask = $('#mask');
 	var id = tip.prop('id').replace(/^N(\d+)$/,'P$1','ig');
 	// console.log('bindtooltip] id='+id);
-	// console.log('[bindtooltip] is touch: '+window.matchMedia("(pointer: coarse)").matches);
-	if (window.matchMedia("(pointer: coarse)").matches){ //FIXME: close lightboxes on click 
-		screen.orientation.lock('landscape');
-	}
 	$("#"+id).on('click', function(e) {
 		e.stopImmediatePropagation();
 		if( tip.filter(':visible').length > 0 ){
@@ -226,39 +211,6 @@ function bindtooltip(note){
 			}
 		}
 	});
-/*
-	if (window.matchMedia("(pointer: coarse)").matches){ //FIXME: close lightboxes on click 
-		screen.orientation.lock('landscape');
-		$("#"+id).on('click', function(e) {
-			if( tip.filter(':visible').length > 0 ){
-				tip.hide(); //Hide tooltip
-				$(e.target).children('.laser').hide();
-				$(e.target).children('.mask').hide();
-			}
-			else {
-				if(!needPanTip(e)){
-					$(e.target).children('.mask').show();
-					showLasers(e.target);
-					showTip(e.target);
-				}
-			}
-		});
-	}
-	else {
-		$("#"+id).hover(function(e){
-			if(!needPanTip(e)){
-				//mask.show();
-				$(e.target).children('.mask').show();
-				showLasers(e.target);
-				showTip(e.target);
-			}
-		}, function(e) {
-			tip.hide(); //Hide tooltip
-			$(e.target).children('.laser').hide();
-			$(e.target).children('.mask').hide();
-		});
-	}
-	*/
 }
 
 // send email
@@ -338,19 +290,24 @@ viewer.addHandler('open', function(event) {
 	}
 });
 
+var isMobile = window.matchMedia("(pointer: coarse)").matches;
 $(document).ready(function(){
-	// bind menú button
-	$('#button').on('click',function(e){
-		$('#menu').toggle("fast",function(){console.log("menu click")});
-		return false;
-	});
+	if (isMobile){
+		// bind menú button
+		$('#button > a').on('click',function(e){
+			$('#menu').toggle("fast",function(){console.log("menu click")});
+			return false;
+		});
+	}
 	// access and exit from each section
 	$('.lightbox').each(function(idx,el){
 		var id = el.id;
 		console.log('id=',id);
 		$('#menu a[href="#'+id+'"]').on('click',function(e){
 			console.log('click ',id);
-			$('#menu').hide("fast",function(){console.log("esconde menu")});
+			if (isMobile){
+				$('#menu').hide("fast",function(){console.log("esconde menu")});
+			}
 			$('#'+id).show("fast",function(){console.log("activa ",id)}).addClass('show');
 			$('#mask').show("fast",function(){console.log("activa máscara")});
 		});
@@ -373,8 +330,14 @@ $(document).ready(function(){
 		mask = e.target;
 		var tip = $('#'+$(mask).parent().attr('aria-controls'));
 		tip.hide(); //Hide tooltip
-		$(mask).siblings('img.laser').hide();
+		$(mask).siblings('div.laser').hide();
 		$(mask).hide();
+	});
+	$('.mask').on('pointerdown',function(e){
+		e.stopImmediatePropagation();
+	});
+	$('.laser').on('pointerdown',function(e){
+		e.stopImmediatePropagation();
 	});
 	// bind notes access
 	$('a.lcct-link').on('click',function(e){
@@ -404,25 +367,22 @@ $(document).ready(function(){
 		document.location.hash='';
 	});
 	// click on left
-	$('#left').on('click',function(){
+	$('#left').on('mousedown',function(){
 		console.log('[left]');
-		var oldBounds = viewer.viewport.getBounds();
-		if ( oldBounds.x > viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(250,0)).x ) {
-			viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(-250,0)), false);
-		}
-		else if ( oldBounds.x > 0 ) {
-			viewer.viewport.panBy(new OpenSeadragon.Point(-oldBounds.x,0), false);
-		}
+		isMousePanning = true;
+		panningFunction = leftPanning;
+		panningFunction();
 	});
 	// click on right
-	$('#right').on('click',function(){
+	$('#right').on('mousedown',function(){
 		console.log('[right]');
-		var oldBounds = viewer.viewport.getBounds();
-		if ( oldBounds.x + oldBounds.width < viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width - 250,0)).x ) {
-			viewer.viewport.panBy(viewer.viewport.deltaPointsFromPixels(new OpenSeadragon.Point(250,0)), false);
-		}
-		else if ( oldBounds.x + oldBounds.width < viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width,0)).x ) {
-			viewer.viewport.panBy(new OpenSeadragon.Point(viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width,0)).x - oldBounds.x - oldBounds.width,0), false);
-		}
+		isMousePanning = true;
+		panningFunction = rightPanning;
+		panningFunction();
 	});
+	// mousedown on body
+	$('body').on('mouseup', function(e){
+		console.log("mouse is up");
+		isMousePanning = false;
+	})
 });

@@ -17,10 +17,10 @@ body {
 	font-family: 'DIN Pro' !important;
 	font-weight: normal;
 	font-style: normal;
-	font-size: 1em;
+	font-size: 1rem;
 	text-decoration: line-through;
 	color: #666666;
-	background-color: #CCCCCC;
+	background-color: black;
 }
 #logo {
 	position: fixed;
@@ -36,8 +36,8 @@ body {
 	display: block;
 	position: fixed;
 	top: 42vh;
-	width: 5vh;
-	height: 5vh;
+	width: 8vh;
+	height: 8vh;
 	clear: none;
 	text-align: center;
 	cursor: pointer;
@@ -73,7 +73,10 @@ main {
 	width: 97vw;
 	overflow: hidden;
 }
-#button {
+#button:hover > div {
+	display: block;
+}
+#button > a {
 /*	outline: orange dashed 1px;*/
 	width: 100%;
 	height: 3vw;
@@ -118,7 +121,7 @@ a.nav-link, a.nav-link:visited {
 	background-color: #666666;
 	text-decoration: none;
 	padding: 0.3em;
-	font-size: 0.8em;
+	font-size: 1.2rem;
 	vertical-align: middle;
 }
 a.nav-link:hover {
@@ -202,12 +205,12 @@ a.nav-link:hover {
 	display: block;
 	position: fixed;
 	width: 94.5vw;
-	top: 92vh;
+	top: 93.2vh;
 	height: 1.5vh;
 	left: 0.5vw;
 /*	bottom: 7%;*/
-	border: white solid 2px;
-	outline: #666666 solid 1px;
+	border: black solid 2px;
+	outline: white solid 1px;
 }
 #btn-bar {
 	display: block;
@@ -387,6 +390,7 @@ footer {
 	bottom: 0px;
 	font-size: 6pt;
 	position: fixed;
+	color: white;
 }
 footer > p {
 	position: fixed;
@@ -404,11 +408,14 @@ footer > p {
  * Puntos
  */
 .lcct-point {
-	width: 12px;
-	height: 12px;
+	top: -14.5px;
+	left: -14.5px;
+	width: 58px;
+	height: 58px;
 	cursor: pointer;
 	display:block;
 	overflow: visible;
+	border-radius: 58px;
 }
 .lcct-point div.mask {
 	display: none;
@@ -420,14 +427,24 @@ footer > p {
 	background-color: black;
 	opacity: 0.80;
 }
-.lcct-point img.laser {
+.lcct-point div.laser {
 	display: none;
 	pointer-events: none;
+	overflow: visible;
+}
+.lcct-point div.laser img {
+	position: relative;
+	width: 5760px; 
+	height: 3600px;
+	margin-left: 31px;
+	margin-top: 17px;
+	left: -2880px;
+	top: -1800px;
 }
 .lcct-point div.asterisk {
 	position: absolute;
-	top: -11px;
-	left: -11px;
+	top: 14.5px;
+	left: 14.5px;
 	width: 29px;
 	height: 29px;
 	background: url('/images/asterisk.svg');
