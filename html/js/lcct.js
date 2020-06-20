@@ -385,4 +385,22 @@ $(document).ready(function(){
 		console.log("mouse is up");
 		isMousePanning = false;
 	})
+	// email
+	var email = "Y2Fyb2xhLnVtYXJpbkBnbWFpbC5jb20=";
+	$('#email').attr('href',"mailto:"+atob(email));
+	$('#email').text(atob(email));
+	var email_project = "bGFjaXVkYWRjb21vdGV4dG8yMDE5QGdtYWlsLmNvbQ==";
+	$('#email_project').attr('href',"mailto:"+atob(email_project));
+	$('#email_project').text(atob(email_project));
+	// counter
+	console.log('[counter] hits='+hits);
+	let digits = (hits+'').split('');
+	console.log('[counter] #digits='+digits.length);
+	for ( ; digits.length < 5; ) {
+		digits.unshift('0');
+	}
+	console.log('[counter] #digits='+digits.length);
+	let counter = digits.map(d => '<span>'+d+'</span>');
+	console.log('[counter] mask='+counter);
+	$('#counter > ul > li+li').html(counter);
 });

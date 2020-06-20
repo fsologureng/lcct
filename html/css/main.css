@@ -9,6 +9,10 @@
 	font-weight: normal;
 	font-style: normal;
 }
+html {
+	padding: 0px;
+	margin: 0px;
+}
 body {
 	width: 100vw;
 	height: 100vh;
@@ -211,6 +215,38 @@ a.nav-link:hover {
 /*	bottom: 7%;*/
 	border: black solid 2px;
 	outline: white solid 1px;
+}
+#counter {
+	display: block;
+	width: 3vw;
+	position: fixed;
+	bottom: 7vh;
+	left: 0.5vw;
+	font-size: 0.5rem;
+	color: #14FF64;
+/*	outline: 1px solid #14FF64;*/
+}
+#counter > ul > li {
+	margin: 0px;
+	padding: 2px;
+	list-style: none;
+	text-align: center;
+	font-weight: bolder;
+}
+#counter > ul > li:first-child {
+	letter-spacing: 2px;
+	text-shadow: -1px 0 #666666, 0 1px #666666, 1px 0 #666666, 0 -1px #666666;
+}
+#counter > ul > li+li {
+	background-color: transparent;
+}
+#counter > ul > li+li > span {
+	font-size: 0.6rem;
+	background-color: #14FF64;
+	color: #666666;
+	border: 1px solid transparent;
+	padding: 2px;
+	margin: 1px;
 }
 #btn-bar {
 	display: block;
