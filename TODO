@@ -1,8 +1,7 @@
  * Incorporar observaciones de la planilla en notas.
  * Corregir overlay de la barra lateral que queda encima de las notas en móviles.
  * Reevaluar mobile en el change window size?
- * Eliminar botón derecho sobre la imagen?
  * Mejorar despliegue de notas para no interferir con la posición en móviles.
- * Corregir nota que se queda abierta en móviles si no se cierra manualmente: capturar evento de paneo para cerrarla.
  * Agregar enlace a libro
  * Crear página en inglés
+ * Agregar history para cada fragmento 

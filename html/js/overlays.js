@@ -296,5 +296,13 @@ var overlays = {
 		checkResize: false,
 		x: 70080.805/lcct_width,
 		y: 577.799/lcct_width
+	},
+	'Epilogo': {
+		id: 'P38',
+		className: 'lcct-point',
+		placement: 'TOP_LEFT',
+		checkResize: false,
+		x: 240352.789/lcct_width,
+		y: 307.8/lcct_width
 	}
 };

@@ -89,7 +89,7 @@ function needPanTip(e){
 	var point = e.target
 	console.log('[needPanTip] point=',point);
 	var bounds = viewer.viewport.getBounds(); 
-	// console.log('bindtooltip] bounds=',bounds);
+	// console.log('[needPanTip] bounds=',bounds);
 	var viewerTopLeft = viewer.viewport.viewportToWindowCoordinates(bounds.getTopLeft());
 	console.log('[needPanTip] viewerTopLeft=',viewerTopLeft);
 	var viewerBottomRight = viewer.viewport.viewportToWindowCoordinates(bounds.getBottomRight());
@@ -172,6 +172,13 @@ var rightPanning = function(){
 		viewer.viewport.panBy(new OpenSeadragon.Point(viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width,0)).x - oldBounds.x - oldBounds.width,0), false);
 	}
 }
+viewer.addHandler('animation-start', function(event) {
+	console.log('[animation-start handler]');
+	//Hide tooltip
+	$('.lcct-note:visible').hide();
+	$('.mask:visible').hide();
+	$('.laser:visible').hide();
+})
 viewer.addHandler('animation-finish', function(event) {
 	console.log('[animation-finish handler]');
 	var point = $('div.pending');
@@ -193,9 +200,9 @@ viewer.addHandler('animation-finish', function(event) {
 // Bind a note
 function bindtooltip(note){
 	var tip = $(note);
-	// console.log('[bindtooltip] tip=',tip);
-	var id = tip.prop('id').replace(/^N(\d+)$/,'P$1','ig');
-	// console.log('bindtooltip] id='+id);
+	console.log('[bindtooltip] tip=',tip);
+	var id = overlays[tip.prop('id')].id;
+	console.log('bindtooltip] id='+id);
 	$("#"+id).on('click', function(e) {
 		e.stopImmediatePropagation();
 		if( tip.filter(':visible').length > 0 ){
@@ -276,9 +283,9 @@ viewer.addHandler('open', function(event) {
 	// Posicionamiento en nota
 	var fragment = document.location.hash;
 	console.log('fragment=',fragment);
-	if ( fragment.match(/^\#N\d\d/g) && fragment >= '#N01' && fragment <= '#N37' ){
+	if ( fragment.match(/^\#N\d\d/g) && ( fragment >= '#N01' && fragment <= '#N37' ) || fragment == '#Epilogo' ){
 		console.log('fragment is a valid point');
-		goToNote(fragment.replace(/^\#(N\d\d)$/,'$1'));
+		goToNote(fragment.replace(/^\#(.*)$/,'$1'));
 	}
 	else {
 		// Starting point
@@ -296,6 +303,10 @@ $(document).ready(function(){
 		// bind menú button
 		$('#button > a').on('click',function(e){
 			$('#menu').toggle("fast",function(){console.log("menu click")});
+			// Hide tooltip
+			$('.lcct-note:visible').hide();
+			$('.mask:visible').hide();
+			$('.laser:visible').hide();
 			return false;
 		});
 	}
@@ -308,6 +319,10 @@ $(document).ready(function(){
 			if (isMobile){
 				$('#menu').hide("fast",function(){console.log("esconde menu")});
 			}
+			// Hide tooltip if visible
+			$('.lcct-note:visible').hide();
+			$('.mask:visible').hide();
+			$('.laser:visible').hide();
 			$('#'+id).show("fast",function(){console.log("activa ",id)}).addClass('show');
 			$('#mask').show("fast",function(){console.log("activa máscara")});
 		});
@@ -346,7 +361,7 @@ $(document).ready(function(){
 		console.log('fragment=',fragment);
 		// fit vertically
 		viewer.viewport.fitVertically();
-		goToNote(fragment.replace(/^\#(N\d+)$/,'$1'));
+		goToNote(fragment.replace(/^\#(.*)$/,'$1'));
 		$('#mask').hide("fast",function(){console.log("desactiva máscara")});
 		$('#notas').hide("fast",function(){console.log("desactiva notas")});
 	});
@@ -403,4 +418,14 @@ $(document).ready(function(){
 	let counter = digits.map(d => '<span>'+d+'</span>');
 	console.log('[counter] mask='+counter);
 	$('#counter > ul > li+li').html(counter);
+	// map
+	$('#mapa button').on('click',function(e){
+		console.log('click cierra mapa');
+		sessionStorage.setItem('mapa', true);
+		$('#mapa').hide();
+	});
+	let hideMap = sessionStorage.getItem('mapa');
+	if ( ! hideMap ){
+		$('#mapa').show();
+	}
 });
