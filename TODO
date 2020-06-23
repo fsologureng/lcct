@@ -1,4 +1,6 @@
- * Incorporar observaciones de la planilla en notas.
+ * Al abrir notas desde el menú la nota debería enfocarse abierta.
+ * Agregar contenedor interno para notas para dar margen.
+ * Corregir ajuste del ir al ppio desde el logo.
  * Corregir overlay de la barra lateral que queda encima de las notas en móviles.
  * Reevaluar mobile en el change window size?
  * Mejorar despliegue de notas para no interferir con la posición en móviles.

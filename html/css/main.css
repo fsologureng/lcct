@@ -220,11 +220,15 @@ a.nav-link:hover {
 	display: block;
 	width: 3vw;
 	position: fixed;
-	bottom: 7vh;
-	left: 0.5vw;
+	bottom: 8vh;
+	left: 4vw;
 	font-size: 0.5rem;
 	color: #14FF64;
 /*	outline: 1px solid #14FF64;*/
+}
+#counter > ul {
+	margin: 0px;
+	padding: 0px;
 }
 #counter > ul > li {
 	margin: 0px;
@@ -236,8 +240,7 @@ a.nav-link:hover {
 }
 #counter > ul > li > span {
 	font-size: 0.6rem;
-/*	background-color: #14FF64;*/
-	background-color: white;
+	background-color: #14FF64;
 	color: #666666;
 	border: 1px solid transparent;
 	padding: 2px;
@@ -312,6 +315,16 @@ a.nav-link:hover {
 	overflow-y: auto;
 	height: 85%;
 }
+.lightbox section > div {
+	display: inline-block;
+	position: relative;
+	top: 0px;
+	padding: 2%;
+/*	outline: green solid 1px !important;*/
+}
+.lightbox section > div > h1 {
+	margin-top: 0em;
+}
 #proyecto {
 	font-size: 1em;
 }
@@ -321,18 +334,23 @@ a.nav-link:hover {
 #proyecto > section > p {
 	margin: 1.5em;
 }
-/*
 #ficha {
-	border: #CCCCCC solid 2px;
-	margin: 3em;
-	padding: 2.5em;
+	border: #14FF64 solid 2px;
+       margin: 3em;
+       padding: 1em;
+	width: 48%;
+	margin-left: 22%;
+	font-size: 0.9rem;
 }
-*/
 #ficha h4 {
-	margin-top: 0px;
+       margin-top: 0px;
 }
 #ficha dt {
-	color: #CCCCCC;
+       color: #CCCCCC;
+}
+#ficha > img {
+	width: 80%;
+	margin-left: 10%;
 }
 p.signature {
 	text-align:right;
@@ -340,20 +358,17 @@ p.signature {
 #comenta {
 	top: 14vh;
 	left: 30vw;
+	/*
 	width: 40vw;
-	height: 72vh;
+	height: 67vh;
+	*/
+	width: 30rem;
+	height: 27rem;
 	padding: 0px;
 }
 #comenta > section {
 	margin: 1.5em;
 	border-radius: 3px;
-}
-#comenta section > div {
-	display: inline-block;
-	position: relative;
-	top: 0px;
-	padding: 2%;
-/*	outline: green solid 1px !important;*/
 }
 #comenta h1 {
 	font-size: 1.5em;
@@ -391,7 +406,7 @@ a.nav-contact {
 	background-color: #14FF64;
 	font-size: 1em;
 	text-decoration: none;
-	padding: 0.5em;
+	padding: 0.3em;
 	border-radius: 0.2em;
 }
 a.social-ig img {
@@ -404,14 +419,17 @@ img.social-logo {
 #comenta div > div {
 	margin-bottom: 2.1em;
 }
+#comenta a.nav-contact {
+	padding: 0.5em;
+}
 #notas {
 	font-size: 1em;
-	padding-right: 1em;
 }
 #notas ul {
 	list-style: "\2731";
 	column-count: 2;
 	column-gap: 15px;
+	margin-block-end: 1.5em;
 }
 #notas ul li {
 	padding-left: 5px;
@@ -434,6 +452,10 @@ a:hover.note-link {
 	margin-right: 20px;
 	color: #666666;
 	background-color: #14FF64;
+	border-radius: 0.5em;
+}
+#notas .nav-note h2 {
+	margin-top: 0em;
 }
 footer {
 	outline: #666666 solid 1px;
@@ -523,7 +545,11 @@ footer > p {
 	font-family: 'DIN Pro';
 }
 .lcct-note > p {
-	max-width: 75vw;
+	max-width: 30rem;
+}
+.lcct-note-large {
+	max-height: 85vh;
+	overflow: scroll;
 }
 .lcct-note > div > p {
 	max-width: 30vw;
@@ -545,8 +571,25 @@ footer > p {
 #N34 {
 	text-align: center;	
 }
+#Epilogo {
+	height: 80vh;
+	overflow: scroll;
+}
+#Epilogo h3:first-child {
+	color: #14FF64;
+}
+#Epilogo ol {
+	width: 35vw;
+	margin: 1em;
+	padding: 0px;
+	font-size: 0.6rem;
+	color: #CCCCCC;
+}
+#Epilogo sup {
+	font-size: 0.5rem;
+}
 p.author {
-	font-weight: bold;
+	color: #14FF64;
 }
 #lasers {
 	display: none;
