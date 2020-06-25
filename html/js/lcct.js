@@ -419,6 +419,7 @@ $(document).ready(function(){
 	console.log('[counter] mask='+counter);
 	$('#counter > ul > li').html(counter);
 	// map
+	/*
 	$('#mapa button').on('click',function(e){
 		console.log('click cierra mapa');
 		sessionStorage.setItem('mapa', true);
@@ -428,4 +429,5 @@ $(document).ready(function(){
 	if ( ! hideMap ){
 		$('#mapa').show();
 	}
+	*/
 });

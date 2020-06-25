@@ -293,10 +293,10 @@ a.nav-link:hover {
 	padding: 0px;
 	color: #14FF64;
 }
-.lightbox nav {
+.lightbox nav, .lcct-note nav {
 	border-radius: 3px;
 }
-.lightbox button {
+.lightbox button, .lcct-note button {
 	color: #14FF64;
 	display: inline-block;
 	background-color: transparent;
@@ -539,27 +539,30 @@ footer > p {
 	display: none;
 	font-size: 0.8em;
 	outline: 2px solid #14FF64;
-	padding: 2vw;
+}
+.lcct-note > nav {
+/*	display: none;*/
+}
+.lcct-note section {
+	position: relative;
+	max-height: 83vh;
+	max-width: 80vw;
+	margin: 1.2rem;
+	overflow: auto;
 }
 .lcct-note pre {
 	font-family: 'DIN Pro';
+	margin-right: 1em;
 }
-.lcct-note > p {
+.lcct-note > section > p {
 	max-width: 30rem;
 }
-.lcct-note-large {
-	max-height: 85vh;
-	overflow: scroll;
-}
-.lcct-note > div > p {
+.lcct-note > section > div > p {
 	max-width: 30vw;
 }
 #N20 div {
 	column-count: 3;
-	column-gap: 15px;
-}
-#N20 pre {
-	margin: 0px;
+	column-gap: 1em;
 }
 #N25 div {
 	column-count: 2;
@@ -606,4 +609,34 @@ p.author {
 	background-color: black;
 	opacity: 0.80;
 }
+#warn {
+	display: none;
+}
 
+@media only screen and (max-device-width: 480px) {
+	/* define mobile specific styles come here */
+	#N20 div {
+		column-count: 2;
+	}
+}
+@media only screen and (orientation:portrait) {
+	#warn {
+		display: block;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		background-color: black;
+		background-image: url("/images/logo.png");
+		background-repeat: no-repeat;
+		background-position-x: center;
+		background-size: contain;
+		color: #14FF64;
+	}
+	#warn h1 {
+		font-size: 2rem;
+		padding: 10%;
+		margin-top: 30%;
+	}
+}
