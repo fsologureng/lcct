@@ -1,5 +1,5 @@
- * Al abrir notas desde el menú la nota debería enfocarse abierta.
- * Agregar contenedor interno para notas para dar margen.
+ * Igualar estilos de IDs inglés/Español para que funcionen iguales.
+ * Activar botón de cierre de notas.
  * Corregir ajuste del ir al ppio desde el logo.
  * Corregir overlay de la barra lateral que queda encima de las notas en móviles.
  * Reevaluar mobile en el change window size?

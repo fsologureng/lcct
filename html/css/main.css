@@ -150,12 +150,18 @@ a.nav-link:hover {
 	outline: #666666 solid 1px;
 	width: 100%;
 }
-#languages p {
+#languages a {
+	display: block;
+	color: #666666;
 	background-color: #CCCCCC;
 	margin: 0px;
 	padding: 0px;
 	text-align: center;
 	font-size: 2vw;
+	text-decoration: none;
+}
+#languages a:hover {
+	background-color: #14FF64 !important;
 }
 #title {
 	outline: orange none 1px !important;
@@ -355,7 +361,7 @@ a.nav-link:hover {
 p.signature {
 	text-align:right;
 }
-#comenta {
+#contacto {
 	top: 14vh;
 	left: 30vw;
 	/*
@@ -366,11 +372,11 @@ p.signature {
 	height: 27rem;
 	padding: 0px;
 }
-#comenta > section {
+#contacto > section {
 	margin: 1.5em;
 	border-radius: 3px;
 }
-#comenta h1 {
+#contacto h1 {
 	font-size: 1.5em;
 	width: 5.5em;
 	background-image: url("/images/envelope.svg");
@@ -416,10 +422,10 @@ img.social-logo {
 	margin-left: 0.5em;
 	width: 2.5em;
 }
-#comenta div > div {
+#contacto div > div {
 	margin-bottom: 2.1em;
 }
-#comenta a.nav-contact {
+#contacto a.nav-contact {
 	padding: 0.5em;
 }
 #notas {
@@ -549,6 +555,7 @@ footer > p {
 	max-width: 80vw;
 	margin: 1.2rem;
 	overflow: auto;
+	padding-right: 1em;
 }
 .lcct-note pre {
 	font-family: 'DIN Pro';
@@ -559,6 +566,13 @@ footer > p {
 }
 .lcct-note > section > div > p {
 	max-width: 30vw;
+}
+#N09 section > ul {
+	margin: 0em;
+	padding: 0px;
+	list-style-type: none;
+	font-size: 0.6rem;
+	color: #CCCCCC;
 }
 #N20 div {
 	column-count: 3;
@@ -574,10 +588,12 @@ footer > p {
 #N34 {
 	text-align: center;	
 }
+/*
 #Epilogo {
 	height: 80vh;
 	overflow: scroll;
 }
+*/
 #Epilogo h3:first-child {
 	color: #14FF64;
 }

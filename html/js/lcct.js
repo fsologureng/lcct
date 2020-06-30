@@ -68,7 +68,7 @@ function showTip(point){
 	var rightPos = asterisk.getBoundingClientRect().right + $(window)['scrollLeft']();
 	console.log('[showTip] rightPos=',rightPos);
 	var tipWidth = tip.outerWidth(); //Find width of tooltip
-	console.log('[needPanTip] tipWidth=',tipWidth);
+	console.log('[showTip] tipWidth=',tipWidth);
 	var tipHeight = tip.outerHeight(); //Find height of tooltip
 	var tipVisX;
 	var tipVisY = (viewerBottomRight.y - tipHeight)/2;
@@ -361,9 +361,12 @@ $(document).ready(function(){
 		console.log('fragment=',fragment);
 		// fit vertically
 		viewer.viewport.fitVertically();
-		goToNote(fragment.replace(/^\#(.*)$/,'$1'));
 		$('#mask').hide("fast",function(){console.log("desactiva máscara")});
 		$('#notas').hide("fast",function(){console.log("desactiva notas")});
+		let note = fragment.replace(/^\#(.*)$/,'$1'); 
+		console.log('note=',note);
+		$('#'+overlays[note].id).addClass('pending');
+		goToNote(note);
 	});
 	// Posicionamiento en sección
 	var fragment = document.location.hash;
