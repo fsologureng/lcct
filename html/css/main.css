@@ -104,7 +104,7 @@ main {
 	display: block;
 	margin: 0px;
 	padding: 0px;
-	height: 3vw;
+/*	height: 3vw;*/
 	list-style: none;
 	border-top: #14FF64 solid 1px;
 	background-color: #666666;
@@ -124,7 +124,7 @@ a.nav-link, a.nav-link:visited {
 	color: #14FF64;
 	background-color: #666666;
 	text-decoration: none;
-	padding: 0.3em;
+	padding: 0.1em;
 	font-size: 1.2rem;
 	vertical-align: middle;
 }
@@ -314,6 +314,7 @@ a.nav-link:hover {
 	float: right;
 	font-size: 1.5em;
 	margin-bottom: -0.3em;
+	cursor: pointer;
 }
 .lightbox section {
 	margin: 1.5em;

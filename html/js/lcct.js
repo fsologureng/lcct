@@ -217,6 +217,7 @@ function bindtooltip(note){
 				showTip(e.target);
 			}
 		}
+		document.location.hash=tip.attr('id');
 	});
 }
 
@@ -302,12 +303,20 @@ $(document).ready(function(){
 	if (isMobile){
 		// bind menú button
 		$('#button > a').on('click',function(e){
-			$('#menu').toggle("fast",function(){console.log("menu click")});
+			e.preventDefault();
+			$('#menu').toggle("fast",function(){
+				console.log("menu click");
+			});
 			// Hide tooltip
 			$('.lcct-note:visible').hide();
 			$('.mask:visible').hide();
 			$('.laser:visible').hide();
-			return false;
+		});
+	}
+	else {
+		// disable button
+		$('#button > a').on('click',function(e){
+			e.preventDefault();
 		});
 	}
 	// access and exit from each section
@@ -317,7 +326,9 @@ $(document).ready(function(){
 		$('#menu a[href="#'+id+'"]').on('click',function(e){
 			console.log('click ',id);
 			if (isMobile){
-				$('#menu').hide("fast",function(){console.log("esconde menu")});
+				$('#menu').hide("fast",function(e){
+					console.log("esconde menu");
+				});
 			}
 			// Hide tooltip if visible
 			$('.lcct-note:visible').hide();
@@ -330,7 +341,7 @@ $(document).ready(function(){
 			console.log('click cierra ',id);
 			$('#mask').hide("fast",function(){console.log("desactiva máscara")});
 			$('#'+id).hide("fast",function(){console.log("desactiva ",id)}).removeClass('show');
-			document.location.hash='';
+			history.back();
 		});
 	});
 	// out with click on mask
@@ -338,7 +349,7 @@ $(document).ready(function(){
 		console.log('click mascara');
 		$('.lightbox.show').hide("fast",function(){console.log("desactiva lightbox desde la máscara")}).removeClass('show');
 		$('#mask').hide("fast",function(){console.log("desactiva máscara")});
-		document.location.hash='';
+		history.back();
 	});
 	$('.mask').on('click',function(e){
 		e.stopImmediatePropagation();
@@ -367,6 +378,15 @@ $(document).ready(function(){
 		console.log('note=',note);
 		$('#'+overlays[note].id).addClass('pending');
 		goToNote(note);
+	});
+	// note close button
+	$('div.lcct-note > nav > button').on('click',function(e){
+		let btn = e.target;
+		let tip = $(btn).parent().parent();
+		tip.hide(); //Hide tooltip
+		let point = $('#'+tip.attr('aria-owns')); 
+		$(point).children('div.laser').hide();
+		$(point).children('div.mask').hide();
 	});
 	// Posicionamiento en sección
 	var fragment = document.location.hash;
