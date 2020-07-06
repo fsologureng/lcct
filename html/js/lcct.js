@@ -23,7 +23,7 @@ var viewer = OpenSeadragon({
 	zoomInButton : "zoom-in",
 	zoomOutButton : "zoom-out",
 	fullPageButton : "full-page",
-	animationTime: 0.1,
+//	animationTime: 0.1,
 	gestureSettingsMouse: {
 		scrollToZoom: true,
 		clickToZoom: false,
@@ -83,6 +83,11 @@ function showTip(point){
 		top: tipVisY,
 		position: 'absolute'
 	});
+	tip.show(); //Show tooltip
+}
+function showTip2(point){
+	console.log('[showTip2]');
+	var tip = $('#'+$(point).attr('aria-controls'));
 	tip.show(); //Show tooltip
 }
 function needPanTip(e){
@@ -187,7 +192,7 @@ viewer.addHandler('animation-finish', function(event) {
 		// mostrar nota asociada
 		point.children('.mask').show();
 		showLasers(point.get(0));
-		showTip(point.get(0));
+		showTip2(point.get(0));
 		point.removeClass('pending');
 		var tip = $('#'+$(point).attr('aria-controls'));
 	}
@@ -211,11 +216,11 @@ function bindtooltip(note){
 			$(e.target).children('.mask').hide();
 		}
 		else {
-			if(!needPanTip(e)){
+//			if(!needPanTip(e)){
 				$(e.target).children('.mask').show();
 				showLasers(e.target);
-				showTip(e.target);
-			}
+				showTip2(e.target);
+//			}
 		}
 		document.location.hash=tip.attr('id');
 	});
@@ -442,15 +447,8 @@ $(document).ready(function(){
 	console.log('[counter] mask='+counter);
 	$('#counter > ul > li').html(counter);
 	// map
-	/*
 	$('#mapa button').on('click',function(e){
 		console.log('click cierra mapa');
-		sessionStorage.setItem('mapa', true);
 		$('#mapa').hide();
 	});
-	let hideMap = sessionStorage.getItem('mapa');
-	if ( ! hideMap ){
-		$('#mapa').show();
-	}
-	*/
 });

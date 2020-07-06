@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="h-100 lcct">
+<html lang="en">
 	<head>
 		<title>La Ciudad Como Texto</title>
 		<meta charset="UTF-8">
@@ -11,8 +11,6 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 		<script src="js/openseadragon.min.js"></script>
 		<script src="js/overlays.js"></script>
-		<!--script src="js/openseadragon-svg-overlay.js"></script>
-      <script src="https://d3js.org/d3.v5.min.js"></script-->
 		<link rel="preload" href="images/menu_icon.svg" as="image">
 		<link rel="preload" href="images/laser1.svg" as="image">
 		<link rel="preload" href="images/laser2.svg" as="image">
@@ -25,7 +23,7 @@
 		<link rel="preload" href="images/right.svg" as="image">
 		<link rel="preload" href="images/asterisk.svg" as="image">
 		<link rel="preload" href="images/credits.svg" as="image">
-		<!--link rel="preload" href="images/ruta.svg" as="image"-->
+		<link rel="preload" href="images/ruta.svg" as="image">
 	</head>
 	<body>
 		<main id="main">
@@ -67,6 +65,10 @@
 				<p>COPYRIGHT &copy;La Ciudad como Texto | 2020</p>
 			</footer>
 		</main>
+		<div id="mapa">
+			<button>&times;</button>
+			<img src="images/ruta.svg" alt="Navegation route">
+		</div>
 		<div id="lateral">
 			<div id="button">
 				<a class="btn bg-light" data-toggle="collapse" href="#menu" role="button" aria-expanded="false" aria-controls="menu">
@@ -304,10 +306,6 @@
 					</div>
 				</section>
 			</div>
-			<!--div id="mapa">
-				<button>&times;</button>
-				<img src="images/ruta.svg" alt="Ruta de navegación">
-			</div-->
 		<div id="P01" class="lcct-point" role="button" aria-expanded="false" aria-controls="N01"><div class="mask"></div><div class="laser"><img src="images/laser1.svg"></div><div class="asterisk"></div></div>
 		<div id="P02" class="lcct-point" role="button" aria-expanded="false" aria-controls="N02"><div class="mask"></div><div class="laser"><img src="images/laser2.svg"></div><div class="asterisk"></div></div>
 		<div id="P03" class="lcct-point" role="button" aria-expanded="false" aria-controls="N03"><div class="mask"></div><div class="laser"><img src="images/laser3.svg"></div><div class="asterisk"></div></div>
@@ -954,6 +952,7 @@ Newen and the profound homeland.
 		<!-- end notes -->
 		<div id="warn">
 			<h1>Para una mejor experiencia, gire su pantalla.</h1>
+			<h1>For a better experience, rotate your screen.</h1>
 		</div>
 		<script src="js/lcct.js">
 		</script>

@@ -10,10 +10,12 @@
 	font-style: normal;
 }
 html {
+	display: grid;
 	padding: 0px;
 	margin: 0px;
 }
 body {
+	display: grid;
 	width: 100vw;
 	height: 100vh;
 	padding: 0px;
@@ -22,9 +24,8 @@ body {
 	font-weight: normal;
 	font-style: normal;
 	font-size: 1rem;
-	text-decoration: line-through;
 	color: #666666;
-	background-color: black;
+	box-sizing: content-box;
 }
 #logo {
 	position: fixed;
@@ -76,12 +77,12 @@ main {
 	height: 100vh;
 	width: 97vw;
 	overflow: hidden;
+	background-color: black;
 }
 #button:hover > div {
 	display: block;
 }
 #button > a {
-/*	outline: orange dashed 1px;*/
 	width: 100%;
 	height: 3vw;
 	display: block;
@@ -97,7 +98,6 @@ main {
 	position: fixed;
 	top: 0px;
 	left: 3vw;
-/*	font-size: 2.8vw;*/
 	border: #CCCCCC solid 1px;
 }
 #menu div {
@@ -194,14 +194,10 @@ a.nav-link:hover {
 	letter-spacing: 0.15vw;
 	text-align: center;
 	font-weight: bold;
-/*	outline: yellowgreen solid 1px;*/
 }
 #description p span {
-/*	margin-top: 0vh;*/
-/*	margin-left: 20px !important;*/
 	font-size: 0.8vw;
 	letter-spacing: 1px;
-/*	text-align: center;*/
 }
 #foto {
 	display: block;
@@ -218,7 +214,6 @@ a.nav-link:hover {
 	top: 93.2vh;
 	height: 1.5vh;
 	left: 0.5vw;
-/*	bottom: 7%;*/
 	border: black solid 2px;
 	outline: white solid 1px;
 }
@@ -230,7 +225,6 @@ a.nav-link:hover {
 	left: 4vw;
 	font-size: 0.5rem;
 	color: #14FF64;
-/*	outline: 1px solid #14FF64;*/
 }
 #counter > ul {
 	margin: 0px;
@@ -260,7 +254,6 @@ a.nav-link:hover {
 }
 #btn-bar > ul > li {
 	list-style: none;
-/*	margin-top: -3px;*/
 	text-align: right;
 }
 #btn-bar a {
@@ -287,15 +280,15 @@ a.nav-link:hover {
 	display: none;
 }
 .lightbox {
-	margin-left: 3vw;
-	position: fixed;
+	position: absolute;
 	background-color: #666666;
 	border: 2px solid #14FF64;
 	border-radius: 3px;
-	top: 20vh;
-	left: 10vw;
+	top: 50%;
+	left: 50%;
 	width: 80vw;
 	height: 60vh;
+	margin: -30vh 0px 0px -40vw;
 	padding: 0px;
 	color: #14FF64;
 }
@@ -307,7 +300,6 @@ a.nav-link:hover {
 	display: inline-block;
 	background-color: transparent;
 	border: 1px none #CCCCCC;
-/*	border-radius: 3px;*/
 	text-transform: uppercase;
 	height: 100%;
 	vertical-align: middle;
@@ -327,7 +319,6 @@ a.nav-link:hover {
 	position: relative;
 	top: 0px;
 	padding: 2%;
-/*	outline: green solid 1px !important;*/
 }
 .lightbox section > div > h1 {
 	margin-top: 0em;
@@ -343,17 +334,17 @@ a.nav-link:hover {
 }
 #ficha {
 	border: #14FF64 solid 2px;
-       margin: 3em;
-       padding: 1em;
+	margin: 3em;
+	padding: 1em;
 	width: 48%;
 	margin-left: 22%;
 	font-size: 0.9rem;
 }
 #ficha h4 {
-       margin-top: 0px;
+	margin-top: 0px;
 }
 #ficha dt {
-       color: #CCCCCC;
+	color: #CCCCCC;
 }
 #ficha > img {
 	width: 80%;
@@ -363,15 +354,9 @@ p.signature {
 	text-align:right;
 }
 #contacto {
-	top: 14vh;
-	left: 30vw;
-	/*
 	width: 40vw;
 	height: 67vh;
-	*/
-	width: 30rem;
-	height: 27rem;
-	padding: 0px;
+	margin: -33.5vh 0px 0px -20vw;
 }
 #contacto > section {
 	margin: 1.5em;
@@ -386,27 +371,29 @@ p.signature {
 	background-size: 25%;
 }
 #mapa {
-	position:relative;
-	left: 4vw;
-	top: 3vh;
-	width: 53vw;
-	display: none;
+	position: absolute;
+	left: 0px;
+	top: 0px;
 	background-color: black;
+	width: 93vw;
+	height: 93vh;
 }
 #mapa button {
+	position: absolute;
+	top: 0px;
+	right: 0px;
 	color: #14FF64;
 	display: inline-block;
 	background-color: transparent;
 	border: 1px none #CCCCCC;
-/*	border-radius: 3px;*/
-	text-transform: uppercase;
+	font-size: 3rem;
+	padding: 0.5rem 1.1rem 0.5rem 1.1rem;
+	cursor: pointer;
+}
+#mapa img {
+	object-fit: contain;
+	width: 100%;
 	height: 100%;
-	vertical-align: middle;
-	float: right;
-	font-size: 1.5em;
-	margin-bottom: -0.3em;
-	float: right;
-	clear: none;
 }
 a.nav-contact {
 	color: #666666;
@@ -444,7 +431,6 @@ img.social-logo {
 a.note-link, a.note-link:visited {
 	display: block;
 	margin: 0px;
-/*	padding: 3pt;*/
 	width: 100%;
 	height: 100%;
 	color: #14FF64;
@@ -474,6 +460,7 @@ footer {
 	font-size: 6pt;
 	position: fixed;
 	color: white;
+	background-color: black;
 }
 footer > p {
 	position: fixed;
@@ -542,13 +529,12 @@ footer > p {
 .lcct-note {
 	color: white;
 	background-color: #666666;
-	position: absolute;
+	position: relative;
 	display: none;
 	font-size: 0.8em;
 	outline: 2px solid #14FF64;
-}
-.lcct-note > nav {
-/*	display: none;*/
+	margin: auto;
+	width: fit-content;
 }
 .lcct-note section {
 	position: relative;
@@ -589,12 +575,6 @@ footer > p {
 #N34 {
 	text-align: center;	
 }
-/*
-#Epilogo {
-	height: 80vh;
-	overflow: scroll;
-}
-*/
 #Epilogo h3:first-child {
 	color: #14FF64;
 }
@@ -630,7 +610,7 @@ p.author {
 	display: none;
 }
 
-@media only screen and (max-device-width: 480px) {
+@media only screen and (max-device-width: 640px) {
 	/* define mobile specific styles come here */
 	#N20 div {
 		column-count: 2;
@@ -654,6 +634,12 @@ p.author {
 	#warn h1 {
 		font-size: 2rem;
 		padding: 10%;
-		margin-top: 30%;
+		margin: 0%;
+	}
+	#warn h1:first-child {
+		margin-top: 25%;
+	}
+	#warn h1+h1 {
+		color: #FFF79D;
 	}
 }
