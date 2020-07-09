@@ -445,7 +445,7 @@ $(document).ready(function(){
 	console.log('[counter] #digits='+digits.length);
 	let counter = digits.map(d => '<span>'+d+'</span>');
 	console.log('[counter] mask='+counter);
-	$('#counter > ul > li').html(counter);
+	$('#counter > p').html(counter);
 	// map
 	$('#mapa button').on('click',function(e){
 		console.log('click cierra mapa');

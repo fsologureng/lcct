@@ -13,11 +13,26 @@ html {
 	display: grid;
 	padding: 0px;
 	margin: 0px;
+	height: 100vh;
+	width: 100vw;
+	justify-items: stretch;
+	align-items: stretch;
+	justify-content: stretch;
+	align-content: stretch;
 }
 body {
 	display: grid;
-	width: 100vw;
-	height: 100vh;
+	grid-template-columns: [begin-bar] 41px [end-bar start-main] 1fr [end-main];
+	grid-template-rows: 1fr;
+	grid-template-areas:
+		"sidebar main";
+	gap: 0px;
+	justify-items: stretch;
+	align-items: stretch;
+	justify-content: stretch;
+	align-content: stretch;
+	width: 100%;
+	height: 100%;
 	padding: 0px;
 	margin: 0px;
 	font-family: 'DIN Pro' !important;
@@ -25,13 +40,14 @@ body {
 	font-style: normal;
 	font-size: 1rem;
 	color: #666666;
-	box-sizing: content-box;
 }
 #logo {
-	position: fixed;
-	right: 0.8em;
-	top: 0.8em;
+	grid-column: 3/6;
+	grid-row: 1/2;
+	justify-self: end;
+	align-self: center;
 	max-width:35vw;
+	z-index: 1;
 }
 #logo img {
 	width: 100%;
@@ -39,43 +55,58 @@ body {
 }
 .panner {
 	display: block;
-	position: fixed;
-	top: 42vh;
-	width: 8vh;
-	height: 8vh;
-	clear: none;
-	text-align: center;
+	position: relative;
+	align-self: center;
+	width: 65%;
 	cursor: pointer;
 }
 .panner img {
 	position: relative;
+	display: block;
 }
 #left {
-	float: left;
-	left: 5vw;
+	grid-area: left;
+	justify-self: end;
 }
 #right {
-	float: right;
-	right: 2vw;
+	grid-area: right;
+	justify-self: start;
 }
 #lateral {
-	display: block;
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	height: 100vh;
-	width: 3vw;
+	/* as child */
+	grid-area: sidebar;
+	/* as parent */
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: [begin-button] 41px [end-button] 0.95fr [begin-lang] 50px [end-lang] 1.05fr;
+	grid-template-areas:
+		"menu"
+		"title"
+		"lang"
+		"desc";
+	gap: 0px;
+	justify-items: stretch;
+	align-items: stretch;
 	outline: #666666 solid 1px;
 	background-color: #CCCCCC;
 }
 main {
-	display: block;
-	position: fixed;
-	top: 0px;
-	left: 3vw;
-	right: 0px;
-	height: 100vh;
-	width: 97vw;
+	grid-area: main;
+	display: grid;
+	grid-template-columns: [begin-left] 40px 40px [end-left start-center] 1fr [end-center begin-right] 60px 40px [end-right];
+	grid-template-rows: [begin-logo] 60px [end-logo] 1fr [begin-counter] 30px [end-counter begin-nav] 25px [end-nav begin-footer] 20px [end-footer];
+	grid-template-areas:
+		"menu menu logo logo logo"
+		"left center center center right"
+		"counter counter other hashtag hashtag"
+		"nav nav nav nav nav"
+		"footer footer footer footer footer";
+	gap: 0px;
+	justify-items: stretch;
+	align-items: stretch;
+	justify-content: stretch;
+	align-content: stretch;
+	width: 100%;
 	overflow: hidden;
 	background-color: black;
 }
@@ -84,7 +115,7 @@ main {
 }
 #button > a {
 	width: 100%;
-	height: 3vw;
+	height: 100%;
 	display: block;
 	background-image: url("/images/menu_icon.svg");
 	background-size: 90%;
@@ -97,14 +128,14 @@ main {
 	padding: 0px;
 	position: fixed;
 	top: 0px;
-	left: 3vw;
+	left: 41px;
 	border: #CCCCCC solid 1px;
 }
 #menu div {
 	display: block;
 	margin: 0px;
 	padding: 0px;
-/*	height: 3vw;*/
+	height: 41px;
 	list-style: none;
 	border-top: #14FF64 solid 1px;
 	background-color: #666666;
@@ -118,13 +149,13 @@ main {
 }
 a.nav-link, a.nav-link:visited {
 	display: inline-block;
-	margin: 0px;
+	margin: auto;
 	width: inherit;
 	height: inherit;
 	color: #14FF64;
 	background-color: #666666;
 	text-decoration: none;
-	padding: 0.1em;
+	padding: 0.4em;
 	font-size: 1.2rem;
 	vertical-align: middle;
 }
@@ -145,8 +176,13 @@ a.nav-link:hover {
 	background-position: center;
 	pointer-events: none;
 }
-#lateral > div+div {
-	display: block;
+#languages {
+	/* as child */
+	grid-area: lang;
+	/* as parent */
+	display: grid;
+	grid-auto-flow: row;
+	place-items: stretch stretch;
 	outline: #666666 solid 1px;
 	width: 100%;
 }
@@ -154,91 +190,99 @@ a.nav-link:hover {
 	display: block;
 	color: #666666;
 	background-color: #CCCCCC;
-	margin: 0px;
+	width: 100%;
+	height: 100%;
+	margin: auto;
 	padding: 0px;
 	text-align: center;
-	font-size: 2vw;
+	font-size: 1.3em;
 	text-decoration: none;
 }
 #languages a:hover {
 	background-color: #14FF64 !important;
 }
 #title {
-	outline: orange none 1px !important;
-	height: 36vh;
-}
-#description {
-	outline: #666666 none 1px !important;
-	height: 45vh;
+	/* as child */
+	grid-area: title;
+	transform: rotate(270deg);
+	transform-origin: center;
+	position: relative;
+	width: 34vh;
+	height: 41px;
+	top: 50%;
+	left: 50%;
+	margin: -20px 0 0 -17vh;
+/*	outline: orange none 1px !important;*/
 }
 #title p {
-	transform: rotate(270deg);
-	transform-origin: left;
-	position: relative;
-	margin-left: 0.7vw !important;
-	height: 0px;
-	width: 39vh;
-	bottom: -36vh;
-	font-size: 1.1vw;
+	margin: auto;
+	font-size: 2.7ex;
 	text-align: center;
+	padding: 0.57ex;
+/*	outline: cyan none 1px !important;*/
+}
+#description {
+	/* as child */
+	grid-area: desc;
+	transform: rotate(270deg);
+	transform-origin: center;
+	position: relative;
+	width: 38vh;
+	height: 41px;
+	top: 50%;
+	left: 50%;
+	margin: -20px 0 0 -19vh;
+	outline: orange none 1px !important;
 }
 #description p {
-	transform: rotate(270deg);
-	transform-origin: left;
-	position: relative;
-	margin-left: 0.2vw !important;
-	height: 0px;
-	width: 45vh;
-	bottom: -42vh;
-	font-size: 1.0vw;
-	letter-spacing: 0.15vw;
+	margin: auto;
+	font-size: 1.8ex;
 	text-align: center;
-	font-weight: bold;
+	padding: 0.17ex;
+	letter-spacing: 0.15rem;
+/*	font-weight: bold;*/
 }
 #description p span {
-	font-size: 0.8vw;
+	font-size: 1.4ex;
 	letter-spacing: 1px;
 }
 #foto {
+	grid-column: 1/6;
+	grid-row: 1/5;
 	display: block;
-	position: fixed;
+	position: relative;
 	border: orange dashed 0px;
-	width: 97vw;
-	height: 97%;
-	right: 0px;
+	width: 100%;
+	height: 100%;
+/*	right: 0px; */
 }
 #navigator {
 	display: block;
-	position: fixed;
 	width: 94.5vw;
-	top: 93.2vh;
-	height: 1.5vh;
-	left: 0.5vw;
 	border: black solid 2px;
 	outline: white solid 1px;
 }
 #counter {
+	grid-area: counter;
+	align-self: end;
+	justify-self: center;
 	display: block;
-	width: 3vw;
-	position: fixed;
+	z-index: 1;
+	width: 100%;
+/*	position: fixed;
 	bottom: 8vh;
-	left: 4vw;
+	left: 4vw;*/
+	margin: auto;
+	padding: 2px;
 	font-size: 0.5rem;
 	color: #14FF64;
 }
-#counter > ul {
-	margin: 0px;
+#counter > p {
+	margin: auto;
 	padding: 0px;
-}
-#counter > ul > li {
-	margin: 0px;
-	padding: 2px;
-	list-style: none;
 	text-align: center;
-	font-weight: bolder;
-	background-color: transparent;
 }
-#counter > ul > li > span {
+#counter > p > span {
 	font-size: 0.6rem;
 	background-color: #14FF64;
 	color: #666666;
@@ -247,49 +291,61 @@ a.nav-link:hover {
 	margin: 1px;
 }
 #btn-bar {
-	display: block;
-	position: fixed;
+	/* as child */
+	grid-area: right;
+	justify-self: start;
+	align-self: end;
+	/* as parent */
+	display: grid;
+	grid-auto-flow: row;
+	place-items: stretch stretch;
+	gap: 3px;
+
+/*	position: fixed;
 	bottom: 6vh;
-	right: 2vw;
+	right: 2vw;*/
 }
-#btn-bar > ul > li {
-	list-style: none;
-	text-align: right;
+#btn-bar > div {
+/*	list-style: none;*/
+	text-align: center;
+	z-index: 1;
+	width: 65%
 }
 #btn-bar a {
-	width: 5vh;
-	border-radius: 2.5vh;
+	width: 100%;
+	border-radius: 50%;
 	font-size: 0em;
 }
 #btn-bar a:hover {
 	border: #666666 solid 1px;
 }
 #btn-bar a > img {
-	padding-top: 1px;
+/*	padding-top: 1px;*/
 	width: inherit;
 }
 #btn-bar a#ig-lnk {
-	margin: 0.4vh;
-	width: 4.2vh;
+/*	margin: 0.4vh;
+	width: 4.2vh;*/
 }
-#btn-bar .social-ht {
+.social-ht {
+	grid-area: hashtag;
 	color:white;
-	margin-top: 3px;
+	z-index: 1;
+/*	margin-top: 3px;*/
 }
 .collapse {
 	display: none;
 }
 .lightbox {
-	position: absolute;
+	grid-area: main;
 	background-color: #666666;
 	border: 2px solid #14FF64;
 	border-radius: 3px;
-	top: 50%;
-	left: 50%;
 	width: 80vw;
 	height: 60vh;
-	margin: -30vh 0px 0px -40vw;
-	padding: 0px;
+	margin: auto;
+	place-items: center center;
+	z-index: 2;
 	color: #14FF64;
 }
 .lightbox nav, .lcct-note nav {
@@ -356,7 +412,6 @@ p.signature {
 #contacto {
 	width: 40vw;
 	height: 67vh;
-	margin: -33.5vh 0px 0px -20vw;
 }
 #contacto > section {
 	margin: 1.5em;
@@ -371,9 +426,10 @@ p.signature {
 	background-size: 25%;
 }
 #mapa {
-	position: absolute;
-	left: 0px;
-	top: 0px;
+	grid-area: main;
+	align-self: center;
+	justify-self: begin;
+ 	display: none;/* FIXME */
 	background-color: black;
 	width: 93vw;
 	height: 93vh;
@@ -451,14 +507,12 @@ a:hover.note-link {
 	margin-top: 0em;
 }
 footer {
+	grid-area: footer;
 	outline: #666666 solid 1px;
 	display: block;
-	height: 3%;
-	width: 97vw;
-	right: 0px;
-	bottom: 0px;
+	height: 100%;
+	width: 100%;
 	font-size: 6pt;
-	position: fixed;
 	color: white;
 	background-color: black;
 }
@@ -469,6 +523,9 @@ footer > p {
 	margin-right: 5px;
 	padding: 0px;
 	text-align: right;
+}
+footer+div {
+	grid-area: nav;
 }
 .active {
 	background-color: #14FF64 !important;
@@ -491,7 +548,7 @@ footer > p {
 	display: none;
 	position: fixed;
 	top: 0px;
-	left: 0px;
+	left: 41px;
 	height: 100vh;
 	width: 100vw;
 	background-color: black;
@@ -510,6 +567,7 @@ footer > p {
 	margin-top: 17px;
 	left: -2880px;
 	top: -1800px;
+	z-index: 3;
 }
 .lcct-point div.asterisk {
 	position: absolute;
@@ -527,6 +585,8 @@ footer > p {
  * Notas
  */
 .lcct-note {
+	grid-column: 1/3;
+	grid-row: 1/2;
 	color: white;
 	background-color: #666666;
 	position: relative;
@@ -535,6 +595,7 @@ footer > p {
 	outline: 2px solid #14FF64;
 	margin: auto;
 	width: fit-content;
+	z-index: 4;
 }
 .lcct-note section {
 	position: relative;
@@ -598,16 +659,60 @@ p.author {
 }
 #mask {
 	display: none;
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	height: 100vh;
-	width: 100vw;
+	z-index: 2;
 	background-color: black;
 	opacity: 0.80;
 }
 #warn {
 	display: none;
+}
+.full {
+	grid-column: 2/3;
+	grid-row: 1/2;
+	height: 100%;
+	width: 100%;
+}
+
+@media only screen and (max-device-height: 768px) {
+	#title p {
+		font-size: 1.6ex;
+		padding: 1.8ex;
+	}
+	#description p {
+		font-size: 1.5ex;
+		padding: 0.67ex;
+	}
+}
+
+@media only screen and (max-device-height: 440px) {
+	#title p {
+		font-size: 1.7ex;
+		padding: 0.6ex;
+	}
+	#description p {
+		font-size: 1.4ex;
+		padding: 0.37ex;
+	}
+}
+
+@media only screen and (max-device-height: 350px) {
+	#title p {
+		font-size: 1.5ex;
+		padding: 1.1ex;
+	}
+	#description p {
+		font-size: 0.55rem;
+	}
+}
+
+@media only screen and (max-device-height: 320px) {
+	#title p {
+		font-size: 1.3ex;
+		padding: 1.3ex;
+	}
+	#description p {
+		font-size: 0.55rem;
+	}
 }
 
 @media only screen and (max-device-width: 640px) {
@@ -641,5 +746,8 @@ p.author {
 	}
 	#warn h1+h1 {
 		color: #FFF79D;
+	}
+	#logo, #counter, #btn-bar, .social-ht {
+		display:none;
 	}
 }

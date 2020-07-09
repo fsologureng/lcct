@@ -2,10 +2,7 @@
  * Eliminar referencias externas de código. Traer al servidor.
  * Igualar estilos de IDs inglés/Español para que funcionen iguales.
  * Corregir ajuste del ir al ppio desde el logo.
- * Corregir overlay de la barra lateral que queda encima de las notas en móviles.
  * Reevaluar mobile en el change window size?
- * Mejorar despliegue de notas para no interferir con la posición en móviles.
  * Agregar enlace a libro
- * Crear página en inglés
  * Agregar history para cada fragmento y usar pushState+replaceState+onpopstate para reabrir los lightboxes.
  * Documentar métodos y comentar javascript
