@@ -86,7 +86,7 @@ function showTip(point){
 	tip.show(); //Show tooltip
 }
 function showTip2(point){
-	console.log('[showTip2]');
+	console.log('[showTip2] point='+point);
 	var tip = $('#'+$(point).attr('aria-controls'));
 	tip.show(); //Show tooltip
 }
@@ -208,21 +208,23 @@ function bindtooltip(note){
 	console.log('[bindtooltip] tip=',tip);
 	var id = overlays[tip.prop('id')].id;
 	console.log('bindtooltip] id='+id);
-	$("#"+id).on('click', function(e) {
-		e.stopImmediatePropagation();
-		if( tip.filter(':visible').length > 0 ){
-			tip.hide(); //Hide tooltip
-			$(e.target).children('.laser').hide();
-			$(e.target).children('.mask').hide();
+	var tracker = new OpenSeadragon.MouseTracker({
+		element: document.getElementById(id),
+		clickHandler: function(e) {
+			console.log('e.originalEvent.target='+e.originalEvent.target);
+			e.originalEvent.stopImmediatePropagation();
+			if( tip.filter(':visible').length > 0 ){
+				tip.hide(); //Hide tooltip
+				$(e.originalEvent.target).children('.laser').hide();
+				$(e.originalEvent.target).children('.mask').hide();
+			}
+			else {
+				$(e.originalEvent.target).children('.mask').show();
+				showLasers(e.originalEvent.target);
+				showTip2(e.originalEvent.target);
+			}
+			document.location.hash=tip.attr('id');
 		}
-		else {
-//			if(!needPanTip(e)){
-				$(e.target).children('.mask').show();
-				showLasers(e.target);
-				showTip2(e.target);
-//			}
-		}
-		document.location.hash=tip.attr('id');
 	});
 }
 
@@ -289,7 +291,7 @@ viewer.addHandler('open', function(event) {
 	// Posicionamiento en nota
 	var fragment = document.location.hash;
 	console.log('fragment=',fragment);
-	if ( fragment.match(/^\#N\d\d/g) && ( fragment >= '#N01' && fragment <= '#N37' ) || fragment == '#Epilogo' ){
+	if ( fragment.match(/^\#N\d\d/g) && ( fragment >= '#N01' && fragment <= '#N42' ) || fragment == '#Epilogo' ){
 		console.log('fragment is a valid point');
 		goToNote(fragment.replace(/^\#(.*)$/,'$1'));
 	}
@@ -317,6 +319,9 @@ $(document).ready(function(){
 			$('.mask:visible').hide();
 			$('.laser:visible').hide();
 		});
+		// Hide zoom buttons
+		$('#zoom-in').hide();
+		$('#zoom-out').hide();
 	}
 	else {
 		// disable button

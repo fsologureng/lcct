@@ -1,3 +1,4 @@
+ * Arreglar centrado de notas al llegar con su fragmento al sitio.
  * Arreglar 1er click fallido en menú en móviles.
  * Eliminar referencias externas de código. Traer al servidor.
  * Igualar estilos de IDs inglés/Español para que funcionen iguales.

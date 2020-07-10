@@ -304,5 +304,37 @@ var overlays = {
 		checkResize: false,
 		x: 240352.789/lcct_width,
 		y: 307.8/lcct_width
+	},
+	'N39': {
+		id: 'P39',
+		className: 'lcct-point',
+		placement: 'TOP_LEFT',
+		checkResize: false,
+		x: 97007.0/lcct_width,
+		y: 741.0/lcct_width
+	},
+	'N40': {
+		id: 'P40',
+		className: 'lcct-point',
+		placement: 'TOP_LEFT',
+		checkResize: false,
+		x: 149226.0/lcct_width,
+		y: 894.0/lcct_width
+	},
+	'N41': {
+		id: 'P41',
+		className: 'lcct-point',
+		placement: 'TOP_LEFT',
+		checkResize: false,
+		x: 106643.0/lcct_width,
+		y: 834.0/lcct_width
+	},
+	'N42': {
+		id: 'P42',
+		className: 'lcct-point',
+		placement: 'TOP_LEFT',
+		checkResize: false,
+		x: 51590.0/lcct_width,
+		y: 706.0/lcct_width
 	}
 };

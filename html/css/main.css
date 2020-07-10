@@ -649,6 +649,13 @@ footer+div {
 #Epilogo sup {
 	font-size: 0.5rem;
 }
+#N39 h3:first-child, #N42 h3:first-child {
+	color: #14FF64;
+}
+#N40 a {
+	font-size: 0.7rem;
+	padding: 0px;
+}
 p.author {
 	color: #14FF64;
 }
@@ -707,11 +714,11 @@ p.author {
 
 @media only screen and (max-device-height: 320px) {
 	#title p {
-		font-size: 1.3ex;
-		padding: 1.3ex;
+		font-size: 1.1ex;
+		padding: 1.2ex;
 	}
 	#description p {
-		font-size: 0.55rem;
+		font-size: 0.4rem;
 	}
 }
 
@@ -735,6 +742,7 @@ p.author {
 		background-position-x: center;
 		background-size: contain;
 		color: #14FF64;
+		z-index: 10;
 	}
 	#warn h1 {
 		font-size: 2rem;
@@ -746,8 +754,5 @@ p.author {
 	}
 	#warn h1+h1 {
 		color: #FFF79D;
-	}
-	#logo, #counter, #btn-bar, .social-ht {
-		display:none;
 	}
 }
