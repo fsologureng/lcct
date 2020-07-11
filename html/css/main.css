@@ -427,12 +427,13 @@ p.signature {
 }
 #mapa, #map {
 	grid-area: main;
+	position: relative;
 	align-self: center;
-	justify-self: begin;
- 	display: none;/* FIXME */
+	justify-self: start;
 	background-color: black;
 	width: 93vw;
 	height: 93vh;
+	z-index: 9;
 }
 #mapa button, #map button {
 	position: absolute;
@@ -723,7 +724,6 @@ p.author {
 }
 
 @media only screen and (max-device-width: 640px) {
-	/* define mobile specific styles come here */
 	#N20 div {
 		column-count: 2;
 	}

@@ -277,6 +277,7 @@ function goToNote(note){ // invariant: always fitted vertically
 	viewer.viewport.fitBoundsWithConstraints(newBounds, true);
 }
 
+/*
 // move point to left or right depending on focus
 function panPoint(point){
 	var leftPos = point.getBoundingClientRect().left + $(window)['scrollLeft']();
@@ -295,6 +296,7 @@ function panPoint(point){
 		}
 	}
 }
+*/
 // inicio del viewer
 viewer.addHandler('open', function(event) {
 	// fit vertically
@@ -471,5 +473,9 @@ $(document).ready(function(){
 	$('#mapa button').on('click',function(e){
 		console.log('click cierra mapa');
 		$('#mapa').hide();
+	});
+	$('#map button').on('click',function(e){
+		console.log('click close map');
+		$('#map').hide();
 	});
 });
