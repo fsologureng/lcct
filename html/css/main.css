@@ -254,7 +254,7 @@ a.nav-link:hover {
 	border: orange dashed 0px;
 	width: 100%;
 	height: 100%;
-/*	right: 0px; */
+	cursor: grab; 
 }
 #navigator {
 	display: block;
@@ -379,16 +379,16 @@ a.nav-link:hover {
 .lightbox section > div > h1 {
 	margin-top: 0em;
 }
-#proyecto {
+#proyecto, #project {
 	font-size: 1em;
 }
-#proyecto > section {
+#proyecto > section, #project > section {
 	border-radius: 3px;
 }
-#proyecto > section > p {
+#proyecto > section > p, #project > section > p {
 	margin: 1.5em;
 }
-#ficha {
+#ficha, #sheet {
 	border: #14FF64 solid 2px;
 	margin: 3em;
 	padding: 1em;
@@ -396,28 +396,28 @@ a.nav-link:hover {
 	margin-left: 22%;
 	font-size: 0.9rem;
 }
-#ficha h4 {
+#ficha h4, #sheet h4 {
 	margin-top: 0px;
 }
-#ficha dt {
+#ficha dt, #sheet dt {
 	color: #CCCCCC;
 }
-#ficha > img {
+#ficha > img, #sheet > img {
 	width: 80%;
 	margin-left: 10%;
 }
 p.signature {
 	text-align:right;
 }
-#contacto {
+#contacto, #contact {
 	width: 40vw;
 	height: 67vh;
 }
-#contacto > section {
+#contacto > section, #contact > section {
 	margin: 1.5em;
 	border-radius: 3px;
 }
-#contacto h1 {
+#contacto h1, #contact h1 {
 	font-size: 1.5em;
 	width: 5.5em;
 	background-image: url("/images/envelope.svg");
@@ -425,7 +425,7 @@ p.signature {
 	background-repeat: no-repeat;
 	background-size: 25%;
 }
-#mapa {
+#mapa, #map {
 	grid-area: main;
 	align-self: center;
 	justify-self: begin;
@@ -434,7 +434,7 @@ p.signature {
 	width: 93vw;
 	height: 93vh;
 }
-#mapa button {
+#mapa button, #map button {
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -446,7 +446,7 @@ p.signature {
 	padding: 0.5rem 1.1rem 0.5rem 1.1rem;
 	cursor: pointer;
 }
-#mapa img {
+#mapa img, #map img {
 	object-fit: contain;
 	width: 100%;
 	height: 100%;
@@ -466,22 +466,22 @@ img.social-logo {
 	margin-left: 0.5em;
 	width: 2.5em;
 }
-#contacto div > div {
+#contacto div > div, #contact div > div {
 	margin-bottom: 2.1em;
 }
-#contacto a.nav-contact {
+#contacto a.nav-contact, #contact a.nav-contact {
 	padding: 0.5em;
 }
-#notas {
+#notas, #notes {
 	font-size: 1em;
 }
-#notas ul {
+#notas ul, #notes ul {
 	list-style: "\2731";
 	column-count: 2;
 	column-gap: 15px;
 	margin-block-end: 1.5em;
 }
-#notas ul li {
+#notas ul li, #notes ul li {
 	padding-left: 5px;
 }
 a.note-link, a.note-link:visited {
@@ -496,14 +496,14 @@ a.note-link, a.note-link:visited {
 a:hover.note-link {
 	text-decoration: line-through;
 }
-#notas .nav-note {
+#notas .nav-note, #notes .nav-note {
 	padding: 12pt;
 	margin-right: 20px;
 	color: #666666;
 	background-color: #14FF64;
 	border-radius: 0.5em;
 }
-#notas .nav-note h2 {
+#notas .nav-note h2, #notes .nav-note h2 {
 	margin-top: 0em;
 }
 footer {

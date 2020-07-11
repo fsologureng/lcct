@@ -177,6 +177,8 @@ var rightPanning = function(){
 		viewer.viewport.panBy(new OpenSeadragon.Point(viewer.viewport.imageToViewportCoordinates(new OpenSeadragon.Point(lcct_width,0)).x - oldBounds.x - oldBounds.width,0), false);
 	}
 }
+var load = undefined;
+var fragment = document.location.hash;
 viewer.addHandler('animation-start', function(event) {
 	console.log('[animation-start handler]');
 	//Hide tooltip
@@ -186,6 +188,11 @@ viewer.addHandler('animation-start', function(event) {
 })
 viewer.addHandler('animation-finish', function(event) {
 	console.log('[animation-finish handler]');
+	if ( load ){
+		let note = load;
+		load = undefined;
+		goToNote( note );
+	}
 	var point = $('div.pending');
 	console.log('[animation-finish handler] point=',point);
 	if ( point.length > 0 ){
@@ -205,9 +212,9 @@ viewer.addHandler('animation-finish', function(event) {
 // Bind a note
 function bindtooltip(note){
 	var tip = $(note);
-	console.log('[bindtooltip] tip=',tip);
+//	console.log('[bindtooltip] tip=',tip);
 	var id = overlays[tip.prop('id')].id;
-	console.log('bindtooltip] id='+id);
+//	console.log('bindtooltip] id='+id);
 	var tracker = new OpenSeadragon.MouseTracker({
 		element: document.getElementById(id),
 		clickHandler: function(e) {
@@ -250,15 +257,23 @@ viewer.addHandler('animate', function(event) {
 	console.log('web=',webPoint.toString(),'viewport=', viewportPoint.toString(), 'image=',imagePoint.toString());
 });
 
+// dragging
+viewer.addHandler('canvas-drag', function(event) {
+	$('#foto').css({cursor: 'grabbing'});
+});
+viewer.addHandler('canvas-drag-end', function(event) {
+	$('#foto').css({cursor: 'grab'});
+});
+
 // focus on a note
 function goToNote(note){ // invariant: always fitted vertically
 	// Starting point
 	var oldBounds = viewer.viewport.getBounds();
-	console.log('oldBounds=',oldBounds);
+//	console.log('oldBounds=',oldBounds);
 	// always fit with displacement
-	var X = overlays[note].x < oldBounds.width*0.3 ? 0 : overlays[note].x > lcct_width - oldBounds.width*0.3 ? lcct_width - oldBounds.width : overlays[note].x-oldBounds.width*0.3;
+	var X = overlays[note].x <= oldBounds.width*0.5 ? 0 : overlays[note].x >= lcct_width - oldBounds.width*0.5 ? lcct_width - oldBounds.width : overlays[note].x-oldBounds.width*0.5;
 	var newBounds = new OpenSeadragon.Rect(X, oldBounds.y, oldBounds.width, oldBounds.height,0); 
-	console.log('newBounds=',newBounds);
+//	console.log('newBounds=',newBounds);
 	viewer.viewport.fitBoundsWithConstraints(newBounds, true);
 }
 
@@ -283,17 +298,17 @@ function panPoint(point){
 // inicio del viewer
 viewer.addHandler('open', function(event) {
 	// fit vertically
-	viewer.viewport.fitVertically();
+	viewer.viewport.fitVertically(true);
 	// Bind notes
 	$('.lcct-note').each(function(idx,note){
 		bindtooltip(note);
 	});
 	// Posicionamiento en nota
-	var fragment = document.location.hash;
 	console.log('fragment=',fragment);
 	if ( fragment.match(/^\#N\d\d/g) && ( fragment >= '#N01' && fragment <= '#N42' ) || fragment == '#Epilogo' ){
 		console.log('fragment is a valid point');
-		goToNote(fragment.replace(/^\#(.*)$/,'$1'));
+		let note = fragment.replace(/^\#(.*)$/,'$1'); 
+		load = note;
 	}
 	else {
 		// Starting point
@@ -308,6 +323,8 @@ viewer.addHandler('open', function(event) {
 var isMobile = window.matchMedia("(pointer: coarse)").matches;
 $(document).ready(function(){
 	if (isMobile){
+		// remove hover style of button
+		$('#button > div').hide();
 		// bind menú button
 		$('#button > a').on('click',function(e){
 			e.preventDefault();
@@ -332,7 +349,7 @@ $(document).ready(function(){
 	// access and exit from each section
 	$('.lightbox').each(function(idx,el){
 		var id = el.id;
-		console.log('id=',id);
+//		console.log('id=',id);
 		$('#menu a[href="#'+id+'"]').on('click',function(e){
 			console.log('click ',id);
 			if (isMobile){
@@ -378,13 +395,13 @@ $(document).ready(function(){
 	// bind notes access
 	$('a.lcct-link').on('click',function(e){
 		console.log('click ',e);
-		var fragment = e.target.hash;
-		console.log('fragment=',fragment);
+		console.log('target.hash=',e.target.hash);
 		// fit vertically
-		viewer.viewport.fitVertically();
+		viewer.viewport.fitVertically(true);
 		$('#mask').hide("fast",function(){console.log("desactiva máscara")});
 		$('#notas').hide("fast",function(){console.log("desactiva notas")});
-		let note = fragment.replace(/^\#(.*)$/,'$1'); 
+		$('#notes').hide("fast",function(){console.log("deactivate notes")});
+		let note = e.target.hash.replace(/^\#(.*)$/,'$1'); 
 		console.log('note=',note);
 		$('#'+overlays[note].id).addClass('pending');
 		goToNote(note);
@@ -399,7 +416,6 @@ $(document).ready(function(){
 		$(point).children('div.mask').hide();
 	});
 	// Posicionamiento en sección
-	var fragment = document.location.hash;
 	console.log('fragment=',fragment);
 	if ( $(''+fragment+'.lightbox').length > 0 ){
 		$('#menu a[href="'+fragment+'"]').trigger('click');
@@ -407,7 +423,7 @@ $(document).ready(function(){
 	// click on logo
 	$('#logo').on('click',function(){
 		// fit vertically
-		viewer.viewport.fitVertically();
+		viewer.viewport.fitVertically(true);
 		// Starting point
 		var oldBounds = viewer.viewport.getBounds();
 		console.log('oldBounds=',oldBounds);

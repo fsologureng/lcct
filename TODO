@@ -1,8 +1,3 @@
- * Arreglar centrado de notas al llegar con su fragmento al sitio.
- * Arreglar 1er click fallido en menú en móviles.
- * Eliminar referencias externas de código. Traer al servidor.
- * Igualar estilos de IDs inglés/Español para que funcionen iguales.
- * Corregir ajuste del ir al ppio desde el logo.
  * Reevaluar mobile en el change window size?
  * Agregar enlace a libro
  * Agregar history para cada fragmento y usar pushState+replaceState+onpopstate para reabrir los lightboxes.
