@@ -54,10 +54,10 @@
 				<img src="images/right.svg" alt="Ir a la derecha">
 			</a>
 			<footer>
-				<p>COPYRIGHT &copy;La Ciudad como Texto | 2020</p>
+				<p><span id="size" style="color: red;"></span><span>&nbsp;</span>COPYRIGHT &copy;La Ciudad como Texto | 2020</p>
 			</footer>
 		</main>
-		<div id="mapa">
+		<div id="mapa" style="display: none;" class="map">
 			<button>&times;</button>
 			<img src="images/ruta.svg" alt="Ruta de navegación">
 		</div>
@@ -85,19 +85,19 @@
 				</div>
 			</div>
 			<div id="title">
-				<p>LA CIUDAD COMO TEXTO 2.4km</p>
+				<h1>LA CIUDAD COMO TEXTO 2.4km</h1>
 			</div>
 			<div id="languages">
 				<a href="index.html" class="active">ES</a>
 				<a href="index_en.html">EN</a>
 			</div>
 			<div id="description">
-				<p>Estallido SOCIAL CHILE 2019<br>
-				<span>Día 36 | La Alameda | Santiago</span></p>
+				<h2>Estallido SOCIAL CHILE 2019</h2>
+				<h3>Día 36 | La Alameda | Santiago</h3>
 			</div>
 		</div>
 		<div id="mask" class="full"></div>
-		<div id="proyecto" class="collapse lightbox">
+		<div id="proyecto" class="collapse lightbox lcct-section project">
 			<nav><button>&times;</button></nav>
 			<section>
 				<div>
@@ -105,7 +105,7 @@
 					<p>Este proyecto busca resguardar la memoria grabada en los muros de la calle que fue protagonista de las manifestaciones en Santiago durante <em>El Estallido Social</em>–Av. Libertador Bernardo O’Higgins, popularmente conocida como La Alameda– exponiendo los casi 2.4 km de extensión como obra en sí misma. El registro corresponde específicamente al día número 36 del Estallido y está conformado por 136 fotografías contiguas que capturan la vereda sur de La Alameda, desde la calle Seminario hasta Nataniel Cox, ubicada frente a la casa de gobierno en Chile: El Palacio de La Moneda.</p> 
 					<p>La invitación por medio de esta plataforma, es a hacer una ‘caminata virtual’ por este recorrido, leer y observar detenidamente el pergamino de fachadas, compuestas por textos sueltos dispuestos en la calle como si fuera un gran lienzo. Cada uno puede seleccionar libremente e hilvanar su propio tejido discursivo. Del mismo modo, se presenta como una posibilidad para que personas que no estuvieron en Santiago o en Chile durante esta ‘Megacrisis’, puedan experimentar este tránsito continuo por donde muchos ciudadanos gritaron, rayaron, saltaron y marcharon durante las protestas. Además se diseñó un libro digital bilingüe de libre descarga, donde se presenta el proyecto completo en su primera versión (link en el menú principal).</p>
 					<p>El registro fotográfico de este recorrido permite fijar, cristalizar e inmortalizar la historia de nuestro país, siendo un material a disposición de todxs quienes estén interesados en descubrirlo. El valor del registro de archivo -no sólo de esta crisis social- posibilita generar investigaciones, proyectos y múltiples análisis desde variadas disciplinas y campos del saber, sobre todo porque se ofrece en sí misma como un material de libre acceso globalmente.</p>
-					<div id="ficha">
+					<div id="ficha" class="sheet">
 						<h4>FICHA TÉCNICA DEL REGISTRO</h4>
 						<dl>
 							<dt>RUTA:</dt>
@@ -151,7 +151,7 @@
 				</div>
 			</section>
 		</div>
-		<div id="notas" class="collapse lightbox">
+		<div id="notas" class="collapse lightbox lcct-section">
 			<nav><button>&times;</button></nav>
 			<section>
 				<div>
@@ -294,22 +294,20 @@
 				</div>
 			</section>
 		</div>
-		<div id="contacto" class="collapse lightbox">
+		<div id="contacto" class="collapse lightbox lcct-section contact">
 			<nav><button>&times;</button></nav>
 			<section>
+				<h1>Contacto</h1>
 				<div>
-					<h1>Contacto</h1>
-					<div>
-						<p><a id="email_project" class="nav-contact" href="#email_project" target="_blank">[email_project]</a></p>
-						<p>Día 36 del Estallido Social | Santiago | Chile</p>
-					</div>
-					<div>
-						<p><strong>#noseborra</strong></p>
-						<p><strong>#laciudadcomotexto</strong></p>
-						<p><strong>#chiledesperto</strong></p>
-					</div>
-					<p><a class="social social-ig" href="https://www.instagram.com/laciudadcomotexto" target="_blank"><img src="images/ig_icon.svg" alt="laciudadcomotexto"></a><img class="social-logo" src="images/logo.svg" alt="LCCT"></p>
+					<p><a id="email_project" class="nav-contact" href="#email_project" target="_blank">[email_project]</a></p>
+					<p>Día 36 del Estallido Social | Santiago | Chile</p>
 				</div>
+				<div>
+					<p><strong>#noseborra</strong></p>
+					<p><strong>#laciudadcomotexto</strong></p>
+					<p><strong>#chiledesperto</strong></p>
+				</div>
+				<p><a class="social social-ig" href="https://www.instagram.com/laciudadcomotexto" target="_blank"><img src="images/ig_icon.svg" alt="laciudadcomotexto"></a><img class="social-logo" src="images/logo.svg" alt="LCCT"></p>
 			</section>
 		</div>
 		<div id="P01" class="lcct-point" role="button" aria-expanded="false" aria-controls="N01"><div class="mask"></div><div class="laser"><img src="images/laser1.svg"></div><div class="asterisk"></div></div>
@@ -354,14 +352,14 @@
 		<div id="P40" class="lcct-point" role="button" aria-expanded="false" aria-controls="N40"><div class="mask"></div><div class="laser"><img src="images/laser1.svg"></div><div class="asterisk"></div></div>
 		<div id="P41" class="lcct-point" role="button" aria-expanded="false" aria-controls="N41"><div class="mask"></div><div class="laser"><img src="images/laser1.svg"></div><div class="asterisk"></div></div>
 		<div id="P42" class="lcct-point" role="button" aria-expanded="false" aria-controls="N42"><div class="mask"></div><div class="laser"><img src="images/laser1.svg"></div><div class="asterisk"></div></div>
-		<div id="N01" class="lcct-note" aria-owns="P01">
+		<div id="N01" class="lightbox lcct-note" aria-owns="P01">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p><em><strong>“Chile despertó, dime algo más lindo k eso”</strong></em>, es la frase que se encumbra en la estructura del paradero de micros. Desde aquí veo esta ciudad nueva, caótica, alborotada…, pero viva, más viva que nunca. Por aquí pasó el hastío desbocado del orden neoliberal, cuando nos cansamos de ser <em>gente</em> de vida hipotecada y nos desordenamos, nos desbordamos con ira creativa y destituyente para volver a ser <em>pueblo</em> palpitante y constituyente. Los muros de Chile, cual palimpsesto, dan cuenta del dolor y la esperanza. Sigo en el paradero. ¿Hasta dónde irá el recorrido?… “Hasta que la dignidad se haga costumbre”.</p>
 				<p class="author">Silvia Aguilera Morales (1963)</p>
 			</section>
 		</div>
-		<div id="N02" class="lcct-note" aria-owns="P02">
+		<div id="N02" class="lightbox lcct-note" aria-owns="P02">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>El muro como una hoja en blanco donde se escribe la historia,
@@ -377,7 +375,7 @@
 				<p class="author">Luis Albornoz Riquelme (1948)</p>
 			</section>
 		</div>
-		<div id="N03" class="lcct-note" aria-owns="P03">
+		<div id="N03" class="lightbox lcct-note" aria-owns="P03">
 			<nav><button>&times;</button></nav>
 			<section>
 				<pre>
@@ -394,7 +392,7 @@ Me pregunto si esta imagen seguirá siendo calco eterno de la identidad fotográ
 				<p class="author">Pedro Álvarez (1968)</p>
 			</section>
 		</div>
-		<div id="N04" class="lcct-note" aria-owns="P04">
+		<div id="N04" class="lightbox lcct-note" aria-owns="P04">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Hace 14 años, por mas que se buscaron significados y justificaciones para el diseño de estos paraderos, para los ojos ciudadanos siempre se vieron como un electrocardiograma. Hoy esa interpretación ciudadana parece profética.</p>
@@ -402,14 +400,14 @@ Me pregunto si esta imagen seguirá siendo calco eterno de la identidad fotográ
 				<p class="author">Moisés Arancibia (1977)</p>
 			</section>
 		</div>
-		<div id="N05" class="lcct-note" aria-owns="P05">
+		<div id="N05" class="lightbox lcct-note" aria-owns="P05">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Es noche de año nuevo y pasamos por Plaza de la Dignidad antes de ir a nuestra fiesta. Un sonido eterno que permanece en mi oído y que reclama dignidad. Un golpe constante que se repite amplificado por las manos que chocan con las láminas de metal que protegen la torre Telefónica. Es noche de celebrar y perderse, pero acá nos encontramos golpeando la pared. Un trance nocturno en medio de las velas prendidas en honor a los caídos en la lucha. Un sonido, un llanto, catarsis y un abrazo colectivo para no olvidar por qué razón nos levantamos cada día luego del 18/10. Ahora, a perderse para siempre volver.</p>
 				<p class="author">Alfonso Arenas (1985)</p>
 			</section>
 		</div>
-		<div id="N06" class="lcct-note" aria-owns="P06">
+		<div id="N06" class="lightbox lcct-note" aria-owns="P06">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Las Calles y la Pizarra Mágica</p>
@@ -417,14 +415,14 @@ Me pregunto si esta imagen seguirá siendo calco eterno de la identidad fotográ
 				<p class="author">Marcos Chilet (1982)</p>
 			</section>
 		</div>
-		<div id="N07" class="lcct-note" aria-owns="P07">
+		<div id="N07" class="lightbox lcct-note" aria-owns="P07">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Esas calles retratadas las miro con nostalgia, tan coloridas y llenas de contenido, cada ladrillo pintado con un mensaje que clama por un futuro digno. Fueron mi cotidianidad hasta hace poco y se han vuelto añoranza en tiempos de cuarentena. Pero no son las calles que conocí toda mi vida, para nada, esas eran calles grises, <em>fomes</em>, contenidas. Desde el 18 de octubre las calles en mi ciudad se transformaron en un espacio de libertad y de resistencia que se construyeron al calor de marchas, evasiones y barricadas. Pueden pintarlas una y otra vez, pero jamás lograrán borrar el mundo nuevo que se dibujó en ellas.</p>
 				<p class="author">Camila Cifuentes (1988)</p>
 			</section>
 		</div>
-		<div id="N08" class="lcct-note" aria-owns="P08">
+		<div id="N08" class="lightbox lcct-note" aria-owns="P08">
 			<nav><button>&times;</button></nav>
 			<section>
 				<pre>
@@ -442,7 +440,7 @@ Lo demás es ornato y aseo.
 				<p class="author">José De Nordenflycht (1970)</p>
 			</section>
 		</div>
-		<div id="N09" class="lcct-note" aria-owns="P09">
+		<div id="N09" class="lightbox lcct-note" aria-owns="P09">
 			<nav><button>&times;</button></nav>
 			<section>
 				<pre>
@@ -455,7 +453,7 @@ Allí sus ideas amarra.
 				<p class="author">Claudia Echenique (1962)</p>
 			</section>
 		</div>
-		<div id="N10" class="lcct-note" aria-owns="P10">
+		<div id="N10" class="lightbox lcct-note" aria-owns="P10">
 			<nav><button>&times;</button></nav>
 			<section>
 				<h3>UN DÍA CUALQUIERA</h3>
@@ -463,7 +461,7 @@ Allí sus ideas amarra.
 				<p class="author">Mario Fonseca (1948)</p>
 			</section>
 		</div>
-		<div id="N11" class="lcct-note" aria-owns="P11">
+		<div id="N11" class="lightbox lcct-note" aria-owns="P11">
 			<nav><button>&times;</button></nav>
 			<section>
 				<pre>
@@ -475,7 +473,7 @@ Superposición de acontecimientos históricos.
 				<p class="author">Felipe Fontecilla (1981)</p>
 			</section>
 		</div>
-		<div id="N12" class="lcct-note" aria-owns="P12">
+		<div id="N12" class="lightbox lcct-note" aria-owns="P12">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Y mientras ocurría la revuelta,</p>
@@ -485,7 +483,7 @@ Superposición de acontecimientos históricos.
 				<p class="author">María Paz González Durney (1985)</p>
 			</section>
 		</div>
-		<div id="N13" class="lcct-note" aria-owns="P13">
+		<div id="N13" class="lightbox lcct-note" aria-owns="P13">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p><em>“No puede haber una revelación más intensa del alma de una sociedad que la forma en que trata a sus niños”</em> dijo Mandela. </p>
@@ -494,21 +492,21 @@ Superposición de acontecimientos históricos.
 				<p class="author">Claudia Hernández del Solar (1981)</p>
 			</section>
 		</div>
-		<div id="N14" class="lcct-note" aria-owns="P14">
+		<div id="N14" class="lightbox lcct-note" aria-owns="P14">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Mira: Hay conexiones fractales clandestinas a la vuelta de cada calle. ¿Te has dado cuenta que se puede trazar una línea perfecta entre un torniquete de un metro y una barricada? Aunque ideológicamente se encuentren en polos opuestos, yo las veo muy cerca. Dos construcciones concebidas para controlar el flujo que atraviesa de un lado a otro. El loop frenético de un circuito enfermo se ha roto: la ciudad chorrea por cada poro. Poner un dedo encima de la grieta sólo frenará el caos por breves segundos. Hay que dejar que pegue el beat drop.</p>
 				<p class="author">Valeria Hofmann (1988)</p>
 			</section>
 		</div>
-		<div id="N15" class="lcct-note" aria-owns="P15">
+		<div id="N15" class="lightbox lcct-note" aria-owns="P15">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>La cuneta siempre fue mi refugio, mi lugar de reflexión. Veinte cinco años atrás pensaba en convertirme en un artista, mientras mi mente paseaba por las distintas formas de lograrlo entre amenazas, amores, balas reales e imaginarias. Aun las sigo pensando, pero desde mi MacBookAir. NUESTRAS LUCHAS INTERNAS están ahí, están aquí, y les tememos mas que a las balas (imaginarias). Sin miedo. Las luchas internas explotaron. HAGAMOS COMO ELLAS, We should do that!</p>
 				<p class="author">Sebastián Jaña (1981)</p>
 			</section>
 		</div>
-		<div id="N16" class="lcct-note" aria-owns="P16">
+		<div id="N16" class="lightbox lcct-note" aria-owns="P16">
 			<nav><button>&times;</button></nav>
 			<section>
 				<pre>
@@ -538,7 +536,7 @@ duele
 				<p class="author">Mathias Klenner (1986)</p>
 			</section>
 		</div>
-		<div id="N17" class="lcct-note" aria-owns="P17">
+		<div id="N17" class="lightbox lcct-note" aria-owns="P17">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>La cueva.</p>
@@ -546,7 +544,7 @@ duele
 				<p class="author">Andrés Larraín (1985)</p>
 			</section>
 		</div>
-		<div id="N18" class="lcct-note" aria-owns="P18">
+		<div id="N18" class="lightbox lcct-note" aria-owns="P18">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Cada época se muestra en la diversidad y calidad de sus expresiones.// Cada tiempo graba su huella en la Memoria Colectiva. // Cada grupo reitera su lenguaje, propósitos y apariencias. // Cada cuál marca su cuerpo, alma y territorio.</p>
@@ -555,7 +553,7 @@ duele
 				<p class="author">Vicente Larrea (1942)</p>
 			</section>
 		</div>
-		<div id="N19" class="lcct-note" aria-owns="P19">
+		<div id="N19" class="lightbox lcct-note" aria-owns="P19">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>El llamado estallido social es para mí, una auténtica insurrección popular. La historia nos enseña que, en esos casos, los muros de la ciudad son el pizarrón de las aspiraciones frustradas, de los odios y los amores del ciudadano común.	Así fue durante la revolución bolchevique de 1917, la revolución agraria mexicana de 1910 o el alzamiento de Paris en 1968, cuando los muros de la ciudad, recibieron consignas como Prohibido Prohibir o Seamos realistas: pidamos lo imposible.</p>
@@ -563,7 +561,7 @@ duele
 				<p class="author">Miguel Lawner Steiman (1928)</p>
 			</section>
 		</div>
-		<div id="N20" class="lcct-note" aria-owns="P20">
+		<div id="N20" class="lightbox lcct-note" aria-owns="P20">
 			<nav><button>&times;</button></nav>
 			<section>
 				<h4>Décimas para La Ciudad como Texto</h4>
@@ -628,14 +626,14 @@ que no escucha al invisible.</pre>
 				<p class="author">Jorge Lillo (1946)</p>
 			</section>
 		</div>
-		<div id="N21" class="lcct-note" aria-owns="P21">
+		<div id="N21" class="lightbox lcct-note" aria-owns="P21">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Vivir el estadillo social desde afuera nos ayudó a encontrarnos en una ciudad extranjera. Nos unió para actuar desde lejos, mostrando de manera aún más fuerte que <strong>TODOS</strong> habíamos despertado. Que ya no había vuelta atrás. Durante esos días mis amigos extranjeros entendieron hasta que nivel somos un país sísmico. De cambios extremos y movimientos violentos, pero también necesarios luego de años de acumular tanta presión. La manifestación la viví con la visión aérea de mi celular. Me emocioné tanto que se me apretó la garganta, me dolió estar lejos y, al mismo tiempo me sentí, más que nunca, unida de mi país. </p>
 				<p class="author">Constanza López Polanco (1988)</p>
 			</section>
 		</div>
-		<div id="N22" class="lcct-note" aria-owns="P22">
+		<div id="N22" class="lightbox lcct-note" aria-owns="P22">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>En la calle-museo los pestañeos son respiraciones.</p>
@@ -645,14 +643,14 @@ que no escucha al invisible.</pre>
 				<p class="author">Julián Marras (1983)</p>
 			</section>
 		</div>
-		<div id="N23" class="lcct-note" aria-owns="P23">
+		<div id="N23" class="lightbox lcct-note" aria-owns="P23">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p><em>Crown Plaza</em>, corona y plaza. Su pórtico semeja un paréntesis que se abre hacia abajo. Un túnel para los pasajeros. Todo es pasajero: el oasis, la multitud, los cantos, el llanto, los carteles. El <em>crown</em> de turistas que se fotografían con manifestantes y fotógrafos y vuelven a pasar bajo el paréntesis que solo puede cerrar el <em>crown</em> virus. Paréntesis entre el estado de emergencia y el estado de catástrofe. Todo se borra, nada se olvida. La muralla no es la pizarra del canalla: late entre la corona del poder y la pandemia, la plaza de la dignidad y la ceguera.</p>
 				<p class="author">Jorge Montealegre Iturra (1954)</p>
 			</section>
 		</div>
-		<div id="N24" class="lcct-note" aria-owns="P24">
+		<div id="N24" class="lightbox lcct-note" aria-owns="P24">
 			<nav><button>&times;</button></nav>
 			<section>
 				<pre>Y de pronto
@@ -667,7 +665,7 @@ La naturaleza tiene una sutil manera de transformarlo todo.</pre>
 				<p class="author">María José Muñoz (1986)</p>
 			</section>
 		</div>
-		<div id="N25" class="lcct-note" aria-owns="P25">
+		<div id="N25" class="lightbox lcct-note" aria-owns="P25">
 			<nav><button>&times;</button></nav>
 			<section>
 				<div>
@@ -717,7 +715,7 @@ La naturaleza tiene una sutil manera de transformarlo todo.</pre>
 				<p class="author">José Miguel Neira Cisternas (1954)</p>
 			</section>
 		</div>
-		<div id="N26" class="lcct-note" aria-owns="P26">
+		<div id="N26" class="lightbox lcct-note" aria-owns="P26">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Nueva Hagiografía Popular</p><!--ya corregida según email Carola 2020-05-19-->
@@ -725,7 +723,7 @@ La naturaleza tiene una sutil manera de transformarlo todo.</pre>
 				<p class="author">Simón Palominos Mandiola (1984)</p>
 			</section>
 		</div>
-		<div id="N27" class="lcct-note" aria-owns="P27">
+		<div id="N27" class="lightbox lcct-note" aria-owns="P27">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>La Memoria y el Enemigo</p>
@@ -735,7 +733,7 @@ La naturaleza tiene una sutil manera de transformarlo todo.</pre>
 				<p class="author">Rafael Pérez Maldonado (1986)</p>
 			</section>
 		</div>
-		<div id="N28" class="lcct-note" aria-owns="P28">
+		<div id="N28" class="lightbox lcct-note" aria-owns="P28">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>(Solo así puedo pensar fuera de la rabia, del dolor. Toda historia es una historia de amor. Por ti, por mi, por lo que fueron y los que vendrán).</p>
@@ -752,7 +750,7 @@ Las Alamedas se abren camino y no dejan de venir.</pre>
 				<p class="author">Nicolás Pino (1981)</p>
 			</section>
 		</div>
-		<div id="N29" class="lcct-note" aria-owns="P29">
+		<div id="N29" class="lightbox lcct-note" aria-owns="P29">
 			<nav><button>&times;</button></nav>
 			<section>
 				<pre>Revisando, parecía
@@ -779,7 +777,7 @@ Como si la respuesta se basara en hechos</pre>
 				<p class="author">Patricio Pozo (1971)</p>
 			</section>
 		</div>
-		<div id="N30" class="lcct-note" aria-owns="P30">
+		<div id="N30" class="lightbox lcct-note" aria-owns="P30">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Iglesia San Francisco. Construida entre los años 1562-1618</p>
@@ -789,14 +787,14 @@ Como si la respuesta se basara en hechos</pre>
 				<p class="author">Patricia Retamal (1985)</p>
 			</section>
 		</div>
-		<div id="N31" class="lcct-note" aria-owns="P31">
+		<div id="N31" class="lightbox lcct-note" aria-owns="P31">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Blasonado en blanco sobre una puerta es el símbolo <strong>"A"</strong> dentro de un círculo. Una llamada a héroes míticos que se ponen entre los indefensos y aquellos que desean hacer un daño indiscriminado. Una mirada superficial revela la cara del enemigo, <strong>"ACAB"</strong> está grabado apresuradamente, deliberadamente, febrilmente alrededor de la <strong>"A"</strong>. A través de una parada de autobús esquelético cuyos paneles de plástico y asientos de acero se convirtieron rápidamente en escudos contra una lluvia de gases lacrimógenos, agua y bastones, veo escrito en la misma pintura blanca, una pista de la identidad de quienes lucharon en la vanguardia, <strong>"SENAME"</strong>.</p>
 				<p class="author">Jude Richardson (1969)</p>
 			</section>
 		</div>
-		<div id="N32" class="lcct-note" aria-owns="P32">
+		<div id="N32" class="lightbox lcct-note" aria-owns="P32">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>A veces hay que leer en profundidad lo que está escrito en los muros de nuestras ciudades. Tal como Bob Dylan cuando, hace 50 años atrás nos cantó <em>Something is happening, Ms Jones</em>, hay un algo que no hemos querido, o sabido ver hasta que nos explota en la cara. Así mismo nos ocurrió en Chile en octubre de 2019.</p>
@@ -805,7 +803,7 @@ Como si la respuesta se basara en hechos</pre>
 				<p class="author">Gonzalo Rojas-May (1964)</p>
 			</section>
 		</div>
-		<div id="N33" class="lcct-note" aria-owns="P33">
+		<div id="N33" class="lightbox lcct-note" aria-owns="P33">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>En acera leo “Nada Cambia Aún”. Pienso en todo lo que ha cambiado, al menos en el último medio año. Me acuerdo también de Longueira diciendo que en Chile nada pasaba nunca. Luego, mi vieja diciendo “este país ha cambiado tanto, era tan distinto cuando era joven”, y 5 minutos después “nunca cambia este país de mierda, siempre lo mismo”. Pienso en mi, en las ganas que todo cambie, en que creo que nunca cambia nada. Y luego, en todo lo que ha cambiado, va a cambiar, en qué y cómo he cambiado yo.</p>
@@ -813,7 +811,7 @@ Como si la respuesta se basara en hechos</pre>
 				<p class="author">Leonardo Salinas (1981)</p>
 			</section>
 		</div>
-		<div id="N34" class="lcct-note" aria-owns="P34">
+		<div id="N34" class="lightbox lcct-note" aria-owns="P34">
 			<nav><button>&times;</button></nav>
 			<section>
 				<h3>“Las paredes son la imprenta del pueblo”</h3>
@@ -840,14 +838,14 @@ Newen y la patria profunda
 				<p class="author">María Paulina Soto Labbé (1964)</p>
 			</section>
 		</div>
-		<div id="N35" class="lcct-note" aria-owns="P35">
+		<div id="N35" class="lightbox lcct-note" aria-owns="P35">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>Hay dos dimensiones que quiero destacar de la “La ciudad como texto”. Lo primero es la <strong>multiplicidad</strong> de elementos que confluyen en el paisaje que conforman este fotomontaje. La ciudad lejos de ser una entidad singular y unitaria, emerge aquí como un espacio agenciado por una heterogeneidad de prácticas y cuerpos, escritos y muros, infraestructuras y cableados, flujos y atmósferas. Segundo, el paisaje representando evidencia con fuerza la idea del <strong>disenso</strong> como momento político por excelencia. La obra muestra una ciudad en crisis, pero al mismo tiempo una ciudad que transforma los desacuerdos y diferencias en una posibilidad para re-imaginar el tipo de sociedad que queremos.</p>
 				<p class="author">Martín Tironi (1979)</p>
 			</section>
 		</div>
-		<div id="N36" class="lcct-note" aria-owns="P36">
+		<div id="N36" class="lightbox lcct-note" aria-owns="P36">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p><em><strong>“Que se vayan todos”</strong></em>, se lee en la fachada de la iglesia San Francisco.</p>
@@ -856,14 +854,14 @@ Newen y la patria profunda
 				<p class="author">Juan Pablo Troncoso (1988)</p>
 			</section>
 		</div>
-		<div id="N37" class="lcct-note" aria-owns="P37">
+		<div id="N37" class="lightbox lcct-note" aria-owns="P37">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>La primavera del año 2004 comprendí qué era el capitalismo. Tenía quince años. Masivas marchas en todo Chile contra la política asesina e imperialista de G.W Bush me enseñaban que la lucha de clases tenía una dimensión global y que las vidas de Irak si importaban.  Quince años después, la revuelta popular de octubre logró expulsar a la <em>“Asia Pacific Economic Cooperation”</em> (APEC) de la ciudad de Santiago. Un sueño de adolescencia. Los nuevos marcos del despojo extractivista patriarcal no serían acordados en nuestro territorio.</p>
 				<p class="author">Geanina Zagal Ehrenfeld (1988)</p>
 			</section>
 		</div>
-		<div id="Epilogo" class="lcct-note" aria-owns="P38">
+		<div id="Epilogo" class="lightbox lcct-note" aria-owns="P38">
 			<nav><button>&times;</button></nav>
 			<section>
 				<h3>EPíLOGO</h3>
@@ -894,7 +892,7 @@ Newen y la patria profunda
 				</ol>
 			</section>
 		</div>
-		<div id="N39" class="lcct-note" aria-owns="P39">
+		<div id="N39" class="lightbox lcct-note" aria-owns="P39">
 			<nav><button>&times;</button></nav>
 			<section>
 				<h3>PREFACIO 1</h3>
@@ -913,7 +911,7 @@ Newen y la patria profunda
 				<p class="author">Nicole Cristi (1987)</p>
 			</section>
 		</div>
-		<div id="N40" class="lcct-note" aria-owns="P40">
+		<div id="N40" class="lightbox lcct-note" aria-owns="P40">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>KOWKÜLEN (Ser líquido)</p>
@@ -972,14 +970,14 @@ Saber que soy parte del territorio.
 				<p class="author">Sebastián Calfuqueo Aliste (1991)</p>
 			</section>
 		</div>
-		<div id="N41" class="lcct-note" aria-owns="P41">
+		<div id="N41" class="lightbox lcct-note" aria-owns="P41">
 			<nav><button>&times;</button></nav>
 			<section>
 				<p>"De pequeña, mi padre me contaba como Leftraru, tras ser raptado por españoles y ver cómo torturaban a su familia, aprendió las técnicas del enemigo, especialmente el uso del caballo. Un día logró huir y enseñarle todo a su gente para sacar a los invasores. Me dijo que el caballo toma muchas formas y, en mi caso, podría ser la cámara. Así llegué a estudiar cine a un terreno inhóspito, donde se me hizo patente la desigualdad de clases. Nunca me sentí cómoda en la ciudad y menos acá, hasta ahora, que las paredes gritan Wallmapu libre mientras los rostros de Catrillanca y Lemun me acompañan."</p>
 				<p class="author">Claudia Huaiquimilla (1987)</p>
 			</section>
 		</div>
-		<div id="N42" class="lcct-note" aria-owns="P42">
+		<div id="N42" class="lightbox lcct-note" aria-owns="P42">
 			<nav><button>&times;</button></nav>
 			<section>
 				<h3>PREFACIO 2</h3>
@@ -1007,5 +1005,6 @@ Saber que soy parte del territorio.
 		<script src="js/openseadragon.min.js"></script>
 		<script src="js/overlays.js"></script>
 		<script src="js/lcct.js"></script>
+		<script src="js/debug.js"></script>
 	</body>
 </html>

@@ -193,19 +193,21 @@ viewer.addHandler('animation-finish', function(event) {
 		load = undefined;
 		goToNote( note );
 	}
-	var point = $('div.pending');
-	console.log('[animation-finish handler] point=',point);
-	if ( point.length > 0 ){
-		// mostrar nota asociada
-		point.children('.mask').show();
-		showLasers(point.get(0));
-		showTip2(point.get(0));
-		point.removeClass('pending');
-		var tip = $('#'+$(point).attr('aria-controls'));
-	}
-	else if ( isMousePanning ) {
-		console.log('continue panning');
-		panningFunction();
+	else {
+		var point = $('div.pending');
+		console.log('[animation-finish handler] point=',point);
+		if ( point.length > 0 ){
+			// mostrar nota asociada
+			point.children('.mask').show();
+			showLasers(point.get(0));
+			showTip2(point.get(0));
+			point.removeClass('pending');
+			var tip = $('#'+$(point).attr('aria-controls'));
+		}
+		else if ( isMousePanning ) {
+			console.log('continue panning');
+			panningFunction();
+		}
 	}
 });
 
@@ -349,7 +351,7 @@ $(document).ready(function(){
 		});
 	}
 	// access and exit from each section
-	$('.lightbox').each(function(idx,el){
+	$('.lcct-section').each(function(idx,el){
 		var id = el.id;
 //		console.log('id=',id);
 		$('#menu a[href="#'+id+'"]').on('click',function(e){
@@ -400,9 +402,8 @@ $(document).ready(function(){
 		console.log('target.hash=',e.target.hash);
 		// fit vertically
 		viewer.viewport.fitVertically(true);
-		$('#mask').hide("fast",function(){console.log("desactiva máscara")});
-		$('#notas').hide("fast",function(){console.log("desactiva notas")});
-		$('#notes').hide("fast",function(){console.log("deactivate notes")});
+		$('#mask').hide("fast",function(){console.log("deactivate mask")});
+		$('div.notes').hide("fast",function(){console.log("deactivate notes")});
 		let note = e.target.hash.replace(/^\#(.*)$/,'$1'); 
 		console.log('note=',note);
 		$('#'+overlays[note].id).addClass('pending');
@@ -417,11 +418,6 @@ $(document).ready(function(){
 		$(point).children('div.laser').hide();
 		$(point).children('div.mask').hide();
 	});
-	// Posicionamiento en sección
-	console.log('fragment=',fragment);
-	if ( $(''+fragment+'.lightbox').length > 0 ){
-		$('#menu a[href="'+fragment+'"]').trigger('click');
-	}
 	// click on logo
 	$('#logo').on('click',function(){
 		// fit vertically
@@ -470,12 +466,19 @@ $(document).ready(function(){
 	console.log('[counter] mask='+counter);
 	$('#counter > p').html(counter);
 	// map
-	$('#mapa button').on('click',function(e){
-		console.log('click cierra mapa');
-		$('#mapa').hide();
+	$('div.map').on('click',function(e){
+		console.log('close map');
+		$('div.map').hide();
 	});
-	$('#map button').on('click',function(e){
-		console.log('click close map');
-		$('#map').hide();
-	});
+	// Posicionamiento en sección
+	console.log('fragment=',fragment);
+	if (fragment.length > 0 ) {
+		if ( $(''+fragment+'.lcct-section').length > 0 ){
+			$('a[aria-controls="'+fragment.substring(1)+'"]').trigger('click');
+		}
+		else if ( $(''+fragment+'.lcct-note').length > 0 ){
+			$('div[aria-controls="'+fragment.substring(1)+'"]').addClass('pending');
+		}
+	}
+	$('div.map').show();
 });
