@@ -260,7 +260,7 @@ a.nav-link:hover {
 	transform: translate(0, -50%);
 	text-align: center;
 	letter-spacing: 0.3ex;
-	font-size: 1.7ex;
+	font-size: 1.8ex;
 }
 #foto {
 	grid-column: 1/6;
@@ -663,10 +663,47 @@ p.author {
 	height: 100%;
 	width: 100%;
 }
+
 /*
- * title, description adjustments
+ * MEDIA ADJUSTMENTS
  */
-@media only screen and (max-device-height: 768px) {
+/* ----------- iPad Pro 12.9" ----------- */
+/* Declare the same value for min- and max-width to avoid colliding with desktops */
+/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+@media only screen 
+	and (min-device-width: 1366px) 
+	and (max-device-width: 1366px) 
+	and (orientation: landscape) 
+	and (-webkit-min-device-pixel-ratio: 2) {
+
+}
+/* ----------- iPad Pro 10.5" ----------- */
+/* Declare the same value for min- and max-width to avoid colliding with desktops */
+/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+@media only screen 
+  and (min-device-width: 1112px) 
+  and (max-device-width: 1112px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+}
+/* ----------- Laptop Non-Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+}
+/* ----------- Laptop Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+}
+/* ---- Default height 768 ---- */
+@media only screen
+	and (max-device-height: 768px)
+	and (orientation: landscape ) {
 	#title h1 {
 		font-size: 1.8ex;
 	}
@@ -677,8 +714,42 @@ p.author {
 		font-size: 1.5ex;
 	}
 }
-
-@media only screen and (max-device-height: 720px) {
+/* ----------- iPad 3, 4 and Pro 9.7" ----------- */
+@media only screen 
+	and (min-device-height: 768px) 
+ 	and (max-device-width: 1024px) 
+ 	and (orientation: landscape) 
+ 	and (-webkit-min-device-pixel-ratio: 2) {
+	#title h1 {
+		font-size: 2.3ex;
+	}
+	#description h2 {
+		font-size: 2.6ex;
+	}
+	#description h3 {
+		font-size: 1.7ex;
+	}
+}
+/* ----------- iPad 1, 2, Mini and Air ----------- */
+@media only screen 
+	and (min-device-height: 768px) 
+	and (max-device-width: 1024px) 
+	and (orientation: landscape) 
+	and (-webkit-min-device-pixel-ratio: 1) {
+	#title h1 {
+		font-size: 2.3ex;
+	}
+	#description h2 {
+		font-size: 2.6ex;
+	}
+	#description h3 {
+		font-size: 1.7ex;
+	}
+}
+/* ---- Default height 720 ---- */
+@media only screen
+	and (max-device-height: 720px)
+	and (orientation: landscape) {
 	#title h1 {
 		font-size: 1.7ex;
 	}
@@ -689,8 +760,10 @@ p.author {
 		font-size: 0.9ex;
 	}
 }
-
-@media only screen and (max-device-height: 411px) {
+/* ---- Default height 411 ---- */
+@media only screen
+	and (max-device-height: 411px)
+	and (orientation: landscape) {
 	#title h1 {
 		font-size: 1.6ex;
 	}
@@ -701,8 +774,26 @@ p.author {
 		font-size: 0.8ex;
 	}
 }
-
-@media only screen and (max-device-height: 375px) {
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+@media only screen 
+	and (min-device-height: 414px) 
+	and (max-device-width: 736px) 
+	and (-webkit-min-device-pixel-ratio: 3)
+	and (orientation: landscape) { 
+	#title h1 {
+		font-size: 1.6ex;
+	}
+	#description h2 {
+		font-size: 1.1ex;
+	}
+	#description h3 {
+		font-size: 0.8ex;
+	}
+}
+/* ---- Default height 375 ---- */
+@media only screen
+	and (max-device-height: 375px)
+	and (orientation: landscape) {
 	#title h1 {
 		font-size: 1.5ex;
 	}
@@ -713,8 +804,42 @@ p.author {
 		font-size: 0.7ex;
 	}
 }
-
-@media only screen and (max-device-height: 350px) {
+/* ----------- iPhone X ----------- */
+@media only screen 
+	and (max-device-height: 375px) 
+	and (max-device-width: 812px) 
+	and (-webkit-min-device-pixel-ratio: 3)
+	and (orientation: landscape) { 
+	#title h1 {
+		font-size: 1.5ex;
+	}
+	#description h2 {
+		font-size: 1ex;
+	}
+	#description h3 {
+		font-size: 0.7ex;
+	}
+}
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+@media only screen 
+	and (min-device-height: 375px) 
+ 	and (max-device-width: 667px) 
+	and (-webkit-min-device-pixel-ratio: 2)
+	and (orientation: landscape) { 
+	#title h1 {
+		font-size: 1.5ex;
+	}
+	#description h2 {
+		font-size: 1ex;
+	}
+	#description h3 {
+		font-size: 0.7ex;
+	}
+}
+/* ---- Default height 350 ---- */
+@media only screen
+	and (max-device-height: 350px)
+	and (orientation: landscape) {
 	#title h1 {
 		font-size: 1.4ex;
 	}
@@ -725,8 +850,10 @@ p.author {
 		font-size: 0.7ex;
 	}
 }
-
-@media only screen and (max-device-height: 320px) {
+/* ---- Default height 320 ---- */
+@media only screen
+	and (max-device-height: 320px)
+	and (orientation: landscape) {
 	#title h1 {
 		font-size: 1.3ex;
 	}
@@ -737,8 +864,42 @@ p.author {
 		font-size: 0.6ex;
 	}
 }
-
-@media only screen and (max-device-height: 279px) {
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+@media only screen 
+	and (min-device-height: 320px) 
+	and (max-device-width: 568px)
+	and (-webkit-min-device-pixel-ratio: 2)
+	and (orientation: landscape) {
+	#title h1 {
+		font-size: 1.3ex;
+	}
+	#description h2 {
+		font-size: 0.6ex;
+	}
+	#description h3 {
+		font-size: 0.3ex;
+	}
+}
+/* ----------- iPhone 4 and 4S ----------- */
+@media only screen 
+	and (min-device-height: 320px) 
+.  and (max-device-width: 480px)
+.  and (-webkit-min-device-pixel-ratio: 2)
+.  and (orientation: landscape) {
+	#title h1 {
+		font-size: 1.3ex;
+	}
+	#description h2 {
+		font-size: 0.6ex;
+	}
+	#description h3 {
+		font-size: 0.3ex;
+	}
+}
+/* ---- Default height 279 ---- */
+@media only screen
+	and (max-device-height: 279px)
+	and (orientation: landscape) {
 	#title h1 {
 		font-size: 1.3ex;
 	}
@@ -750,11 +911,14 @@ p.author {
 	}
 }
 
+/* Columns of note 20 */
 @media only screen and (max-device-width: 640px) {
 	#N20 div {
 		column-count: 2;
 	}
 }
+
+/* Portrait Warning */
 @media only screen and (orientation:portrait) {
 	#warn {
 		display: block;
