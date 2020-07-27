@@ -202,7 +202,6 @@ viewer.addHandler('animation-finish', function(event) {
 			showLasers(point.get(0));
 			showTip2(point.get(0));
 			point.removeClass('pending');
-			var tip = $('#'+$(point).attr('aria-controls'));
 		}
 		else if ( isMousePanning ) {
 			console.log('continue panning');
@@ -274,9 +273,19 @@ function goToNote(note){ // invariant: always fitted vertically
 //	console.log('oldBounds=',oldBounds);
 	// always fit with displacement
 	var X = overlays[note].x <= oldBounds.width*0.5 ? 0 : overlays[note].x >= lcct_width - oldBounds.width*0.5 ? lcct_width - oldBounds.width : overlays[note].x-oldBounds.width*0.5;
-	var newBounds = new OpenSeadragon.Rect(X, oldBounds.y, oldBounds.width, oldBounds.height,0); 
-//	console.log('newBounds=',newBounds);
-	viewer.viewport.fitBoundsWithConstraints(newBounds, true);
+	if ( oldBounds.x != X ){
+		$('#'+overlays[note].id).addClass('pending');
+		var newBounds = new OpenSeadragon.Rect(X, oldBounds.y, oldBounds.width, oldBounds.height,0); 
+//		console.log('newBounds=',newBounds);
+		viewer.viewport.fitBoundsWithConstraints(newBounds, true);
+	}
+	else {
+		// mostrar nota asociada
+		var point = $('#'+overlays[note].id);
+		point.children('.mask').show();
+		showLasers(point.get(0));
+		showTip2(point.get(0));
+	}
 }
 
 /*
@@ -340,9 +349,6 @@ $(document).ready(function(){
 			$('.mask:visible').hide();
 			$('.laser:visible').hide();
 		});
-		// Hide zoom buttons
-		$('#zoom-in').hide();
-		$('#zoom-out').hide();
 	}
 	else {
 		// disable button
@@ -361,8 +367,8 @@ $(document).ready(function(){
 					console.log("esconde menu");
 				});
 			}
-			// Hide tooltip if visible
-			$('.lcct-note:visible').hide();
+			// Hide lightbox if visible
+			$('.lightbox:visible').hide();
 			$('.mask:visible').hide();
 			$('.laser:visible').hide();
 			$('#'+id).show("fast",function(){console.log("activa ",id)}).addClass('show');
@@ -406,7 +412,6 @@ $(document).ready(function(){
 		$('div.notes').hide("fast",function(){console.log("deactivate notes")});
 		let note = e.target.hash.replace(/^\#(.*)$/,'$1'); 
 		console.log('note=',note);
-		$('#'+overlays[note].id).addClass('pending');
 		goToNote(note);
 	});
 	// note close button
@@ -469,6 +474,16 @@ $(document).ready(function(){
 	$('div.map').on('click',function(e){
 		console.log('close map');
 		$('div.map').hide();
+		if ( document.querySelector("body").requestFullscreen ) {
+			document.querySelector("body").requestFullscreen().catch(err => {
+				alert(`Error attempting to enable full-screen mode.`);
+			});
+		}
+		else if (document.querySelector("body").webkitRequestFullscreen) {
+			document.querySelector("body").webkitRequestFullscreen().catch(err => {
+				alert(`Error attempting to enable full-screen mode.`);
+			});
+		}
 	});
 	// Posicionamiento en sección
 	console.log('fragment=',fragment);
@@ -480,5 +495,21 @@ $(document).ready(function(){
 			$('div[aria-controls="'+fragment.substring(1)+'"]').addClass('pending');
 		}
 	}
-	$('div.map').show();
+	else {
+		$('div.map').show();
+	}
+	// fullscreen
+	$('a.fullscreen').on('click',function(e){
+		if ( document.querySelector("body").requestFullscreen ) {
+			document.querySelector("body").requestFullscreen().catch(err => {
+				alert(`Error attempting to enable full-screen mode.`);
+			});
+		}
+		else if (document.querySelector("body").webkitRequestFullscreen) {
+			document.querySelector("body").webkitRequestFullscreen().catch(err => {
+				alert(`Error attempting to enable full-screen mode.`);
+			});
+		}
+	});
 });
+
