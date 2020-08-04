@@ -186,9 +186,19 @@ viewer.addHandler('animation-start', function(event) {
 	$('.mask:visible').hide();
 	$('.laser:visible').hide();
 })
+var first = false;
 viewer.addHandler('animation-finish', function(event) {
 	console.log('[animation-finish handler]');
-	if ( load ){
+	if ( first ) {
+		// Starting point
+		var oldBounds = viewer.viewport.getBounds();
+		console.log('oldBounds=',oldBounds);
+		var newBounds = new OpenSeadragon.Rect(0, oldBounds.y, oldBounds.width, oldBounds.height,0); 
+		console.log('newBounds=',newBounds);
+		viewer.viewport.fitBoundsWithConstraints(newBounds, true);
+		first = false;
+	}
+	else if ( load ){
 		let note = load;
 		load = undefined;
 		goToNote( note );
@@ -324,12 +334,8 @@ viewer.addHandler('open', function(event) {
 		load = note;
 	}
 	else {
-		// Starting point
-		var oldBounds = viewer.viewport.getBounds();
-		console.log('oldBounds=',oldBounds);
-		var newBounds = new OpenSeadragon.Rect(0, oldBounds.y, oldBounds.width, oldBounds.height,0); 
-		console.log('newBounds=',newBounds);
-		viewer.viewport.fitBoundsWithConstraints(newBounds, true);
+		// Mark starting point
+		first = true;
 	}
 });
 
