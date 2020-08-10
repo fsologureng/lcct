@@ -55,38 +55,7 @@ var viewer = OpenSeadragon({
 });
 
 function showTip(point){
-	var tip = $('#'+$(point).attr('aria-controls'));
-	var bounds = viewer.viewport.getBounds(); 
-	var viewerTopLeft = viewer.viewport.viewportToWindowCoordinates(bounds.getTopLeft());
-	console.log('[showTip] viewerTopLeft=',viewerTopLeft);
-	var viewerBottomRight = viewer.viewport.viewportToWindowCoordinates(bounds.getBottomRight());
-	console.log('[showTip] viewerBottomRight=',viewerBottomRight);
-	var asterisk = $(point).children('div.asterisk').get(0);
-	console.log('[showTip] point=',point);
-	var leftPos = asterisk.getBoundingClientRect().left + $(window)['scrollLeft']();
-	console.log('[showTip] leftPos=',leftPos);
-	var rightPos = asterisk.getBoundingClientRect().right + $(window)['scrollLeft']();
-	console.log('[showTip] rightPos=',rightPos);
-	var tipWidth = tip.outerWidth(); //Find width of tooltip
-	console.log('[showTip] tipWidth=',tipWidth);
-	var tipHeight = tip.outerHeight(); //Find height of tooltip
-	var tipVisX;
-	var tipVisY = (viewerBottomRight.y - tipHeight)/2;
-	if ( leftPos - viewerTopLeft.x < viewerBottomRight.x - rightPos ) {
-		tipVisX = rightPos + (viewerBottomRight.x - rightPos - tipWidth)/2;
-	}
-	else {
-		tipVisX = viewerTopLeft.x + (leftPos - tipWidth - viewerTopLeft.x)/2;
-	}
-	tip.css({
-		left: tipVisX,
-		top: tipVisY,
-		position: 'absolute'
-	});
-	tip.show(); //Show tooltip
-}
-function showTip2(point){
-	console.log('[showTip2] point='+point);
+	// console.log('[showTip] point='+point);
 	var tip = $('#'+$(point).attr('aria-controls'));
 	tip.show(); //Show tooltip
 }
@@ -201,16 +170,17 @@ viewer.addHandler('animation-finish', function(event) {
 	else if ( load ){
 		let note = load;
 		load = undefined;
+		history.pushState({'note': note},'Note '+note,document.location.href);
 		goToNote( note );
 	}
 	else {
 		var point = $('div.pending');
-		console.log('[animation-finish handler] point=',point);
+		// console.log('[animation-finish handler] point=',point);
 		if ( point.length > 0 ){
 			// mostrar nota asociada
 			point.children('.mask').show();
 			showLasers(point.get(0));
-			showTip2(point.get(0));
+			showTip(point.get(0));
 			point.removeClass('pending');
 		}
 		else if ( isMousePanning ) {
@@ -239,9 +209,10 @@ function bindtooltip(note){
 			else {
 				$(e.originalEvent.target).children('.mask').show();
 				showLasers(e.originalEvent.target);
-				showTip2(e.originalEvent.target);
+				showTip(e.originalEvent.target);
 			}
-			document.location.hash=tip.attr('id');
+//			document.location.hash=tip.attr('id');
+			history.pushState({'note':tip.attr('id')},'Note '+tip.attr('id'),'#'+tip.attr('id'));
 		}
 	});
 }
@@ -294,30 +265,9 @@ function goToNote(note){ // invariant: always fitted vertically
 		var point = $('#'+overlays[note].id);
 		point.children('.mask').show();
 		showLasers(point.get(0));
-		showTip2(point.get(0));
+		showTip(point.get(0));
 	}
 }
-
-/*
-// move point to left or right depending on focus
-function panPoint(point){
-	var leftPos = point.getBoundingClientRect().left + $(window)['scrollLeft']();
-	var rightPos = point.getBoundingClientRect().right + $(window)['scrollLeft']();
-	var note_width = $('#'+point.prop('aria-controls')).width();
-	if ( ( $('#foto').width() - rightPos ) < note_width || ( $('#foto').width() - leftPos ) < note_width ){ // center
-		if ( leftPos > ($('#foto').width() - rightPos ) ) {
-			// mover a la izquierda 
-			console.log('[panPoint] move to left');
-			viewer.viewport.panBy(new OpenSeadragon.Point(-(note_width - ($('#foto').width() - leftPos))/lcct_width,0), false);
-		}
-		else {
-			// mover a la derecha 
-			console.log('[panPoint] move to right');
-			viewer.viewport.panBy(new OpenSeadragon.Point((note_width - ($('#foto').width() - rightPos))/lcct_width,0), false);
-		}
-	}
-}
-*/
 // inicio del viewer
 viewer.addHandler('open', function(event) {
 	// fit vertically
@@ -327,7 +277,7 @@ viewer.addHandler('open', function(event) {
 		bindtooltip(note);
 	});
 	// Posicionamiento en nota
-	console.log('fragment=',fragment);
+	// console.log('fragment=',fragment);
 	if ( fragment.match(/^\#N\d\d/g) && ( fragment >= '#N01' && fragment <= '#N42' ) || fragment == '#Epilogo' ){
 		console.log('fragment is a valid point');
 		let note = fragment.replace(/^\#(.*)$/,'$1'); 
@@ -338,6 +288,38 @@ viewer.addHandler('open', function(event) {
 		first = true;
 	}
 });
+// history
+window.onpopstate = function(e) {
+	console.log("[onpopstate] history state: " + JSON.stringify(e.state));
+	// fit vertically
+	if ( e.state !== null ){
+		// Hide lightbox if visible
+		$('.lightbox:visible').hide();
+		$('.mask:visible').hide();
+		$('.laser:visible').hide();
+		$('#mask:visible').hide("fast",function(){console.log("deactivate mask")});
+		$('div.notes:visible').hide("fast",function(){console.log("deactivate notes")});
+		if ( e.state.hasOwnProperty('note') ){
+			console.log("[onpopstate] is a note");
+			// fit vertically
+			viewer.viewport.fitVertically(true);
+			goToNote(e.state.note);
+		}
+		else if ( e.state.hasOwnProperty('section') ){
+			console.log("[onpopstate] is a section");
+			$('#'+e.state.section).show("fast",function(){console.log("activa ",e.state.section)}).addClass('show');
+			$('#mask').show("fast",function(){console.log("activa máscara")});
+		}
+		else {
+			// fit vertically
+			viewer.viewport.fitVertically(true);
+			// Starting point
+			var oldBounds = viewer.viewport.getBounds();
+			// console.log('[onpopstate] oldBounds=',oldBounds);
+			viewer.viewport.panBy(new OpenSeadragon.Point(-oldBounds.x,0), false);
+		}
+	}
+};
 
 var isMobile = window.matchMedia("(pointer: coarse)").matches;
 $(document).ready(function(){
@@ -365,7 +347,7 @@ $(document).ready(function(){
 	// access and exit from each section
 	$('.lcct-section').each(function(idx,el){
 		var id = el.id;
-//		console.log('id=',id);
+		// console.log('id=',id);
 		$('#menu a[href="#'+id+'"]').on('click',function(e){
 			console.log('click ',id);
 			if (isMobile){
@@ -379,12 +361,12 @@ $(document).ready(function(){
 			$('.laser:visible').hide();
 			$('#'+id).show("fast",function(){console.log("activa ",id)}).addClass('show');
 			$('#mask').show("fast",function(){console.log("activa máscara")});
+			history.pushState({'section':id}, 'Section '+id, '#'+id);
 		});
 		$('#'+id+' nav button').on('click',function(e){
 			console.log('click cierra ',id);
 			$('#mask').hide("fast",function(){console.log("desactiva máscara")});
 			$('#'+id).hide("fast",function(){console.log("desactiva ",id)}).removeClass('show');
-			history.back();
 		});
 	});
 	// out with click on mask
@@ -392,7 +374,6 @@ $(document).ready(function(){
 		console.log('click mascara');
 		$('.lightbox.show').hide("fast",function(){console.log("desactiva lightbox desde la máscara")}).removeClass('show');
 		$('#mask').hide("fast",function(){console.log("desactiva máscara")});
-		history.back();
 	});
 	$('.mask').on('click',function(e){
 		e.stopImmediatePropagation();
@@ -410,14 +391,16 @@ $(document).ready(function(){
 	});
 	// bind notes access
 	$('a.lcct-link').on('click',function(e){
-		console.log('click ',e);
-		console.log('target.hash=',e.target.hash);
+		// console.log('click ',e);
+		// console.log('target.hash=',e.target.hash);
 		// fit vertically
 		viewer.viewport.fitVertically(true);
 		$('#mask').hide("fast",function(){console.log("deactivate mask")});
 		$('div.notes').hide("fast",function(){console.log("deactivate notes")});
 		let note = e.target.hash.replace(/^\#(.*)$/,'$1'); 
-		console.log('note=',note);
+		console.log('[lcct-link] note=',note);
+		console.log('[lcct-link] new history location='+ document.location.hash.replace(/#(notas|notes)$/,'#'+note));
+		history.replaceState({'note':note}, 'Note '+note, '#'+note);
 		goToNote(note);
 	});
 	// note close button
@@ -437,7 +420,7 @@ $(document).ready(function(){
 		var oldBounds = viewer.viewport.getBounds();
 		console.log('oldBounds=',oldBounds);
 		viewer.viewport.panBy(new OpenSeadragon.Point(-oldBounds.x,0), false);
-		document.location.hash='';
+		history.pushState({}, 'Init', '/');
 	});
 	// click on left
 	$('#left').on('mousedown',function(){
@@ -480,6 +463,7 @@ $(document).ready(function(){
 	$('div.map').on('click',function(e){
 		console.log('close map');
 		$('div.map').hide();
+		history.replaceState({}, 'Init', '/');
 		if ( document.querySelector("body").requestFullscreen ) {
 			document.querySelector("body").requestFullscreen().catch(err => {
 				alert(`Error attempting to enable full-screen mode.`);
@@ -492,8 +476,9 @@ $(document).ready(function(){
 		}
 	});
 	// Posicionamiento en sección
-	console.log('fragment=',fragment);
+	// console.log('fragment=',fragment);
 	if (fragment.length > 0 ) {
+		history.replaceState({}, 'Init', '/');
 		if ( $(''+fragment+'.lcct-section').length > 0 ){
 			$('a[aria-controls="'+fragment.substring(1)+'"]').trigger('click');
 		}
