@@ -1023,7 +1023,7 @@ p.author {
 		margin: 0 auto;
 		width: 30vw;
 	}
-	#warn h1+img+h1 {
+	#warn h1:last-child {
 		color: #FFF79D;
 	}
 }
