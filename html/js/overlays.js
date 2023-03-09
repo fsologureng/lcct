@@ -185,14 +185,6 @@ var overlays = {
 		x: 64885.758/lcct_width,
 		y: 385.8/lcct_width
 	},
-	'N24': {
-		id: 'P24',
-		className: 'lcct-point',
-		placement: 'TOP_LEFT',
-		checkResize: false,
-		x: 73272.786/lcct_width,
-		y: 972.799/lcct_width
-	},
 	'N25': {
 		id: 'P25',
 		className: 'lcct-point',
