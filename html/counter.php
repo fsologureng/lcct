@@ -6,9 +6,6 @@
 	$output;
 	// debugging
 	$debug = 0;
-	if ( isset($_GET['debug']) && $_GET['debug'] ){
-		$debug = 1;
-	}
 	$message = "/*\n";
 	$message .= "HTTP_HOST=".$_SERVER["HTTP_HOST"]."'\n";
 	$message .= "REFERER=".$_SERVER["HTTP_REFERER"]."'\n";
